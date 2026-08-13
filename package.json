@@ -1,0 +1,41 @@
+{
+  "name": "my-car-corporate",
+  "version": "1.0.0",
+  "description": "Web App for chauffeurs and passengers Management through the portal.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BSSE24062/my-car-corporate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BSSE24062/my-car-corporate/issues"
+  },
+  "homepage": "https://github.com/BSSE24062/my-car-corporate#readme",
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "gsap": "^3.12.0",
+    "@studio-freight/lenis": "^0.2.29",
+    "lucide-react": "^0.268.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "@types/react": "^18.2.0",
+    "@types/node": "^20.4.0",
+    "tailwindcss": "^3.5.0",
+    "postcss": "^8.4.27",
+    "autoprefixer": "^10.4.14"
+  }
+}
