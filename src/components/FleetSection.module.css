@@ -1,28 +1,94 @@
 .fleetSection {
-  padding: 5rem 1rem;
   text-align: center;
   color: var(--text-color);
   background-color: var(--bg-color);
 }
 
+/* ─── Road Banner ─────────────────────────────────────────── */
+.roadBanner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* Road image, scrolls left-to-right */
+.roadBg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/road-only.jpg');
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  background-position: 0 center;
+  animation: roadScroll 3s linear infinite;
+}
+
+@keyframes roadScroll {
+  0%   { background-position: 0 center; }
+  100% { background-position: -800px center; }
+}
+
+/* Semi-transparent overlay for text legibility */
+.roadOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Marquee track — clips overflow and contains two copies of text */
+.marqueeTrack {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Each text span scrolls from right → left at the same speed as the road */
+.marqueeText {
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+  animation: marqueeScroll 8s linear infinite;
+  padding-right: 40px;
+  font-family: 'Playfair Display', serif;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Static subtitle over the road */
+.roadSubtitle {
+  position: relative;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  max-width: 600px;
+  text-align: center;
+  padding: 0 20px;
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Fleet Grid ──────────────────────────────────────────── */
 .container {
   max-width: 1400px;
   margin: 0 auto;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.header h2 {
-  font-size: 3rem;
-  margin-bottom: 15px;
-}
-
-.header p {
-  color: var(--text-muted);
-  font-size: 1.2rem;
+  padding: 4rem 1rem 5rem;
 }
 
 .grid {
@@ -78,4 +144,20 @@
 .info p {
   color: var(--text-muted);
   font-size: 1rem;
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .roadBanner {
+    height: 160px;
+    gap: 12px;
+  }
+
+  .marqueeText {
+    font-size: 2rem;
+  }
+
+  .roadSubtitle {
+    font-size: 0.85rem;
+  }
 }

@@ -1,6 +1,6 @@
 .sliderSection {
   position: relative;
-  height: 100vh;
+  height: 110vh;
   width: 100vw;
   overflow: hidden;
   background-color: var(--bg-color);

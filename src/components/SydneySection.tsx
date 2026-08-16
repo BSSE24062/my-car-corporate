@@ -9,64 +9,64 @@ const sydneyImages = [
     id: 1,
     title: "Sydney Opera House",
     description: "Arrive at Sydney's most iconic harbor destination in the comfort of a private luxury sedan.",
-    desktopImg: "/sydney/operaHouse.jpg",
-    mobileImg: "/sydney/mobile_sydney/operaHouse.jpg"
+    desktopImg: "/Sydney/operaHouse.jpg",
+    mobileImg: "/Sydney/mobile_sydney/operaHouse.jpg"
   },
   {
     id: 2,
     title: "Kingsford Smith Airport",
     description: "Seamless, stress-free airport pick-ups and transfers with premium concierge service.",
-    desktopImg: "/sydney/airport.jpg",
-    mobileImg: "/sydney/mobile_sydney/airport.jpg"
+    desktopImg: "/Sydney/airport.jpg",
+    mobileImg: "/Sydney/mobile_sydney/airport.jpg"
   },
   {
     id: 3,
     title: "Bondi Beach",
     description: "Cruising along the famous coastal strip in style, ready for the sun and surf.",
-    desktopImg: "/sydney/bonndi.jpg",
-    mobileImg: "/sydney/mobile_sydney/bondi.jpg"
+    desktopImg: "/Sydney/bondi.jpg",
+    mobileImg: "/Sydney/mobile_sydney/bondi.jpg"
   },
   {
     id: 4,
     title: "Sydney Harbour Bridge",
     description: "Experience stunning panoramic views of the Bridge and Harbour under the harbor lights.",
-    desktopImg: "/sydney/harbour.jpg",
-    mobileImg: "/sydney/mobile_sydney/harbour.jpg"
+    desktopImg: "/Sydney/harbour.jpg",
+    mobileImg: "/Sydney/mobile_sydney/harbour.jpg"
   },
   {
     id: 5,
     title: "Sea Cliff Bridge",
     description: "A breathtaking coastal drive over the ocean along the Grand Pacific Drive.",
-    desktopImg: "/sydney/seacliff.jpg",
-    mobileImg: "/sydney/mobile_sydney/seacliff.jpg"
+    desktopImg: "/Sydney/seacliff.jpg",
+    mobileImg: "/Sydney/mobile_sydney/seacliff.jpg"
   },
   {
     id: 6,
     title: "Sydney Royal Botanic Garden",
     description: "Serene landscapes and classical views overlooking the Opera House and Harbour.",
-    desktopImg: "/sydney/nearOpera.jpg",
-    mobileImg: "/sydney/mobile_sydney/nearOpera.jpg"
+    desktopImg: "/Sydney/nearOpera.jpg",
+    mobileImg: "/Sydney/mobile_sydney/nearOpera.jpg"
   },
   {
     id: 7,
     title: "Sydney Town Hall Clock Tower",
     description: "Timeless historical landmarks in the heart of Sydney's central business district.",
-    desktopImg: "/sydney/clockTower.jpg",
-    mobileImg: "/sydney/mobile_sydney/clockTower.jpg"
+    desktopImg: "/Sydney/clockTower.jpg",
+    mobileImg: "/Sydney/mobile_sydney/clockTower.jpg"
   },
   {
     id: 8,
     title: "Sydney Airport Terminal",
     description: "Reliable, executive-class business travel directly from the private aviation runway.",
-    desktopImg: "/sydney/sydneyAirport.jpg",
-    mobileImg: "/sydney/mobile_sydney/sydneyAirport.jpg"
+    desktopImg: "/Sydney/sydneyAirport.jpg",
+    mobileImg: "/Sydney/mobile_sydney/sydneyAirport.jpg"
   },
   {
     id: 9,
     title: "Darling Harbour Side",
     description: "Vibrant nightlife, premium dining, and entertainment venues at the waterfront.",
-    desktopImg: "/sydney/harbourSide.jpg",
-    mobileImg: "/sydney/mobile_sydney/harbourSide.jpg"
+    desktopImg: "/Sydney/harbourSide.jpg",
+    mobileImg: "/Sydney/mobile_sydney/harbourSide.jpg"
   }
 ];
 
@@ -86,7 +86,7 @@ const SydneySection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % sydneyImages.length);
-    }, 6000); // 6 seconds per slide
+    }, 4500); // 4.5 seconds per slide
     return () => clearInterval(interval);
   }, []);
 
@@ -114,18 +114,18 @@ const SydneySection = () => {
                     y: '0%', 
                     opacity: 1,
                     transition: {
-                      duration: 0.5,
-                      ease: [0.16, 1, 0.3, 1], // Smooth custom easeOutExpo
-                      delay: index * 0.04 // Staggered entry
+                      duration: 0.7,
+                      ease: [0.16, 1, 0.3, 1],
+                      delay: index * 0.055
                     }
                   }}
                   exit={{ 
                     y: '100%',
                     opacity: 0,
                     transition: {
-                      duration: 0.4,
-                      ease: [0.7, 0, 0.84, 0], // Smooth easeInExpo
-                      delay: (7 - index) * 0.02 // Staggered exit in reverse
+                      duration: 0.6,
+                      ease: [0.7, 0, 0.84, 0],
+                      delay: (7 - index) * 0.03
                     }
                   }}
                   style={{
@@ -143,7 +143,7 @@ const SydneySection = () => {
                     animate={{
                       scale: [1.0, 1.05],
                       transition: {
-                        duration: 6.0,
+                        duration: 4.5,
                         ease: "easeOut"
                       }
                     }}

@@ -9,31 +9,31 @@ const services = [
     id: 1,
     title: "Professional Chauffeurs",
     description: "Experience the pinnacle of luxury with our highly trained and discreet chauffeurs, dedicated to providing a seamless journey.",
-    bgImage: "/professional.jpg"
+    bgImage: "/professsional.jpg"
   },
   {
     id: 2,
     title: "Airport Pickups",
     description: "Punctual and stress-free airport transfers. We monitor your flight to ensure we are there when you land.",
-    bgImage: "/AirportPickup.jpg"
+    bgImage: "/AirportPickups.jpg"
   },
   {
     id: 3,
     title: "One Day Trip",
     description: "Explore the city or countryside in unparalleled comfort. Custom itineraries tailored to your desires.",
-    bgImage: "/oneDayTrip.jpg"
+    bgImage: "/oneDayTour.jpg"
   },
   {
     id: 4,
     title: "Wedding Transport",
     description: "Make your special day even more memorable with our elegant fleet and red-carpet service.",
-    bgImage: "/wedding.png"
+    bgImage: "/wedding.jpg"
   },
   {
     id: 5,
     title: "Private Tours",
     description: "Discover hidden gems and iconic landmarks with personalized private tours driven by local experts.",
-    bgImage: "/privateTours.jpg"
+    bgImage: "/privateTour.jpg"
   }
 ];
 
@@ -44,7 +44,7 @@ const ServicesSlider = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % services.length);
-    }, 5000);
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
 
@@ -56,7 +56,7 @@ const ServicesSlider = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
           className={styles.slideBackground}
           style={{ backgroundImage: `url(${services[currentIndex].bgImage})` }}
         >
@@ -66,14 +66,14 @@ const ServicesSlider = () => {
             <motion.h2 
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.3 }}
+              transition={{ delay: 0.15, duration: 0.5 }}
             >
               {services[currentIndex].title}
             </motion.h2>
             <motion.p
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.3 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
             >
               {services[currentIndex].description}
             </motion.p>

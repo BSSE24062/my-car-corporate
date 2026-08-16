@@ -4,10 +4,9 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ServicesSlider from '@/components/ServicesSlider';
-import ChooseUsSection from '@/components/ChooseUsSection';
-import SydneySection from '@/components/SydneySection';
 import FleetSection from '@/components/FleetSection';
-import PricingSection from '@/components/PricingSection';
+import SydneySection from '@/components/SydneySection';
+import ChooseUsSection from '@/components/ChooseUsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import BookingForm from '@/components/BookingForm';
 import Footer from '@/components/Footer';
@@ -19,10 +18,9 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <ServicesSlider />
-      <ChooseUsSection />
-      <SydneySection />
       <FleetSection />
-      <PricingSection />
+      <SydneySection />
+      <ChooseUsSection />
       <TestimonialsSection />
       <BookingForm />
       <Footer />

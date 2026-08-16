@@ -35,6 +35,7 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
+  z-index: 3;
 }
 
 .textBlock {
@@ -46,69 +47,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.dateTimeContainer {
-  position: absolute;
-  top: 75%;
-  left: 5%;
-  display: flex;
-  gap: 15px;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.clockCard,
-.calendarCard {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  padding: 12px 24px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-  backdrop-filter: blur(8px);
-}
-
-.clockCard {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--text-color);
-  letter-spacing: 1px;
-  font-family: 'Orbitron', 'Courier New', Courier, monospace; /* Digital theme */
-}
-
-.calendarCard {
-  flex-direction: column;
-  min-width: 100px;
-  padding: 8px 20px;
-}
-
-.calendarDay {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #ff3b30; /* Calendar Red accent */
-  letter-spacing: 2px;
-  margin-bottom: 2px;
-  text-transform: uppercase;
-}
-
-.calendarDate {
-  font-size: 1.8rem;
-  font-weight: 800;
-  line-height: 1;
-  color: var(--text-color);
-}
-
-.calendarMonth {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-top: 2px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
 }
 
 .textBlock h1 {
@@ -138,11 +76,39 @@
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--text-muted);
+  margin-bottom: 1.8rem;
+}
+
+.bookNowBtn {
+  display: inline-block;
+  width: fit-content;
+  background: var(--text-color);
+  color: var(--bg-color);
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid var(--text-color);
+  z-index: 10;
+  cursor: pointer;
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.bookNowBtn:hover {
+  background: transparent;
+  color: var(--text-color);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+:global(.light-theme) .bookNowBtn:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .absoluteCenter {
   opacity: 0;
-  /* Handled by GSAP */
 }
 
 .carContainer {
@@ -155,10 +121,9 @@
 .animatedCar {
   position: absolute;
   right: -20%;
-  /* Start slightly off-screen right */
   width: 120%;
-  /* Oversize to make it look imposing */
   max-width: 1000px;
+  z-index: 1;
 }
 
 .carBody {
@@ -186,50 +151,40 @@
   top: 49%;
 }
 
+/* Road strip — scrolls right-to-left to simulate motion */
+.roadStrip {
+  position: absolute;
+  bottom: 14%;
+  left: -100%;
+  width: 400%;
+  height: 18%;
+  background-image: url('/road-only.jpg');
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  background-position: 0 center;
+  z-index: 0;
+  animation: roadScroll 3s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes roadScroll {
+  0%   { background-position: 0 center; }
+  100% { background-position: -800px center; }
+}
+
 @keyframes driveBob {
   0% {
     transform: translateY(0px);
   }
-
   100% {
     transform: translateY(-5px);
   }
 }
 
-.persistentBookBtn {
-  position: absolute;
-  top: 88%;
-  left: 5%;
-  display: inline-block;
-  background: var(--text-color);
-  color: var(--bg-color);
-  padding: 12px 30px;
-  border-radius: 8px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid var(--text-color);
-  z-index: 10;
-  cursor: pointer;
-  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.3s ease;
-  text-decoration: none;
-}
-
-.persistentBookBtn:hover {
-  background: var(--bg-color);
-  color: var(--text-color);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  border-color: var(--text-color);
-}
-
-:global(.light-theme) .persistentBookBtn:hover {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-
 @media (max-width: 768px) {
   .contentWrapper {
     flex-direction: column;
-    padding: 130px 5% 30px 5%;
+    padding: 110px 5% 30px 5%;
   }
 
   .textContent {
@@ -275,6 +230,13 @@
   .description {
     font-size: 0.95rem;
     line-height: 1.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .bookNowBtn {
+    margin: 10px auto 0 auto;
+    padding: 10px 26px;
+    font-size: 0.9rem;
   }
 
   .absoluteCenter {
@@ -302,53 +264,5 @@
     left: 50%;
     width: 85%;
     max-width: 400px;
-  }
-
-  .dateTimeContainer {
-    position: relative;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    z-index: 10;
-    pointer-events: none;
-    margin: 70px auto 0 auto;
-  }
-
-  .clockCard,
-  .calendarCard {
-    padding: 8px 16px;
-    border-radius: 8px;
-  }
-
-  .clockCard {
-    font-size: 1.6rem;
-  }
-
-  .calendarCard {
-    min-width: 80px;
-    padding: 4px 12px;
-  }
-
-  .calendarDate {
-    font-size: 1.3rem;
-  }
-
-  .persistentBookBtn {
-    position: relative;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    display: block;
-    width: fit-content;
-    margin: 45px auto 0 auto;
-    padding: 10px 28px;
-    font-size: 0.95rem;
-    border-radius: 6px;
-    text-align: center;
   }
 }

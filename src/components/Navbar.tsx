@@ -37,17 +37,22 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logo}>
+      <button
+        className={styles.logo}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Back to top"
+      >
         <h1>My Corporate Cars</h1>
-      </div>
+      </button>
 
       {/* Desktop Menu */}
       <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ''}`}>
-        <a href="#services" onClick={() => setMenuOpen(false)}>{t('nav.services')}</a>
-        <a href="#fleet" onClick={() => setMenuOpen(false)}>{t('nav.fleet')}</a>
-        <a href="#pricing" onClick={() => setMenuOpen(false)}>{t('nav.pricing')}</a>
-        <a href="#about" onClick={() => setMenuOpen(false)}>{t('nav.about')}</a>
-        <a href="#booking" className={styles.bookBtn} onClick={() => setMenuOpen(false)}>{t('form.submit')}</a>
+        <a href="#" onClick={() => setMenuOpen(false)}>{t('nav.home', 'Home')}</a>
+        <a href="#services" onClick={() => setMenuOpen(false)}>{t('nav.services', 'Services')}</a>
+        <a href="#fleet" onClick={() => setMenuOpen(false)}>{t('nav.fleet', 'Our Fleet')}</a>
+        <a href="#sydney" onClick={() => setMenuOpen(false)}>{t('nav.sydney', 'Sydney In Style')}</a>
+        <a href="#about" onClick={() => setMenuOpen(false)}>{t('nav.about', 'Why Choose Us')}</a>
+        <a href="#booking" className={styles.bookBtn} onClick={() => setMenuOpen(false)}>{t('form.submit', 'Book Now')}</a>
       </div>
 
       <div className={styles.actions}>
