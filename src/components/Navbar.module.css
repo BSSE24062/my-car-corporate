@@ -1,0 +1,154 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-color);
+  transition: color 0.5s ease;
+}
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navLinks a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navLinks a:hover {
+  color: #ccc;
+}
+
+.bookBtn {
+  background: var(--text-color);
+  color: var(--bg-color) !important;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-weight: 600 !important;
+  transition: all 0.3s ease;
+}
+
+.bookBtn:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.langSelector {
+  position: relative;
+}
+
+.langBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color);
+  padding: 8px;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.5s ease;
+}
+
+.langBtn:hover {
+  background: var(--hover-bg);
+}
+
+.currentLang {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.langDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  background: var(--dropdown-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.langDropdown button {
+  padding: 10px 15px;
+  text-align: left;
+  color: var(--text-color);
+  opacity: 0.8;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.langDropdown button:hover {
+  background: var(--hover-bg);
+  opacity: 1;
+}
+
+.activeLang {
+  color: var(--text-color) !important;
+  font-weight: 600;
+  opacity: 1 !important;
+  background: var(--hover-bg);
+}
+
+.mobileMenuBtn {
+  display: none;
+  color: var(--text-color);
+  transition: color 0.5s ease;
+}
+
+@media (max-width: 768px) {
+  .navLinks {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: var(--bg-color);
+    padding: 2rem 0;
+    gap: 1.5rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .navLinks.showMenu {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobileMenuBtn {
+    display: block;
+  }
+}

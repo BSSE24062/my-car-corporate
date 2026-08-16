@@ -1,0 +1,354 @@
+.heroContainer {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, var(--bg-secondary) 0%, var(--bg-color) 100%);
+  z-index: 1;
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.textContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.textBlock {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dateTimeContainer {
+  position: absolute;
+  top: 75%;
+  left: 5%;
+  display: flex;
+  gap: 15px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.clockCard,
+.calendarCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 12px 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  backdrop-filter: blur(8px);
+}
+
+.clockCard {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-color);
+  letter-spacing: 1px;
+  font-family: 'Orbitron', 'Courier New', Courier, monospace; /* Digital theme */
+}
+
+.calendarCard {
+  flex-direction: column;
+  min-width: 100px;
+  padding: 8px 20px;
+}
+
+.calendarDay {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff3b30; /* Calendar Red accent */
+  letter-spacing: 2px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.calendarDate {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-color);
+}
+
+.calendarMonth {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 2px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.textBlock h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  background: linear-gradient(to right, var(--text-color), var(--text-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.textBlock p {
+  max-width: 85%;
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ff3b30;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.absoluteCenter {
+  opacity: 0;
+  /* Handled by GSAP */
+}
+
+.carContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.animatedCar {
+  position: absolute;
+  right: -20%;
+  /* Start slightly off-screen right */
+  width: 120%;
+  /* Oversize to make it look imposing */
+  max-width: 1000px;
+}
+
+.carBody {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wheel {
+  position: absolute;
+  width: 14.8%;
+  height: 24.67%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform-origin: center center;
+}
+
+.frontWheel {
+  left: 13.8857%;
+  top: 49%;
+}
+
+.backWheel {
+  left: 67.6%;
+  top: 49%;
+}
+
+@keyframes driveBob {
+  0% {
+    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+.persistentBookBtn {
+  position: absolute;
+  top: 88%;
+  left: 5%;
+  display: inline-block;
+  background: var(--text-color);
+  color: var(--bg-color);
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid var(--text-color);
+  z-index: 10;
+  cursor: pointer;
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+.persistentBookBtn:hover {
+  background: var(--bg-color);
+  color: var(--text-color);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  border-color: var(--text-color);
+}
+
+:global(.light-theme) .persistentBookBtn:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .contentWrapper {
+    flex-direction: column;
+    padding: 130px 5% 30px 5%;
+  }
+
+  .textContent {
+    flex: none;
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .textBlock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .relativeMobile {
+    position: relative !important;
+    height: auto !important;
+  }
+
+  .textBlock h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .textBlock p {
+    max-width: 100%;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .absoluteCenter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .carContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    margin-top: 15px;
+  }
+
+  .animatedCar {
+    position: absolute;
+    right: auto;
+    left: 50%;
+    width: 85%;
+    max-width: 400px;
+  }
+
+  .dateTimeContainer {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    z-index: 10;
+    pointer-events: none;
+    margin: 70px auto 0 auto;
+  }
+
+  .clockCard,
+  .calendarCard {
+    padding: 8px 16px;
+    border-radius: 8px;
+  }
+
+  .clockCard {
+    font-size: 1.6rem;
+  }
+
+  .calendarCard {
+    min-width: 80px;
+    padding: 4px 12px;
+  }
+
+  .calendarDate {
+    font-size: 1.3rem;
+  }
+
+  .persistentBookBtn {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    display: block;
+    width: fit-content;
+    margin: 45px auto 0 auto;
+    padding: 10px 28px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    text-align: center;
+  }
+}

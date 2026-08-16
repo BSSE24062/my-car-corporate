@@ -1,0 +1,33 @@
+{
+  "hero": {
+    "title": "My Corporate Cars",
+    "subtitle": "Premium Chauffeur Service in Sydney",
+    "description": "Experience first-class travel tailored for corporate executives, VIP events, and seamless airport transfers. Our professional chauffeurs guarantee absolute reliability, ultimate comfort, and a grand arrival in Sydney's premier luxury fleet.",
+    "luxury_title": "Unmatched Luxury",
+    "luxury_subtitle": "Arrive in style with our world-class fleet.",
+    "luxury_description": "Indulge in a bespoke journey defined by pristine vehicles, tailored amenities, and impeccable detail. Whether for corporate roadshows or private tours, our commitment to elite standards elevates every mile."
+  },
+  "nav": {
+    "services": "Services",
+    "fleet": "Our Fleet",
+    "pricing": "Pricing",
+    "about": "Why Choose Us"
+  },
+  "form": {
+    "name": "Name",
+    "contact": "+61 xxx xxx xxx",
+    "email": "email@example.com",
+    "service_type": "Service Type",
+    "service_options": {
+      "airport": "Airport",
+      "one_day": "One Day Trip",
+      "wedding": "Wedding Transport",
+      "hourly": "Hourly Bookings",
+      "tour": "Personal Tour",
+      "other": "Other"
+    },
+    "date": "Date",
+    "details": "Further details e.g Travell, Time, Location etc...",
+    "submit": "Book Now"
+  }
+}

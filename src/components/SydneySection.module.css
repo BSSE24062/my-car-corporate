@@ -1,0 +1,178 @@
+.sydneySection {
+  padding: 100px 5%;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, var(--text-color), var(--text-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header p {
+  color: #cda250;
+  font-size: 1.1rem;
+}
+
+.slideshowWrapper {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: black;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.slideContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slice {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sliceInner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.65));
+}
+
+.contentBox {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  max-width: 450px;
+  background: rgba(15, 15, 15, 0.65);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 16px;
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.5s ease;
+}
+
+:global(.light-theme) .contentBox {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.badge {
+  display: inline-block;
+  background: #ff3b30;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.slideInfo h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.slideInfo p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.dotsContainer {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+:global(.light-theme) .dot {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.activeDot {
+  width: 24px;
+  border-radius: 4px;
+  background: #ff3b30;
+}
+
+:global(.light-theme) .activeDot {
+  background: #ff3b30;
+}
+
+@media (max-width: 768px) {
+  .sydneySection {
+    padding: 60px 5%;
+  }
+
+  .slideshowWrapper {
+    height: 500px;
+  }
+
+  .contentBox {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    max-width: none;
+    padding: 20px;
+  }
+
+  .slideInfo h3 {
+    font-size: 1.4rem;
+  }
+
+  .slideInfo p {
+    font-size: 0.9rem;
+  }
+}
