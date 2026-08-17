@@ -1,5 +1,5 @@
 .sydneySection {
-  padding: 100px 5%;
+  padding: 50px 5% 100px;
   background: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.5s ease, color 0.5s ease;
@@ -158,7 +158,7 @@
   }
 
   .sydneySection {
-    padding: 60px 5%;
+    padding: 30px 5% 60px;
   }
 
   .slideshowWrapper {
