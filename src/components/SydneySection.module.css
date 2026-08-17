@@ -153,6 +153,10 @@
 }
 
 @media (max-width: 768px) {
+  .slideContainer {
+    height: 340px; /* Constrain image height on mobile */
+  }
+
   .sliceInner {
     background-image: var(--bg-mobile);
   }
@@ -162,22 +166,44 @@
   }
 
   .slideshowWrapper {
-    height: 500px;
+    height: 590px; /* Total card height */
   }
 
   .contentBox {
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
+    position: absolute;
+    top: 340px; /* Starts exactly where the image ends */
+    bottom: 0;
+    left: 0;
+    right: 0;
     max-width: none;
-    padding: 20px;
+    padding: 24px 20px 20px;
+    border-radius: 0 0 20px 20px;
+    background: var(--bg-secondary);
+    border: none;
+    border-top: 1px solid var(--border-color);
+    box-shadow: none;
+    backdrop-filter: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .badge {
+    margin-bottom: 10px;
   }
 
   .slideInfo h3 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    margin-bottom: 6px;
   }
 
   .slideInfo p {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  
+  .dotsContainer {
+    margin-top: auto; /* Push dots to the very bottom of the card body */
+    padding-top: 12px;
   }
 }

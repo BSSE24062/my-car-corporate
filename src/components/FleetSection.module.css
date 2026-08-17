@@ -22,7 +22,7 @@
 .roadBg {
   position: absolute;
   inset: 0;
-  background-image: url('/road-only.jpg');
+  background-image: url('/Hero/road-only.jpg');
   background-size: auto 100%;
   background-repeat: repeat-x;
   background-position: 0 center;

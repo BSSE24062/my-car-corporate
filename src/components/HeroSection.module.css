@@ -8,19 +8,40 @@
   align-items: center;
 }
 
-.background {
+.backgroundSlideshow {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.slideImage {
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-desktop);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, var(--bg-secondary) 0%, var(--bg-color) 100%);
-  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .slideImage {
+    background-image: var(--bg-mobile);
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.82) 100%);
+  z-index: 2;
 }
 
 .contentWrapper {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: 100%;
   height: 100%;
   display: flex;
@@ -124,6 +145,7 @@
   width: 120%;
   max-width: 1000px;
   z-index: 1;
+  margin-top: 75px; /* Moves the car lower to lie in the bg image's center on desktop */
 }
 
 .carBody {
@@ -158,7 +180,7 @@
   left: -100%;
   width: 400%;
   height: 18%;
-  background-image: url('/road-only.jpg');
+  background-image: url('/Hero/road-only.jpg');
   background-size: auto 100%;
   background-repeat: repeat-x;
   background-position: 0 center;
@@ -264,5 +286,6 @@
     left: 50%;
     width: 85%;
     max-width: 400px;
+    margin-top: 0; /* Reset desktop margin on mobile */
   }
 }

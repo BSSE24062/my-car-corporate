@@ -1,0 +1,61 @@
+.bannerContainer {
+  background-color: #000000;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  height: 48px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.marqueeTrack {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+}
+
+.marqueeText {
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  animation: marqueeScroll 16s linear infinite;
+  padding-right: 20px;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .bannerContainer {
+    height: 40px;
+  }
+  
+  .marqueeText {
+    font-size: 0.88rem;
+    letter-spacing: 1px;
+    animation-duration: 12s;
+  }
+}
+
+:global(.light-theme) .bannerContainer {
+  background-color: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+:global(.light-theme) .marqueeText {
+  color: #000000;
+}

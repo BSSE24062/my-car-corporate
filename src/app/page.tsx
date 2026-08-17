@@ -3,6 +3,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
+import ServicesBanner from '@/components/ServicesBanner';
 import ServicesSlider from '@/components/ServicesSlider';
 import FleetSection from '@/components/FleetSection';
 import SydneySection from '@/components/SydneySection';
@@ -17,6 +18,7 @@ export default function Home() {
     <main style={{ backgroundColor: 'black', minHeight: '100vh', width: '100vw', overflowX: 'hidden' }}>
       <Navbar />
       <HeroSection />
+      <ServicesBanner />
       <ServicesSlider />
       <FleetSection />
       <SydneySection />

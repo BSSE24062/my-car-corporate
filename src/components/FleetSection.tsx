@@ -2,14 +2,14 @@ import React from 'react';
 import styles from './FleetSection.module.css';
 
 const fleet = [
-  { name: 'Mercedes-Benz S-Class', class: 'Luxury Sedan', img: '/benz s class.jpg' },
-  { name: 'Mercedes Maybach', class: 'Ultra Luxury', img: '/benz.jpg' },
-  { name: 'BMW 7 Series', class: 'Premium Sedan', img: '/BMW i7.jpg' },
-  { name: 'Mercedes-Benz GLS', class: 'Luxury SUV', img: '/gls.jpg' },
-  { name: 'BMW X7', class: 'Premium SUV', img: '/bmwX7.jpg' },
-  { name: 'Audi Q7', class: 'Executive SUV', img: '/audiQ7.avif' },
-  { name: 'Mercedes-Benz V-Class', class: 'Luxury Van', img: '/benz v class.jpg' },
-  { name: 'Mercedes Sprinter', class: 'Executive Minibus', img: '/sprinter.jpg' }
+  { name: 'Mercedes-Benz S-Class', class: 'Luxury Sedan', img: '/Fleet/benz s class.jpg' },
+  { name: 'Mercedes Maybach', class: 'Ultra Luxury', img: '/Fleet/benz.jpg' },
+  { name: 'BMW 7 Series', class: 'Premium Sedan', img: '/Fleet/BMW i7.jpg' },
+  { name: 'Mercedes-Benz GLS', class: 'Luxury SUV', img: '/Fleet/gls.jpg' },
+  { name: 'BMW X7', class: 'Premium SUV', img: '/Fleet/bmwX7.jpg' },
+  { name: 'Audi Q7', class: 'Executive SUV', img: '/Fleet/audiQ7.avif' },
+  { name: 'Mercedes-Benz V-Class', class: 'Luxury Van', img: '/Fleet/benz v class.jpg' },
+  { name: 'Mercedes Sprinter', class: 'Executive Minibus', img: '/Fleet/sprinter.jpg' }
 ];
 
 const FleetSection = () => {

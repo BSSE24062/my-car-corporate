@@ -9,36 +9,36 @@ const services = [
     id: 1,
     title: "Professional Chauffeurs",
     description: "Experience the pinnacle of luxury with our highly trained and discreet chauffeurs, dedicated to providing a seamless journey.",
-    bgImage: "/professsional.jpg",
-    mobileBgImage: "/mobile_asset/professional.jpg"
+    bgImage: "/Services/professional.jpg",
+    mobileBgImage: "/Services/mobile_services/professional.jpg"
   },
   {
     id: 2,
     title: "Airport Pickups",
     description: "Punctual and stress-free airport transfers. We monitor your flight to ensure we are there when you land.",
-    bgImage: "/AirportPickups.jpg",
-    mobileBgImage: "/mobile_asset/AirportPickups.jpg"
+    bgImage: "/Services/AirportPickups.jpg",
+    mobileBgImage: "/Services/mobile_services/AirportPickups.jpg"
   },
   {
     id: 3,
     title: "One Day Trip",
     description: "Explore the city or countryside in unparalleled comfort. Custom itineraries tailored to your desires.",
-    bgImage: "/oneDayTour.jpg",
-    mobileBgImage: "/mobile_asset/oneDayTrip.jpg"
+    bgImage: "/Services/oneDayTour.jpg",
+    mobileBgImage: "/Services/mobile_services/oneDayTrip.jpg"
   },
   {
     id: 4,
     title: "Wedding Transport",
     description: "Make your special day even more memorable with our elegant fleet and red-carpet service.",
-    bgImage: "/wedding.jpg",
-    mobileBgImage: "/mobile_asset/wedding.jpg"
+    bgImage: "/Services/wedding.jpg",
+    mobileBgImage: "/Services/mobile_services/wedding.jpg"
   },
   {
     id: 5,
     title: "Private Tours",
     description: "Discover hidden gems and iconic landmarks with personalized private tours driven by local experts.",
-    bgImage: "/privateTour.jpg",
-    mobileBgImage: "/mobile_asset/privateTours.jpg"
+    bgImage: "/Services/privateTour.jpg",
+    mobileBgImage: "/Services/mobile_services/privateTours.jpg"
   }
 ];
 

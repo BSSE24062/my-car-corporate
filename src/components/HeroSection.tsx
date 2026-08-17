@@ -1,15 +1,24 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './HeroSection.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const heroBgs = [
+  { id: 1, desktop: '/Hero/hero-bg-1.jpg', mobile: '/Hero/mobile_hero/hero-bg-1.jpg' },
+  { id: 2, desktop: '/Hero/hero-bg-2.jpg', mobile: '/Hero/mobile_hero/hero-bg-2.jpg' },
+  { id: 3, desktop: '/Hero/hero-bg-3.jpg', mobile: '/Hero/mobile_hero/hero-bg-3.jpg' },
+  { id: 4, desktop: '/Hero/hero-bg-4.jpg', mobile: '/Hero/mobile_hero/hero-bg-4.jpg' },
+];
+
 const HeroSection = () => {
   const { t } = useTranslation();
+  const [bgIndex, setBgIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const carWrapperRef = useRef<HTMLDivElement>(null);
   const car1Ref = useRef<HTMLDivElement>(null);
@@ -20,6 +29,13 @@ const HeroSection = () => {
   const backWheel2Ref = useRef<HTMLImageElement>(null);
   const text1Ref = useRef<HTMLDivElement>(null);
   const text2Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % heroBgs.length);
+    }, 5500); // Change background every 5.5s
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current || !carWrapperRef.current || !car1Ref.current || !frontWheel1Ref.current || !backWheel1Ref.current || !car2Ref.current || !frontWheel2Ref.current || !backWheel2Ref.current || !text1Ref.current || !text2Ref.current) return;
@@ -166,7 +182,32 @@ const HeroSection = () => {
 
   return (
     <section ref={containerRef} className={styles.heroContainer}>
-      <div className={styles.background}></div>
+      <div className={styles.backgroundSlideshow}>
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={bgIndex}
+            className={styles.slideImage}
+            initial={{ opacity: 0, scale: 1.12 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1.04,
+              transition: {
+                opacity: { duration: 1.5, ease: "easeInOut" },
+                scale: { duration: 5.5, ease: "linear" }
+              }
+            }}
+            exit={{ 
+              opacity: 0,
+              transition: { duration: 1.5, ease: "easeInOut" }
+            }}
+            style={{
+              '--bg-desktop': `url(${heroBgs[bgIndex].desktop})`,
+              '--bg-mobile': `url(${heroBgs[bgIndex].mobile})`
+            } as React.CSSProperties}
+          />
+        </AnimatePresence>
+        <div className={styles.overlay}></div>
+      </div>
 
       <div className={styles.contentWrapper}>
         
@@ -199,16 +240,16 @@ const HeroSection = () => {
             className={styles.animatedCar} 
             style={{ opacity: 0 }}
           >
-            <img src="/audiBody_no_shadow.png" alt="Audi Q7 Body" className={styles.carBody} />
+            <img src="/Hero/audiBody_no_shadow.png" alt="Audi Q7 Body" className={styles.carBody} />
             <img 
               ref={frontWheel1Ref} 
-              src="/front_wheel.png" 
+              src="/Hero/front_wheel.png" 
               alt="Front Wheel" 
               className={`${styles.wheel} ${styles.frontWheel}`} 
             />
             <img 
               ref={backWheel1Ref} 
-              src="/back_wheel.png" 
+              src="/Hero/back_wheel.png" 
               alt="Back Wheel" 
               className={`${styles.wheel} ${styles.backWheel}`} 
             />
@@ -220,16 +261,16 @@ const HeroSection = () => {
             className={styles.animatedCar} 
             style={{ opacity: 1, transform: 'translate3d(120vw, 0px, 0px)' }}
           >
-            <img src="/audiBody_no_shadow.png" alt="Audi Q7 Body" className={styles.carBody} />
+            <img src="/Hero/audiBody_no_shadow.png" alt="Audi Q7 Body" className={styles.carBody} />
             <img 
               ref={frontWheel2Ref} 
-              src="/front_wheel.png" 
+              src="/Hero/front_wheel.png" 
               alt="Front Wheel" 
               className={`${styles.wheel} ${styles.frontWheel}`} 
             />
             <img 
               ref={backWheel2Ref} 
-              src="/back_wheel.png" 
+              src="/Hero/back_wheel.png" 
               alt="Back Wheel" 
               className={`${styles.wheel} ${styles.backWheel}`} 
             />
