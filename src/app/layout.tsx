@@ -64,7 +64,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "TaxiService",
               "name": "My Corporate Cars",
-              "image": "https://mycorporatecars.com.au/audiMain.png", 
+              "image": "https://mycorporatecars.com.au/audiMain.png",
               "@id": "https://mycorporatecars.com.au/#service",
               "url": "https://mycorporatecars.com.au",
               "telephone": "+61451002525",
@@ -116,7 +116,9 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        {loading && <LoadingScreen />}
+        {/* Always keep LoadingScreen in the DOM — iOS Safari won't autoplay
+             a video that is conditionally mounted after page load. */}
+        <LoadingScreen hidden={!loading} />
         <div style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s ease-in' }}>
           {children}
         </div>

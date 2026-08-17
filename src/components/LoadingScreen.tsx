@@ -2,43 +2,57 @@
 
 import React, { useEffect, useRef } from 'react';
 
-const LoadingScreen = () => {
+interface LoadingScreenProps {
+  hidden?: boolean;
+}
+
+const LoadingScreen = ({ hidden = false }: LoadingScreenProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // iOS Safari requires these to be set programmatically as well as via attributes
+    // iOS Safari requires these set programmatically as well as via HTML attributes
     video.muted = true;
     video.playsInline = true;
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
 
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch((error) => {
-        console.warn("Autoplay blocked. Registering user interaction fallback listeners.", error);
+    const tryPlay = () => {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.warn("Autoplay blocked, waiting for user interaction:", error);
 
-        const playOnInteraction = () => {
-          video.play()
-            .then(() => {
-              document.removeEventListener('touchstart', playOnInteraction);
-              document.removeEventListener('click', playOnInteraction);
-            })
-            .catch((err) => console.error("Video play on user interaction failed:", err));
-        };
+          const playOnInteraction = () => {
+            video.play()
+              .then(() => {
+                document.removeEventListener('touchstart', playOnInteraction);
+                document.removeEventListener('click', playOnInteraction);
+              })
+              .catch((err) => console.error("Video play on interaction failed:", err));
+          };
 
-        document.addEventListener('touchstart', playOnInteraction, { passive: true });
-        document.addEventListener('click', playOnInteraction, { passive: true });
-      });
-    }
+          document.addEventListener('touchstart', playOnInteraction, { passive: true });
+          document.addEventListener('click', playOnInteraction, { passive: true });
+        });
+      }
+    };
+
+    tryPlay();
   }, []);
 
   return (
-    <div className="loader-wrapper">
-      {/* Video must always be in the DOM on first render for iOS Safari autoplay to work.
-          Never conditionally render the video element behind a state flag. */}
+    /*
+     * IMPORTANT: This wrapper must always stay in the DOM (never unmount this component).
+     * iOS Safari will not autoplay a video that is injected after initial page load.
+     * Visibility is controlled via the `hidden` class / CSS opacity, NOT by unmounting.
+     */
+    <div
+      className={`loader-wrapper${hidden ? ' loader-hidden' : ''}`}
+      aria-hidden={hidden}
+    >
       <video
         ref={videoRef}
         autoPlay
