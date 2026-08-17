@@ -63,6 +63,7 @@
   height: 100%;
   background-size: cover;
   background-position: center;
+  background-image: var(--bg-desktop);
 }
 
 .overlay {
@@ -152,6 +153,10 @@
 }
 
 @media (max-width: 768px) {
+  .sliceInner {
+    background-image: var(--bg-mobile);
+  }
+
   .sydneySection {
     padding: 60px 5%;
   }

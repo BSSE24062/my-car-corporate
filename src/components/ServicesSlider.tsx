@@ -9,31 +9,36 @@ const services = [
     id: 1,
     title: "Professional Chauffeurs",
     description: "Experience the pinnacle of luxury with our highly trained and discreet chauffeurs, dedicated to providing a seamless journey.",
-    bgImage: "/professsional.jpg"
+    bgImage: "/professsional.jpg",
+    mobileBgImage: "/mobile_asset/professional.jpg"
   },
   {
     id: 2,
     title: "Airport Pickups",
     description: "Punctual and stress-free airport transfers. We monitor your flight to ensure we are there when you land.",
-    bgImage: "/AirportPickups.jpg"
+    bgImage: "/AirportPickups.jpg",
+    mobileBgImage: "/mobile_asset/AirportPickups.jpg"
   },
   {
     id: 3,
     title: "One Day Trip",
     description: "Explore the city or countryside in unparalleled comfort. Custom itineraries tailored to your desires.",
-    bgImage: "/oneDayTour.jpg"
+    bgImage: "/oneDayTour.jpg",
+    mobileBgImage: "/mobile_asset/oneDayTrip.jpg"
   },
   {
     id: 4,
     title: "Wedding Transport",
     description: "Make your special day even more memorable with our elegant fleet and red-carpet service.",
-    bgImage: "/wedding.jpg"
+    bgImage: "/wedding.jpg",
+    mobileBgImage: "/mobile_asset/wedding.jpg"
   },
   {
     id: 5,
     title: "Private Tours",
     description: "Discover hidden gems and iconic landmarks with personalized private tours driven by local experts.",
-    bgImage: "/privateTour.jpg"
+    bgImage: "/privateTour.jpg",
+    mobileBgImage: "/mobile_asset/privateTours.jpg"
   }
 ];
 
@@ -58,7 +63,10 @@ const ServicesSlider = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
           className={styles.slideBackground}
-          style={{ backgroundImage: `url(${services[currentIndex].bgImage})` }}
+          style={{
+            '--bg-desktop': `url(${services[currentIndex].bgImage})`,
+            '--bg-mobile': `url(${services[currentIndex].mobileBgImage})`
+          } as React.CSSProperties}
         >
           <div className={styles.overlay}></div>
           

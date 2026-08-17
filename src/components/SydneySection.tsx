@@ -72,16 +72,6 @@ const sydneyImages = [
 
 const SydneySection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -89,10 +79,6 @@ const SydneySection = () => {
     }, 4500); // 4.5 seconds per slide
     return () => clearInterval(interval);
   }, []);
-
-  const getBgImage = (slide: typeof sydneyImages[0]) => {
-    return isMobile ? slide.mobileImg : slide.desktopImg;
-  };
 
   return (
     <section id="sydney" className={styles.sydneySection}>
@@ -138,8 +124,9 @@ const SydneySection = () => {
                     style={{
                       left: `-${index * 100}%`,
                       width: `${8 * 100}%`,
-                      backgroundImage: `url(${getBgImage(sydneyImages[currentIndex])})`,
-                    }}
+                      '--bg-desktop': `url(${sydneyImages[currentIndex].desktopImg})`,
+                      '--bg-mobile': `url(${sydneyImages[currentIndex].mobileImg})`,
+                    } as React.CSSProperties}
                     animate={{
                       scale: [1.0, 1.05],
                       transition: {
