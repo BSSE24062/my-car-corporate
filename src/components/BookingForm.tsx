@@ -54,9 +54,9 @@ const BookingForm = () => {
           {/* Left Column: Contact Card */}
           <div className={styles.contactCard}>
             <div className={styles.contactCardHeader}>
-              <span className={styles.badge}>Get In Touch</span>
-              <h2>Contact Details</h2>
-              <p>For urgent transfer bookings, corporate accounts, or direct support, contact our dispatch team via phone, email, or WhatsApp.</p>
+              <span className={styles.badge}>{t('contact.badge', 'Get In Touch')}</span>
+              <h2>{t('contact.title', 'Contact Details')}</h2>
+              <p>{t('contact.desc', 'For urgent transfer bookings, corporate accounts, or direct support, contact our dispatch team via phone, email, or WhatsApp.')}</p>
             </div>
 
             <div className={styles.contactInfo}>
@@ -65,7 +65,7 @@ const BookingForm = () => {
                   <Phone size={20} />
                 </div>
                 <div className={styles.infoDetails}>
-                  <span className={styles.infoLabel}>Call Us</span>
+                  <span className={styles.infoLabel}>{t('contact.call_us', 'Call Us')}</span>
                   <span className={styles.infoValue}>+61 451 002 525</span>
                 </div>
               </a>
@@ -75,7 +75,7 @@ const BookingForm = () => {
                   <Mail size={20} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <span className={styles.infoLabel}>Email Us</span>
+                  <span className={styles.infoLabel}>{t('contact.email_us', 'Email Us')}</span>
                   <span className={styles.infoValue}>zakki@zubs.dev</span>
                 </div>
               </a>
@@ -92,30 +92,30 @@ const BookingForm = () => {
                   </svg>
                 </div>
                 <div className={styles.infoDetails}>
-                  <span className={styles.infoLabel}>WhatsApp Us</span>
-                  <span className={styles.infoValue}>Chat Now</span>
+                  <span className={styles.infoLabel}>{t('contact.whatsapp_us', 'WhatsApp Us')}</span>
+                  <span className={styles.infoValue}>{t('contact.chat_now', 'Chat Now')}</span>
                 </div>
               </a>
             </div>
           </div>
 
           <div className={styles.formWrapper}>
-            <h2>Book Your Ride</h2>
-            <p>Reserve your premium chauffeur experience today.</p>
+            <h2>{t('booking.title', 'Book Your Ride')}</h2>
+            <p>{t('booking.subtitle', 'Reserve your premium chauffeur experience today.')}</p>
 
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.inputGroup}>
                 <label>{t('form.name', 'Name')}</label>
-                <input type="text" name="name" placeholder="Name" required />
+                <input type="text" name="name" placeholder={t('form.name', 'Name')} required />
               </div>
 
               <div className={styles.row}>
                 <div className={styles.inputGroup}>
-                  <label>Contact Number</label>
+                  <label>{t('form.contact_label', 'Contact Number')}</label>
                   <input type="tel" name="contactNumber" placeholder="+61 xxx xxx xxx" required />
                 </div>
                 <div className={styles.inputGroup}>
-                  <label>Email</label>
+                  <label>{t('form.email_label', 'Email')}</label>
                   <input type="email" name="email" placeholder="email@example.com" required />
                 </div>
               </div>
@@ -124,13 +124,13 @@ const BookingForm = () => {
                 <div className={styles.inputGroup}>
                   <label>{t('form.service_type', 'Service Type')}</label>
                   <select name="serviceType" required defaultValue="">
-                    <option value="" disabled>Select Service</option>
-                    <option value="airport">Airport</option>
-                    <option value="one_day">One Day Trip</option>
-                    <option value="wedding">Wedding Transport</option>
-                    <option value="hourly">Hourly Bookings</option>
-                    <option value="tour">Personal Tour</option>
-                    <option value="other">Other</option>
+                    <option value="" disabled>{t('form.select_service', 'Select Service')}</option>
+                    <option value="airport">{t('form.airport', 'Airport')}</option>
+                    <option value="one_day">{t('form.one_day', 'One Day Trip')}</option>
+                    <option value="wedding">{t('form.wedding', 'Wedding Transport')}</option>
+                    <option value="hourly">{t('form.hourly', 'Hourly Bookings')}</option>
+                    <option value="tour">{t('form.tour', 'Personal Tour')}</option>
+                    <option value="other">{t('form.other', 'Other')}</option>
                   </select>
                 </div>
                 <div className={styles.inputGroup}>
@@ -140,24 +140,24 @@ const BookingForm = () => {
               </div>
 
               <div className={styles.inputGroup}>
-                <label>Further Details</label>
+                <label>{t('form.details_label', 'Further Details')}</label>
                 <textarea 
                   name="details"
-                  placeholder="Further details e.g Travell, Time, Location etc..." 
+                  placeholder={t('form.details', 'Further details e.g Travel, Time, Location etc...')} 
                   rows={4}
                   required
                 ></textarea>
               </div>
 
               <button type="submit" className={styles.submitBtn} disabled={isLoading}>
-                {isLoading ? 'Sending...' : t('form.submit', 'Book Now')}
+                {isLoading ? t('form.sending_status', 'Sending...') : t('form.submit', 'Book Now')}
               </button>
               
               {status === 'success' && (
-                <p className={styles.statusMsg}>Booking request sent successfully! We will contact you shortly.</p>
+                <p className={styles.statusMsg}>{t('form.success', 'Booking request sent successfully! We will contact you shortly.')}</p>
               )}
               {status === 'sending' && (
-                <p className={styles.sendingMsg}>Sending booking request...</p>
+                <p className={styles.sendingMsg}>{t('form.sending_status', 'Sending...')}</p>
               )}
               {status && status.startsWith('error:') && (
                 <p className={styles.errorMsg}>{status.replace('error: ', '')}</p>

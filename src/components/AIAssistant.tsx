@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import styles from './AIAssistant.module.css';
 
 interface Message {
@@ -10,10 +11,11 @@ interface Message {
 }
 
 const AIAssistant = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Hello! I am the My Corporate Cars AI assistant. How can I help you with your premium booking today?' }
+    { role: 'assistant', content: 'welcome_chat' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +67,7 @@ const AIAssistant = () => {
               <div className={styles.avatar}>
                 <img src="/AI-agent.jpg" alt="AI Agent" className={styles.avatarImage} />
               </div>
-              <h4>Concierge</h4>
+              <h4>{t('form.chat_header', 'Concierge')}</h4>
             </div>
             <button onClick={() => setIsOpen(false)} className={styles.closeBtn}><X size={20} /></button>
           </div>
@@ -74,7 +76,10 @@ const AIAssistant = () => {
             {messages.map((msg, idx) => (
               <div key={idx} className={`${styles.message} ${styles[msg.role]}`}>
                 <div className={styles.messageBubble}>
-                  {msg.content}
+                  {msg.content === 'welcome_chat' 
+                    ? t('form.welcome_chat', 'Hello! I am the My Corporate Cars AI assistant. How can I help you today?') 
+                    : msg.content
+                  }
                 </div>
               </div>
             ))}
@@ -94,7 +99,7 @@ const AIAssistant = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Type your message..."
+              placeholder={t('form.input_placeholder', 'Type your message...')}
             />
             <button onClick={handleSend} disabled={isLoading || !input.trim()}>
               <Send size={18} />
@@ -105,7 +110,7 @@ const AIAssistant = () => {
         <div className={styles.fabContainer}>
           {showWelcome && (
             <div className={styles.welcomeBubble}>
-              <span className={styles.welcomeText}>👋 Welcome! Ask me anything.</span>
+              <span className={styles.welcomeText}>{t('form.welcome_msg', '👋 Welcome! Ask me anything.')}</span>
               <button 
                 onClick={(e) => {
                   e.stopPropagation();

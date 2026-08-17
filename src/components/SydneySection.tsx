@@ -2,75 +2,77 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import styles from './SydneySection.module.css';
 
 const sydneyImages = [
   {
     id: 1,
-    title: "Sydney Opera House",
-    description: "Arrive at Sydney's most iconic harbor destination in the comfort of a private luxury sedan.",
+    titleKey: "sydney.opera_title",
+    descKey: "sydney.opera_desc",
     desktopImg: "/Sydney/operaHouse.jpg",
     mobileImg: "/Sydney/mobile_sydney/operaHouse.jpg"
   },
   {
     id: 2,
-    title: "Kingsford Smith Airport",
-    description: "Seamless, stress-free airport pick-ups and transfers with premium concierge service.",
+    titleKey: "sydney.airport_title",
+    descKey: "sydney.airport_desc",
     desktopImg: "/Sydney/airport.jpg",
     mobileImg: "/Sydney/mobile_sydney/airport.jpg"
   },
   {
     id: 3,
-    title: "Bondi Beach",
-    description: "Cruising along the famous coastal strip in style, ready for the sun and surf.",
+    titleKey: "sydney.bondi_title",
+    descKey: "sydney.bondi_desc",
     desktopImg: "/Sydney/bondi.jpg",
     mobileImg: "/Sydney/mobile_sydney/bondi.jpg"
   },
   {
     id: 4,
-    title: "Sydney Harbour Bridge",
-    description: "Experience stunning panoramic views of the Bridge and Harbour under the harbor lights.",
+    titleKey: "sydney.harbour_title",
+    descKey: "sydney.harbour_desc",
     desktopImg: "/Sydney/harbour.jpg",
     mobileImg: "/Sydney/mobile_sydney/harbour.jpg"
   },
   {
     id: 5,
-    title: "Sea Cliff Bridge",
-    description: "A breathtaking coastal drive over the ocean along the Grand Pacific Drive.",
+    titleKey: "sydney.seacliff_title",
+    descKey: "sydney.seacliff_desc",
     desktopImg: "/Sydney/seacliff.jpg",
     mobileImg: "/Sydney/mobile_sydney/seacliff.jpg"
   },
   {
     id: 6,
-    title: "Sydney Royal Botanic Garden",
-    description: "Serene landscapes and classical views overlooking the Opera House and Harbour.",
+    titleKey: "sydney.botanic_title",
+    descKey: "sydney.botanic_desc",
     desktopImg: "/Sydney/nearOpera.jpg",
     mobileImg: "/Sydney/mobile_sydney/nearOpera.jpg"
   },
   {
     id: 7,
-    title: "Sydney Town Hall Clock Tower",
-    description: "Timeless historical landmarks in the heart of Sydney's central business district.",
+    titleKey: "sydney.clock_title",
+    descKey: "sydney.clock_desc",
     desktopImg: "/Sydney/clockTower.jpg",
     mobileImg: "/Sydney/mobile_sydney/clockTower.jpg"
   },
   {
     id: 8,
-    title: "Sydney Airport Terminal",
-    description: "Reliable, executive-class business travel directly from the private aviation runway.",
+    titleKey: "sydney.terminal_title",
+    descKey: "sydney.terminal_desc",
     desktopImg: "/Sydney/sydneyAirport.jpg",
     mobileImg: "/Sydney/mobile_sydney/sydneyAirport.jpg"
   },
   {
     id: 9,
-    title: "Darling Harbour Side",
-    description: "Vibrant nightlife, premium dining, and entertainment venues at the waterfront.",
+    titleKey: "sydney.darling_title",
+    descKey: "sydney.darling_desc",
     desktopImg: "/Sydney/harbourSide.jpg",
     mobileImg: "/Sydney/mobile_sydney/harbourSide.jpg"
   }
 ];
 
 const SydneySection = () => {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -84,8 +86,8 @@ const SydneySection = () => {
     <section id="sydney" className={styles.sydneySection}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2>Sydney In Style</h2>
-          <p>Experience the finest chauffeured transport across Sydney's landmark destinations.</p>
+          <h2>{t('sydney.title', 'Sydney In Style')}</h2>
+          <p>{t('sydney.subtitle', "Experience the finest chauffeured transport across Sydney's landmark destinations.")}</p>
         </div>
 
         <div className={styles.slideshowWrapper}>
@@ -143,7 +145,7 @@ const SydneySection = () => {
 
           {/* Elegant Content Box */}
           <div className={styles.contentBox}>
-            <div className={styles.badge}>Sydney Coverage</div>
+            <div className={styles.badge}>{t('sydney.coverage', 'Sydney Coverage')}</div>
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -153,8 +155,8 @@ const SydneySection = () => {
                 transition={{ duration: 0.25 }}
                 className={styles.slideInfo}
               >
-                <h3>{sydneyImages[currentIndex].title}</h3>
-                <p>{sydneyImages[currentIndex].description}</p>
+                <h3>{t(sydneyImages[currentIndex].titleKey)}</h3>
+                <p>{t(sydneyImages[currentIndex].descKey)}</p>
               </motion.div>
             </AnimatePresence>
 

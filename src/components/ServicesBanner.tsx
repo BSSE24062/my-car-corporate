@@ -1,8 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './ServicesBanner.module.css';
 
 const ServicesBanner = () => {
-  const text = "Our Luxury Services  ·  Our Luxury Services  ·  Our Luxury Services  ·  Our Luxury Services  ·  ";
+  const { t } = useTranslation();
+  const label = t('services.banner', 'Our Luxury Services');
+  const text = `${label}  ·  ${label}  ·  ${label}  ·  ${label}  ·  `;
   
   return (
     <div className={styles.bannerContainer}>

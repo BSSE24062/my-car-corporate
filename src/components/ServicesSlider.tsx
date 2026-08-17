@@ -2,47 +2,49 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import styles from './ServicesSlider.module.css';
 
 const services = [
   {
     id: 1,
-    title: "Professional Chauffeurs",
-    description: "Experience the pinnacle of luxury with our highly trained and discreet chauffeurs, dedicated to providing a seamless journey.",
+    titleKey: "services.professional_title",
+    descKey: "services.professional_desc",
     bgImage: "/Services/professional.jpg",
     mobileBgImage: "/Services/mobile_services/professional.jpg"
   },
   {
     id: 2,
-    title: "Airport Pickups",
-    description: "Punctual and stress-free airport transfers. We monitor your flight to ensure we are there when you land.",
+    titleKey: "services.airport_title",
+    descKey: "services.airport_desc",
     bgImage: "/Services/AirportPickups.jpg",
     mobileBgImage: "/Services/mobile_services/AirportPickups.jpg"
   },
   {
     id: 3,
-    title: "One Day Trip",
-    description: "Explore the city or countryside in unparalleled comfort. Custom itineraries tailored to your desires.",
+    titleKey: "services.one_day_title",
+    descKey: "services.one_day_desc",
     bgImage: "/Services/oneDayTour.jpg",
     mobileBgImage: "/Services/mobile_services/oneDayTrip.jpg"
   },
   {
     id: 4,
-    title: "Wedding Transport",
-    description: "Make your special day even more memorable with our elegant fleet and red-carpet service.",
+    titleKey: "services.wedding_title",
+    descKey: "services.wedding_desc",
     bgImage: "/Services/wedding.jpg",
     mobileBgImage: "/Services/mobile_services/wedding.jpg"
   },
   {
     id: 5,
-    title: "Private Tours",
-    description: "Discover hidden gems and iconic landmarks with personalized private tours driven by local experts.",
+    titleKey: "services.private_title",
+    descKey: "services.private_desc",
     bgImage: "/Services/privateTour.jpg",
     mobileBgImage: "/Services/mobile_services/privateTours.jpg"
   }
 ];
 
 const ServicesSlider = () => {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto slide (optional, can be removed if user should only click)
@@ -76,14 +78,14 @@ const ServicesSlider = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.15, duration: 0.5 }}
             >
-              {services[currentIndex].title}
+              {t(services[currentIndex].titleKey)}
             </motion.h2>
             <motion.p
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              {services[currentIndex].description}
+              {t(services[currentIndex].descKey)}
             </motion.p>
           </div>
         </motion.div>

@@ -2,10 +2,12 @@
 
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Clock, Shield, Award, Car } from 'lucide-react';
 import styles from './ChooseUsSection.module.css';
 
 const ChooseUsSection = () => {
+  const { t } = useTranslation();
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -35,23 +37,23 @@ const ChooseUsSection = () => {
   const points = [
     {
       icon: <Clock className={styles.icon} size={28} />,
-      title: "Flawless Punctuality",
-      description: "We track your flight numbers in real-time and plan routes dynamically to guarantee we are always 15 minutes ahead of schedule."
+      titleKey: "why_choose_us.punctuality_title",
+      descKey: "why_choose_us.punctuality_desc"
     },
     {
       icon: <Shield className={styles.icon} size={28} />,
-      title: "Absolute Safety & Discretion",
-      description: "Travel with complete peace of mind. Our chauffeured transfers prioritize your privacy, confidentiality, and physical security."
+      titleKey: "why_choose_us.safety_title",
+      descKey: "why_choose_us.safety_desc"
     },
     {
       icon: <Award className={styles.icon} size={28} />,
-      title: "Elite Certified Chauffeurs",
-      description: "Our drivers are rigorously vetted, professionally trained in defensive driving, and committed to providing first-class concierge hospitality."
+      titleKey: "why_choose_us.chauffeurs_title",
+      descKey: "why_choose_us.chauffeurs_desc"
     },
     {
       icon: <Car className={styles.icon} size={28} />,
-      title: "Impeccable Luxury Fleet",
-      description: "Select from a pristine fleet of modern luxury sedans, SUVs, and executive vans equipped with complementary premium amenities."
+      titleKey: "why_choose_us.fleet_title",
+      descKey: "why_choose_us.fleet_desc"
     }
   ];
 
@@ -102,10 +104,10 @@ const ChooseUsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className={styles.subtitle}>Uncompromising Excellence</span>
-              <h2>Why Choose Us?</h2>
+              <span className={styles.subtitle}>{t('why_choose_us.subtitle', 'Uncompromising Excellence')}</span>
+              <h2>{t('why_choose_us.title', 'Why Choose Us?')}</h2>
               <p className={styles.leadText}>
-                We redefine corporate transportation through meticulous execution, world-class luxury fleets, and a commitment to setting new standards in executive concierge services.
+                {t('why_choose_us.lead', 'We redefine corporate transportation through meticulous execution, world-class luxury fleets, and a commitment to setting new standards in executive concierge services.')}
               </p>
             </motion.div>
 
@@ -123,8 +125,8 @@ const ChooseUsSection = () => {
                     {point.icon}
                   </div>
                   <div className={styles.pointContent}>
-                    <h3>{point.title}</h3>
-                    <p>{point.description}</p>
+                    <h3>{t(point.titleKey)}</h3>
+                    <p>{t(point.descKey)}</p>
                   </div>
                 </motion.div>
               ))}
