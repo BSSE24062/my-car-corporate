@@ -7,64 +7,83 @@ interface LoadingScreenProps {
 }
 
 const LoadingScreen = ({ hidden = false }: LoadingScreenProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const video = videoRef.current;
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    /*
+     * WHY innerHTML instead of JSX <video>:
+     * React (including React 19) does NOT serialize the `muted` boolean prop
+     * to the actual HTML `muted` attribute. iOS Safari makes its autoplay
+     * decision based on the presence of the `muted` HTML attribute, NOT the
+     * JS property. By injecting via innerHTML we guarantee the attribute is
+     * present in the DOM string that iOS Safari evaluates.
+     */
+    wrapper.innerHTML = `
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        style="display:block;max-width:100%;max-height:100%;object-fit:contain;"
+      >
+        <source src="/loading.mp4" type="video/mp4" />
+      </video>
+    `;
+
+    const video = wrapper.querySelector('video') as HTMLVideoElement | null;
     if (!video) return;
 
-    // iOS Safari requires these set programmatically as well as via HTML attributes
+    // Belt-and-suspenders: also set via JS properties
     video.muted = true;
+    (video as any).defaultMuted = true;
     video.playsInline = true;
-    video.setAttribute('muted', '');
-    video.setAttribute('playsinline', '');
+
+    // Call load() before play() — required on some iOS versions
+    video.load();
 
     const tryPlay = () => {
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.warn("Autoplay blocked, waiting for user interaction:", error);
+        playPromise.catch((err) => {
+          console.warn('iOS autoplay blocked, waiting for first touch:', err);
 
-          const playOnInteraction = () => {
+          const onTouch = () => {
             video.play()
               .then(() => {
-                document.removeEventListener('touchstart', playOnInteraction);
-                document.removeEventListener('click', playOnInteraction);
+                document.removeEventListener('touchstart', onTouch);
+                document.removeEventListener('click', onTouch);
               })
-              .catch((err) => console.error("Video play on interaction failed:", err));
+              .catch((e) => console.error('Play on interaction failed:', e));
           };
 
-          document.addEventListener('touchstart', playOnInteraction, { passive: true });
-          document.addEventListener('click', playOnInteraction, { passive: true });
+          document.addEventListener('touchstart', onTouch, { passive: true });
+          document.addEventListener('click', onTouch, { passive: true });
         });
       }
     };
 
+    // Some iOS versions need a tiny delay after load() before play()
+    video.addEventListener('loadedmetadata', tryPlay, { once: true });
+    // Fallback: also try immediately
     tryPlay();
   }, []);
 
   return (
     /*
-     * IMPORTANT: This wrapper must always stay in the DOM (never unmount this component).
-     * iOS Safari will not autoplay a video that is injected after initial page load.
-     * Visibility is controlled via the `hidden` class / CSS opacity, NOT by unmounting.
+     * CRITICAL: This component must NEVER be conditionally unmounted.
+     * Use the `hidden` prop + CSS to hide it. If unmounted and remounted,
+     * iOS Safari will block autoplay on the re-injected video.
      */
     <div
       className={`loader-wrapper${hidden ? ' loader-hidden' : ''}`}
       aria-hidden={hidden}
-    >
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        style={{ display: 'block' }}
-      >
-        <source src="/loading.mp4" type="video/mp4" />
-      </video>
-    </div>
+      ref={wrapperRef}
+    />
   );
 };
 
