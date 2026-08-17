@@ -12,10 +12,10 @@ const LoadingScreen = () => {
   return (
     <div className="loader-wrapper">
       {isMounted && (
-        <video 
-          autoPlay 
-          loop 
-          muted 
+        <video
+          autoPlay
+          loop
+          muted
           playsInline
         >
           <source src="/loading.mp4" type="video/mp4" />
