@@ -93,7 +93,7 @@ const BookingForm = () => {
                 </div>
                 <div className={styles.infoDetails}>
                   <span className={styles.infoLabel}>WhatsApp Us</span>
-                  <span className={styles.infoValue}>Chat Live</span>
+                  <span className={styles.infoValue}>Chat Now</span>
                 </div>
               </a>
             </div>

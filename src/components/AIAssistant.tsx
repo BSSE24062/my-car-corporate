@@ -11,6 +11,7 @@ interface Message {
 
 const AIAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: 'Hello! I am the My Corporate Cars AI assistant. How can I help you with your premium booking today?' }
   ]);
@@ -99,9 +100,26 @@ const AIAssistant = () => {
           </div>
         </div>
       ) : (
-        <button className={styles.fab} onClick={() => setIsOpen(true)}>
-          <MessageSquare size={24} />
-        </button>
+        <div className={styles.fabContainer}>
+          {showWelcome && (
+            <div className={styles.welcomeBubble}>
+              <span className={styles.welcomeText}>👋 Welcome! Ask me anything.</span>
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowWelcome(false);
+                }} 
+                className={styles.welcomeCloseBtn}
+                title="Dismiss welcome message"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          )}
+          <button className={styles.fab} onClick={() => { setIsOpen(true); setShowWelcome(false); }}>
+            <MessageSquare size={24} />
+          </button>
+        </div>
       )}
     </div>
   );

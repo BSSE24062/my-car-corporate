@@ -183,3 +183,62 @@
     border-radius: 0;
   }
 }
+
+.fabContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.welcomeBubble {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-size: 0.88rem;
+  animation: fadeIn 0.3s ease-out;
+  pointer-events: auto;
+}
+
+:global(.light-theme) .welcomeBubble {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.welcomeText {
+  line-height: 1.2;
+}
+
+.welcomeCloseBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.welcomeCloseBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+}
+
+:global(.light-theme) .welcomeCloseBtn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
