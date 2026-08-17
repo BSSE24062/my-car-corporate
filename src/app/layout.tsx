@@ -116,9 +116,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        {/* Always keep LoadingScreen in the DOM — iOS Safari won't autoplay
-             a video that is conditionally mounted after page load. */}
-        <LoadingScreen hidden={!loading} />
+        {loading && <LoadingScreen />}
         <div style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s ease-in' }}>
           {children}
         </div>
