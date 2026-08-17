@@ -29,7 +29,7 @@ const ChooseUsSection = () => {
   const handleMouseLeave = () => {
     const card = cardRef.current;
     if (!card) return;
-    card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    card.style.transform = `perspective(1200px) rotateX(5deg) rotateY(10deg) scale3d(1, 1, 1)`;
   };
 
   const points = [
@@ -71,9 +71,17 @@ const ChooseUsSection = () => {
             <div 
               ref={cardRef}
               className={styles.glassCard}
+              style={{ transform: 'perspective(1200px) rotateX(5deg) rotateY(10deg)' }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
+              {/* 3D Cuboid Sides */}
+              <div className={`${styles.side} ${styles.sideTop}`} />
+              <div className={`${styles.side} ${styles.sideBottom}`} />
+              <div className={`${styles.side} ${styles.sideLeft}`} />
+              <div className={`${styles.side} ${styles.sideRight}`} />
+              <div className={styles.cardBack} />
+
               <div className={styles.imageWrapper}>
                 <img src="/chooseUS.jpg" alt="Why Choose Us" className={styles.mainImage} />
                 <div className={styles.glassOverlay} />

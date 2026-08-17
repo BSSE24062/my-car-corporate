@@ -76,7 +76,7 @@ const SydneySection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % sydneyImages.length);
-    }, 4500); // 4.5 seconds per slide
+    }, 5000); // 5 seconds per slide
     return () => clearInterval(interval);
   }, []);
 
@@ -100,18 +100,18 @@ const SydneySection = () => {
                     y: '0%', 
                     opacity: 1,
                     transition: {
-                      duration: 0.7,
+                      duration: 1.0,
                       ease: [0.16, 1, 0.3, 1],
-                      delay: index * 0.055
+                      delay: index * 0.075
                     }
                   }}
                   exit={{ 
                     y: '100%',
                     opacity: 0,
                     transition: {
-                      duration: 0.6,
+                      duration: 0.8,
                       ease: [0.7, 0, 0.84, 0],
-                      delay: (7 - index) * 0.03
+                      delay: (7 - index) * 0.04
                     }
                   }}
                   style={{
@@ -130,7 +130,7 @@ const SydneySection = () => {
                     animate={{
                       scale: [1.0, 1.05],
                       transition: {
-                        duration: 4.5,
+                        duration: 5.0,
                         ease: "easeOut"
                       }
                     }}
