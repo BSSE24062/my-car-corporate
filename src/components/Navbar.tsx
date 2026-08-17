@@ -41,6 +41,7 @@ const Navbar = () => {
         className={styles.logo}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         aria-label="Back to top"
+        suppressHydrationWarning
       >
         <h1>My Corporate Cars</h1>
       </button>

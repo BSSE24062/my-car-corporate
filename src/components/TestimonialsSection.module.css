@@ -94,6 +94,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 180px; /* Prevents height collapsing during cross-fade transitions */
 }
 
 .testimonialCard {
@@ -120,6 +121,7 @@
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  min-height: 110px; /* Keeps height stable across different quote lengths */
 }
 
 .authorInfo {
@@ -183,9 +185,14 @@
     min-height: 380px;
   }
 
+  .testimonialContainer {
+    min-height: 240px; /* Prevents height collapsing on mobile screens */
+  }
+
   .quote {
     font-size: 1.1rem;
     line-height: 1.6;
+    min-height: 140px; /* Stable height for longer quotes on mobile */
   }
 }
 

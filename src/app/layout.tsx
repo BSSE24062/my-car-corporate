@@ -20,7 +20,7 @@ export default function RootLayout({
     const timer = setTimeout(() => {
       setLoading(false);
       window.dispatchEvent(new Event('loading-finished'));
-    }, 3500); // 3.5s minimum loading
+    }, 4500); // 4.5s minimum loading
     return () => clearTimeout(timer);
   }, []);
 
