@@ -87,7 +87,7 @@
 .glassCard {
   position: relative;
   width: 100%;
-  max-width: 450px;
+  max-width: 450px; /* Restored to original size */
   border-radius: 24px;
   padding: 16px;
   background: rgba(255, 255, 255, 0.02);
@@ -95,7 +95,7 @@
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6),
               inset 0 1px 0 rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.5s ease, background-color 0.5s ease;
+  transition: transform 0.1s ease, border-color 0.5s ease, background-color 0.5s ease;
   transform-style: preserve-3d;
 }
 
@@ -109,7 +109,7 @@
 /* 3D Cuboid Sides */
 .side {
   position: absolute;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.06); /* original frosty glass side */
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   pointer-events: none;
@@ -167,7 +167,7 @@
   background: rgba(255, 255, 255, 0.01);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 24px;
-  transform: translateZ(-24px);
+  transform: translateZ(-24px); /* Original z-depth offset */
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.65);
   z-index: 0;
 }
@@ -181,7 +181,7 @@
 .imageWrapper {
   position: relative;
   width: 100%;
-  border-radius: 16px;
+  border-radius: 16px; /* Smooth rounded corners on inner image wrapper */
   overflow: hidden;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
   transform: translateZ(30px); /* Lifts image up inside 3D space */
@@ -226,7 +226,7 @@
     rgba(255, 255, 255, 0.03) 55%,
     rgba(255, 255, 255, 0) 100%
   );
-  transform: rotate(-30deg) translateZ(40px);
+  transform: rotate(-30deg) translateZ(20px); /* Raised glare reflection over the image */
   pointer-events: none;
   z-index: 3;
 }

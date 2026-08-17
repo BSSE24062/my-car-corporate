@@ -19,7 +19,7 @@ const ChooseUsSection = () => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    // Maximum 12 degrees rotation for subtle premium feel
+    // Maximum 12 degrees rotation for subtle premium feel (as in last git push)
     const rotateX = ((centerY - y) / centerY) * 12;
     const rotateY = ((x - centerX) / centerX) * 12;
 
@@ -29,7 +29,7 @@ const ChooseUsSection = () => {
   const handleMouseLeave = () => {
     const card = cardRef.current;
     if (!card) return;
-    card.style.transform = `perspective(1200px) rotateX(5deg) rotateY(10deg) scale3d(1, 1, 1)`;
+    card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
   };
 
   const points = [
@@ -71,22 +71,25 @@ const ChooseUsSection = () => {
             <div 
               ref={cardRef}
               className={styles.glassCard}
-              style={{ transform: 'perspective(1200px) rotateX(5deg) rotateY(10deg)' }}
+              style={{ transform: 'perspective(1200px) rotateX(0deg) rotateY(0deg)' }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
-              {/* 3D Cuboid Sides */}
-              <div className={`${styles.side} ${styles.sideTop}`} />
-              <div className={`${styles.side} ${styles.sideBottom}`} />
-              <div className={`${styles.side} ${styles.sideLeft}`} />
-              <div className={`${styles.side} ${styles.sideRight}`} />
+              {/* Back Face shadow layer */}
               <div className={styles.cardBack} />
 
+              {/* Image at the front face (z = 24px) with glassy border and glare */}
               <div className={styles.imageWrapper}>
                 <img src="/chooseUS.jpg" alt="Why Choose Us" className={styles.mainImage} />
                 <div className={styles.glassOverlay} />
                 <div className={styles.reflection} />
               </div>
+
+              {/* 3D Cuboid Sides (Rendered after image to ensure edges are fully visible) */}
+              <div className={`${styles.side} ${styles.sideTop}`} />
+              <div className={`${styles.side} ${styles.sideBottom}`} />
+              <div className={`${styles.side} ${styles.sideLeft}`} />
+              <div className={`${styles.side} ${styles.sideRight}`} />
             </div>
           </div>
 
