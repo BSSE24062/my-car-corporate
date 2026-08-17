@@ -193,13 +193,17 @@
   cursor: not-allowed;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .chatWindow {
-    width: 100vw;
-    height: 100vh;
-    bottom: 0;
-    right: 0;
-    border-radius: 0;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: calc(100vw - 40px);
+    max-height: 80vh;
+    height: 480px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    z-index: 10000;
   }
 }
 
