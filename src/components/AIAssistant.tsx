@@ -62,7 +62,9 @@ const AIAssistant = () => {
         <div className={styles.chatWindow}>
           <div className={styles.header}>
             <div className={styles.headerInfo}>
-              <div className={styles.avatar}>AI</div>
+              <div className={styles.avatar}>
+                <img src="/AI-agent.jpg" alt="AI Agent" className={styles.avatarImage} />
+              </div>
               <h4>Concierge</h4>
             </div>
             <button onClick={() => setIsOpen(false)} className={styles.closeBtn}><X size={20} /></button>
@@ -117,7 +119,7 @@ const AIAssistant = () => {
             </div>
           )}
           <button className={styles.fab} onClick={() => { setIsOpen(true); setShowWelcome(false); }}>
-            <MessageSquare size={24} />
+            <img src="/AI-agent.jpg" alt="AI Agent" className={styles.fabImage} />
           </button>
         </div>
       )}
