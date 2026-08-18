@@ -75,7 +75,13 @@
   font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1.1;
-  background: linear-gradient(to right, var(--text-color), var(--text-muted));
+  background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0.75));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:global(.light-theme) .textBlock h1 {
+  background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0.75));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
