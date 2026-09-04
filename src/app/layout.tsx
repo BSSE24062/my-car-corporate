@@ -5,6 +5,7 @@ import "./globals.css";
 import "../lib/i18n"; // Initialize i18n
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -280,6 +281,7 @@ export default function RootLayout({
         <div style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s ease-in' }}>
           {children}
         </div>
+        <Analytics />
       </body>
     </html>
   );
