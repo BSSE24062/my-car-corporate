@@ -30,10 +30,11 @@ const AIAssistant = () => {
   }, [messages]);
 
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || isLoading) return;
 
-    const userMessage = { role: 'user' as const, content: input };
-    setMessages(prev => [...prev, userMessage]);
+    const userMessage: Message = { role: 'user', content: input.trim() };
+    const currentHistory = [...messages, userMessage];
+    setMessages(currentHistory);
     setInput('');
     setIsLoading(true);
 
@@ -41,20 +42,43 @@ const AIAssistant = () => {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMessage] })
+        body: JSON.stringify({ messages: currentHistory })
       });
-      
-      const data = await response.json();
-      
-      if (data.text) {
-        setMessages(prev => [...prev, { role: 'assistant', content: data.text }]);
-      } else {
-        setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error connecting to the service.' }]);
+
+      if (!response.ok || !response.body) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.error || 'Service temporarily busy');
+      }
+
+      // Prepare empty message for streaming
+      setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
+      setIsLoading(false); // Stop typing indicator as soon as stream opens!
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let streamedContent = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        streamedContent += chunk;
+
+        setMessages(prev => {
+          const next = [...prev];
+          const lastIdx = next.length - 1;
+          if (lastIdx >= 0 && next[lastIdx].role === 'assistant') {
+            next[lastIdx] = { role: 'assistant', content: streamedContent };
+          }
+          return next;
+        });
       }
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Network error. Please try again later.' }]);
-    } finally {
       setIsLoading(false);
+      setMessages(prev => [
+        ...prev,
+        { role: 'assistant', content: 'Our concierge is available directly. Please call +61 430 729 993 or email info@elitecarsaustralia.com.au for immediate assistance.' }
+      ]);
     }
   };
 
@@ -71,13 +95,13 @@ const AIAssistant = () => {
             </div>
             <button onClick={() => setIsOpen(false)} className={styles.closeBtn}><X size={20} /></button>
           </div>
-          
+
           <div className={styles.messagesContainer}>
             {messages.map((msg, idx) => (
               <div key={idx} className={`${styles.message} ${styles[msg.role]}`}>
                 <div className={styles.messageBubble}>
-                  {msg.content === 'welcome_chat' 
-                    ? t('form.welcome_chat', 'Hello! I am the Elite Cars Australia AI assistant. How can I help you today?') 
+                  {msg.content === 'welcome_chat'
+                    ? t('form.welcome_chat', 'Hello! I am the Elite Cars Australia AI assistant. How can I help you today?')
                     : msg.content
                   }
                 </div>
@@ -94,8 +118,8 @@ const AIAssistant = () => {
           </div>
 
           <div className={styles.inputArea}>
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
@@ -111,11 +135,11 @@ const AIAssistant = () => {
           {showWelcome && (
             <div className={styles.welcomeBubble}>
               <span className={styles.welcomeText}>{t('form.welcome_msg', '👋 Welcome! Ask me anything.')}</span>
-              <button 
+              <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowWelcome(false);
-                }} 
+                }}
                 className={styles.welcomeCloseBtn}
                 title="Dismiss welcome message"
               >
