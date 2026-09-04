@@ -4,6 +4,8 @@
   width: 100vw;
   overflow: hidden;
   background-color: var(--bg-color);
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .slideBackground {

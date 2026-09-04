@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -49,6 +49,23 @@ const ServicesSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
+  // Touch swipe state
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+  const touchEndY = useRef<number | null>(null);
+
+  // Preload all slider images on mount for instant zero-lag rendering
+  useEffect(() => {
+    services.forEach((s) => {
+      const img1 = new Image();
+      img1.src = s.bgImage;
+      const img2 = new Image();
+      img2.src = s.mobileBgImage;
+    });
+  }, []);
+
+  // Auto slide timer (pauses when hovered or interacted with)
   useEffect(() => {
     if (isHovered) return;
     const timer = setInterval(() => {
@@ -65,12 +82,48 @@ const ServicesSlider = () => {
     setCurrentIndex((prev) => (prev + 1) % services.length);
   };
 
+  // Touch Event Handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchEndX.current = null;
+    touchEndY.current = null;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+    touchEndY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const diffX = touchStartX.current - touchEndX.current;
+    const diffY = (touchStartY.current || 0) - (touchEndY.current || 0);
+
+    // Ensure it's a predominantly horizontal swipe of at least 40px
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        handleNext(); // Swiped left -> Next slide
+      } else {
+        handlePrev(); // Swiped right -> Prev slide
+      }
+    }
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+    touchEndX.current = null;
+    touchEndY.current = null;
+  };
+
   return (
     <section 
       id="services" 
       className={styles.sliderSection}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Navigation Arrows */}
       <button 
@@ -89,13 +142,14 @@ const ServicesSlider = () => {
         <ChevronRight size={24} />
       </button>
 
-      <AnimatePresence mode="wait">
+      {/* Seamless Cross-fade without mode="wait" to eliminate blank void */}
+      <AnimatePresence initial={false}>
         <motion.div
           key={currentIndex}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className={styles.slideBackground}
           style={{
             '--bg-desktop': `url(${services[currentIndex].bgImage})`,
@@ -106,16 +160,16 @@ const ServicesSlider = () => {
           
           <div className={styles.content}>
             <motion.h2 
-              initial={{ y: 30, opacity: 0 }}
+              initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.15, duration: 0.5 }}
+              transition={{ delay: 0.1, duration: 0.35 }}
             >
               {t(services[currentIndex].titleKey)}
             </motion.h2>
             <motion.p
-              initial={{ y: 30, opacity: 0 }}
+              initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
+              transition={{ delay: 0.2, duration: 0.35 }}
             >
               {t(services[currentIndex].descKey)}
             </motion.p>
