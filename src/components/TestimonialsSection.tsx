@@ -59,7 +59,7 @@ const TestimonialsSection = () => {
         <div className={styles.header}>
           <span className={styles.badge}>{t('testimonials.badge', 'Client Reviews')}</span>
           <h2>{t('testimonials.title', 'Client Testimonials')}</h2>
-          <p>{t('testimonials.subtitle', 'Read what our distinguished clients say about our executive transport services.')}</p>
+          <p>{t('testimonials.subtitle', 'Read what our distinguished clients say about our executive transport services across Australia.')}</p>
         </div>
 
         <div 
@@ -100,7 +100,7 @@ const TestimonialsSection = () => {
               >
                 <div className={styles.rating}>
                   {Array.from({ length: testimonials[currentIndex].rating }).map((_, i) => (
-                    <Star key={i} className={styles.star} size={18} fill="#ff3b30" color="#ff3b30" />
+                    <Star key={i} className={styles.star} size={18} fill="#c9a86a" color="#c9a86a" />
                   ))}
                 </div>
                 

@@ -21,12 +21,12 @@ const Footer = () => {
           {/* Column 1: Brand Info */}
           <div className={styles.brandCol}>
             <button onClick={scrollToTop} className={styles.brandLogo} aria-label="Back to top">
-              <h2>My Corporate Cars</h2>
-              <span className={styles.brandTagline}>Sydney's Premier Chauffeurs</span>
+              <h2>Elite Cars Australia</h2>
+              <span className={styles.brandTagline}>Australia's Premier Chauffeurs</span>
             </button>
             
             <p className={styles.brandDesc}>
-              Bespoke executive transportation across Sydney and New South Wales — defined by discretion, precision, and an unwavering commitment to the extraordinary.
+              Bespoke executive transportation across Australia — defined by discretion, precision, and an unwavering commitment to the extraordinary.
             </p>
 
             <div className={styles.socialRow}>
@@ -58,7 +58,7 @@ const Footer = () => {
                 <a href="#fleet"><ChevronRight size={14} /> Luxury Fleet</a>
               </li>
               <li>
-                <a href="#sydney"><ChevronRight size={14} /> Sydney In Style</a>
+                <a href="#sydney"><ChevronRight size={14} /> Australia In Style</a>
               </li>
               <li>
                 <a href="#about"><ChevronRight size={14} /> Why Choose Us</a>
@@ -114,7 +114,7 @@ const Footer = () => {
               </div>
               <div>
                 <span className={styles.contactLabel}>Service Territory</span>
-                <span className={styles.contactValue}>Sydney CBD & NSW, Australia</span>
+                <span className={styles.contactValue}>Nationwide — Sydney, Melbourne, Brisbane, Perth & Across Australia</span>
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className={styles.bottomBar}>
           <div className={styles.bottomLeft}>
-            &copy; {new Date().getFullYear()} My Corporate Cars. All rights reserved.
+            &copy; {new Date().getFullYear()} Elite Cars Australia. All rights reserved.
           </div>
           <div className={styles.bottomRight}>
             <span>Private Transport</span>

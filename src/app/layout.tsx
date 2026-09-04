@@ -28,33 +28,31 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Primary Meta Tags */}
-        <title>Luxury Chauffeur Service Sydney | My Corporate Cars</title>
-        <meta name="title" content="Luxury Chauffeur Service Sydney | My Corporate Cars" />
-        <meta name="description" content="Book Sydney's premier luxury chauffeur service. Top-rated corporate cars, professional drivers, airport transfers, VIP concierge, weddings & private transport." />
-        <meta name="keywords" content="chauffeur Sydney, chauffeurs Sydney, private driver Sydney, luxury car service, corporate cars, VIP transport Sydney, airport transfer Sydney, wedding cars Sydney, luxury transport, concierge driver Sydney, hire car Sydney, corporate travel" />
+        <title>Luxury Chauffeur Service Australia | Elite Cars Australia</title>
+        <meta name="title" content="Luxury Chauffeur Service Australia | Elite Cars Australia" />
+        <meta name="description" content="Book Australia's premier luxury chauffeur service. Top-rated corporate cars, professional drivers, nationwide airport transfers, VIP concierge, weddings & private transport across Sydney, Melbourne, Brisbane, Perth & nationwide." />
+        <meta name="keywords" content="chauffeur Australia, luxury car service Australia, corporate cars Australia, private driver Australia, airport transfer Sydney, airport transfer Melbourne, airport transfer Brisbane, VIP transport Australia, wedding cars Australia, concierge driver Australia" />
         <meta name="robots" content="index, follow" />
         <meta name="language" content="English" />
-        <link rel="canonical" href="https://mycorporatecars.com.au/" />
+        <link rel="canonical" href="https://elitecarsaustralia.com.au/" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://mycorporatecars.com.au/" />
-        <meta property="og:title" content="Luxury Chauffeur Service Sydney | My Corporate Cars" />
-        <meta property="og:description" content="Book Sydney's premier luxury chauffeur service. Top-rated corporate cars, professional drivers, airport transfers, VIP concierge, weddings & private transport." />
-        <meta property="og:image" content="https://mycorporatecars.com.au/audiMain.png" />
+        <meta property="og:url" content="https://elitecarsaustralia.com.au/" />
+        <meta property="og:title" content="Luxury Chauffeur Service Australia | Elite Cars Australia" />
+        <meta property="og:description" content="Book Australia's premier luxury chauffeur service. Top-rated corporate cars, professional drivers, nationwide airport transfers, VIP concierge, weddings & private transport." />
+        <meta property="og:image" content="https://elitecarsaustralia.com.au/audiMain.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://mycorporatecars.com.au/" />
-        <meta property="twitter:title" content="Luxury Chauffeur Service Sydney | My Corporate Cars" />
-        <meta property="twitter:description" content="Book Sydney's premier luxury chauffeur service. Top-rated corporate cars, professional drivers, airport transfers, VIP concierge, weddings & private transport." />
-        <meta property="twitter:image" content="https://mycorporatecars.com.au/audiMain.png" />
+        <meta property="twitter:url" content="https://elitecarsaustralia.com.au/" />
+        <meta property="twitter:title" content="Luxury Chauffeur Service Australia | Elite Cars Australia" />
+        <meta property="twitter:description" content="Book Australia's premier luxury chauffeur service. Top-rated corporate cars, professional drivers, nationwide airport transfers, VIP concierge, weddings & private transport." />
+        <meta property="twitter:image" content="https://elitecarsaustralia.com.au/audiMain.png" />
 
         {/* Geo Tags */}
-        <meta name="geo.region" content="AU-NSW" />
-        <meta name="geo.placename" content="Sydney" />
-        <meta name="geo.position" content="-33.8688;151.2093" />
-        <meta name="ICBM" content="-33.8688, 151.2093" />
+        <meta name="geo.region" content="AU" />
+        <meta name="geo.placename" content="Australia" />
 
         {/* JSON-LD Structured Data Schema */}
         <script
@@ -63,24 +61,15 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "TaxiService",
-              "name": "My Corporate Cars",
-              "image": "https://mycorporatecars.com.au/audiMain.png",
-              "@id": "https://mycorporatecars.com.au/#service",
-              "url": "https://mycorporatecars.com.au",
+              "name": "Elite Cars Australia",
+              "image": "https://elitecarsaustralia.com.au/audiMain.png",
+              "@id": "https://elitecarsaustralia.com.au/#service",
+              "url": "https://elitecarsaustralia.com.au",
               "telephone": "+61451002525",
               "priceRange": "$$",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Sydney CBD",
-                "addressLocality": "Sydney",
-                "addressRegion": "NSW",
-                "postalCode": "2000",
                 "addressCountry": "AU"
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": -33.8688,
-                "longitude": 151.2093
               },
               "openingHoursSpecification": {
                 "@type": "OpeningHoursSpecification",
@@ -98,17 +87,33 @@ export default function RootLayout({
               },
               "areaServed": [
                 {
+                  "@type": "Country",
+                  "name": "Australia"
+                },
+                {
                   "@type": "AdministrativeArea",
                   "name": "Sydney"
                 },
                 {
                   "@type": "AdministrativeArea",
-                  "name": "New South Wales"
+                  "name": "Melbourne"
+                },
+                {
+                  "@type": "AdministrativeArea",
+                  "name": "Brisbane"
+                },
+                {
+                  "@type": "AdministrativeArea",
+                  "name": "Perth"
+                },
+                {
+                  "@type": "AdministrativeArea",
+                  "name": "Adelaide"
                 }
               ],
               "provider": {
                 "@type": "LocalBusiness",
-                "name": "My Corporate Cars",
+                "name": "Elite Cars Australia",
                 "telephone": "+61451002525"
               }
             })

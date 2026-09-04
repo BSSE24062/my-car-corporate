@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import styles from './SydneySection.module.css';
 
-const sydneyImages = [
+const destinationImages = [
   {
     id: 1,
     titleKey: "sydney.opera_title",
@@ -77,7 +77,7 @@ const SydneySection = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % sydneyImages.length);
+      setCurrentIndex((prev) => (prev + 1) % destinationImages.length);
     }, 5000); // 5 seconds per slide
     return () => clearInterval(interval);
   }, []);
@@ -86,8 +86,8 @@ const SydneySection = () => {
     <section id="sydney" className={styles.sydneySection}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2>{t('sydney.title', 'Sydney In Style')}</h2>
-          <p>{t('sydney.subtitle', "Experience the finest chauffeured transport across Sydney's landmark destinations.")}</p>
+          <h2>{t('sydney.title', 'Australia In Style')}</h2>
+          <p>{t('sydney.subtitle', "Experience the finest chauffeured transport across Australia's landmark destinations.")}</p>
         </div>
 
         <div className={styles.slideshowWrapper}>
@@ -126,8 +126,8 @@ const SydneySection = () => {
                     style={{
                       left: `-${index * 100}%`,
                       width: `${8 * 100}%`,
-                      '--bg-desktop': `url(${sydneyImages[currentIndex].desktopImg})`,
-                      '--bg-mobile': `url(${sydneyImages[currentIndex].mobileImg})`,
+                      '--bg-desktop': `url(${destinationImages[currentIndex].desktopImg})`,
+                      '--bg-mobile': `url(${destinationImages[currentIndex].mobileImg})`,
                     } as React.CSSProperties}
                     animate={{
                       scale: [1.0, 1.05],
@@ -145,7 +145,7 @@ const SydneySection = () => {
 
           {/* Elegant Content Box */}
           <div className={styles.contentBox}>
-            <div className={styles.badge}>{t('sydney.coverage', 'Sydney Coverage')}</div>
+            <div className={styles.badge}>{t('sydney.coverage', 'Nationwide Coverage')}</div>
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -155,19 +155,19 @@ const SydneySection = () => {
                 transition={{ duration: 0.25 }}
                 className={styles.slideInfo}
               >
-                <h3>{t(sydneyImages[currentIndex].titleKey)}</h3>
-                <p>{t(sydneyImages[currentIndex].descKey)}</p>
+                <h3>{t(destinationImages[currentIndex].titleKey)}</h3>
+                <p>{t(destinationImages[currentIndex].descKey)}</p>
               </motion.div>
             </AnimatePresence>
 
             {/* Dots navigation */}
             <div className={styles.dotsContainer}>
-              {sydneyImages.map((_, idx) => (
+              {destinationImages.map((_, idx) => (
                 <button
                   key={idx}
                   className={`${styles.dot} ${idx === currentIndex ? styles.activeDot : ''}`}
                   onClick={() => setCurrentIndex(idx)}
-                  aria-label={`Go to Sydney slide ${idx + 1}`}
+                  aria-label={`Go to slide ${idx + 1}`}
                 />
               ))}
             </div>

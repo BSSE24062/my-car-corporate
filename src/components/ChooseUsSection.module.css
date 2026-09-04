@@ -39,7 +39,7 @@
   left: 10%;
   width: 400px;
   height: 400px;
-  background: #ff3b30;
+  background: #c9a86a;
 }
 
 .blob2 {
@@ -243,7 +243,7 @@
 
 .subtitle {
   display: block;
-  color: #ff3b30;
+  color: #c9a86a;
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -306,14 +306,14 @@
   justify-content: center;
   width: 54px;
   height: 54px;
-  background: rgba(255, 59, 48, 0.08);
+  background: rgba(201, 168, 106, 0.12);
   border-radius: 12px;
-  color: #ff3b30;
+  color: #c9a86a;
   flex-shrink: 0;
 }
 
 :global(.light-theme) .iconWrapper {
-  background: rgba(255, 59, 48, 0.1);
+  background: rgba(201, 168, 106, 0.15);
 }
 
 .pointContent h3 {

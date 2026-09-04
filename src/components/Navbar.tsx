@@ -35,6 +35,19 @@ const Navbar = () => {
     }
   }, [isLight]);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    setMenuOpen(false);
+    if (targetId === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const elem = document.querySelector(targetId);
+    if (elem) {
+      e.preventDefault();
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className={styles.navbar}>
       <button
@@ -43,17 +56,17 @@ const Navbar = () => {
         aria-label="Back to top"
         suppressHydrationWarning
       >
-        <h1>My Corporate Cars</h1>
+        <h1>Elite Cars Australia</h1>
       </button>
 
       {/* Desktop Menu */}
       <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ''}`}>
-        <a href="#" onClick={() => setMenuOpen(false)}>{t('nav.home', 'Home')}</a>
-        <a href="#services" onClick={() => setMenuOpen(false)}>{t('nav.services', 'Services')}</a>
-        <a href="#fleet" onClick={() => setMenuOpen(false)}>{t('nav.fleet', 'Our Fleet')}</a>
-        <a href="#sydney" onClick={() => setMenuOpen(false)}>{t('nav.sydney', 'Sydney In Style')}</a>
-        <a href="#about" onClick={() => setMenuOpen(false)}>{t('nav.about', 'Why Choose Us')}</a>
-        <a href="#booking" className={styles.bookBtn} onClick={() => setMenuOpen(false)}>{t('form.submit', 'Book Now')}</a>
+        <a href="#" onClick={(e) => handleNavClick(e, '#')}>{t('nav.home', 'Home')}</a>
+        <a href="#services" onClick={(e) => handleNavClick(e, '#services')}>{t('nav.services', 'Services')}</a>
+        <a href="#fleet" onClick={(e) => handleNavClick(e, '#fleet')}>{t('nav.fleet', 'Our Fleet')}</a>
+        <a href="#sydney" onClick={(e) => handleNavClick(e, '#sydney')}>{t('nav.sydney', 'Australia In Style')}</a>
+        <a href="#about" onClick={(e) => handleNavClick(e, '#about')}>{t('nav.about', 'Why Choose Us')}</a>
+        <a href="#booking" className={styles.bookBtn} onClick={(e) => handleNavClick(e, '#booking')}>{t('form.submit', 'Book Now')}</a>
       </div>
 
       <div className={styles.actions}>

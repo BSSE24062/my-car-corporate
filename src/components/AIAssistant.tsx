@@ -77,7 +77,7 @@ const AIAssistant = () => {
               <div key={idx} className={`${styles.message} ${styles[msg.role]}`}>
                 <div className={styles.messageBubble}>
                   {msg.content === 'welcome_chat' 
-                    ? t('form.welcome_chat', 'Hello! I am the My Corporate Cars AI assistant. How can I help you today?') 
+                    ? t('form.welcome_chat', 'Hello! I am the Elite Cars Australia AI assistant. How can I help you today?') 
                     : msg.content
                   }
                 </div>

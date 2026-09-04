@@ -3,31 +3,31 @@
     "home": "Home",
     "services": "Services",
     "fleet": "Our Fleet",
-    "sydney": "Sydney In Style",
+    "sydney": "Australia In Style",
     "about": "Why Choose Us",
     "testimonials": "Testimonials",
     "booking": "Book Now"
   },
   "hero": {
-    "title": "My Corporate Cars",
-    "subtitle": "Premium Chauffeur Service in Sydney",
-    "description": "Experience first-class travel tailored for corporate executives, VIP events, and seamless airport transfers. Our professional chauffeurs guarantee absolute reliability, ultimate comfort, and a grand arrival in Sydney's premier luxury fleet.",
+    "title": "Elite Cars Australia",
+    "subtitle": "Premium Chauffeur Service Across Australia",
+    "description": "Experience first-class travel tailored for corporate executives, VIP events, and seamless airport transfers across Australia. Our professional chauffeurs guarantee absolute reliability, ultimate comfort, and a grand arrival in our premier luxury fleet.",
     "luxury_title": "Unmatched Luxury",
     "luxury_subtitle": "Arrive in style with our world-class fleet.",
-    "luxury_description": "Indulge in a bespoke journey defined by pristine vehicles, tailored amenities, and impeccable detail. Whether for corporate roadshows or private tours, our commitment to elite standards elevates every mile."
+    "luxury_description": "Indulge in a bespoke journey defined by pristine vehicles, tailored amenities, and impeccable detail across Australia."
   },
   "services": {
     "banner": "Our Luxury Services",
     "professional_title": "Professional Chauffeurs",
     "professional_desc": "Experience the pinnacle of luxury with our highly trained and discreet chauffeurs, dedicated to providing a seamless journey.",
     "airport_title": "Airport Pickups",
-    "airport_desc": "Punctual and stress-free airport transfers. We monitor your flight to ensure we are there when you land.",
+    "airport_desc": "Punctual and stress-free airport transfers nationwide. We monitor your flight to ensure we are there when you land.",
     "one_day_title": "One Day Trip",
-    "one_day_desc": "Explore the city or countryside in unparalleled comfort. Custom itineraries tailored to your desires.",
+    "one_day_desc": "Explore Australia's premier cities or countryside in unparalleled comfort. Custom itineraries tailored to your desires.",
     "wedding_title": "Wedding Transport",
     "wedding_desc": "Make your special day even more memorable with our elegant fleet and red-carpet service.",
     "private_title": "Private Tours",
-    "private_desc": "Discover hidden gems and iconic landmarks with personalized private tours driven by local experts."
+    "private_desc": "Discover hidden gems and iconic Australian landmarks with personalized private tours driven by local experts."
   },
   "fleet": {
     "title": "Our Premium Fleet",
@@ -42,9 +42,9 @@
     "executive_minibus": "Executive Minibus"
   },
   "sydney": {
-    "title": "Sydney In Style",
-    "subtitle": "Experience the finest chauffeured transport across Sydney's landmark destinations.",
-    "coverage": "Sydney Coverage",
+    "title": "Australia In Style",
+    "subtitle": "Experience the finest chauffeured transport across Australia's landmark destinations.",
+    "coverage": "Nationwide Coverage",
     "opera_title": "Sydney Opera House",
     "opera_desc": "Arrive at Sydney's most iconic harbor destination in the comfort of a private luxury sedan.",
     "airport_title": "Kingsford Smith Airport",
@@ -52,22 +52,22 @@
     "bondi_title": "Bondi Beach",
     "bondi_desc": "Cruising along the famous coastal strip in style, ready for the sun and surf.",
     "harbour_title": "Sydney Harbour Bridge",
-    "harbour_desc": "Experience stunning panoramic views of the Bridge and Harbour under the harbor lights.",
+    "harbour_desc": "Experience stunning panoramic views of the Bridge and Harbour under the evening lights.",
     "seacliff_title": "Sea Cliff Bridge",
     "seacliff_desc": "A breathtaking coastal drive over the ocean along the Grand Pacific Drive.",
-    "botanic_title": "Sydney Royal Botanic Garden",
+    "botanic_title": "Royal Botanic Garden",
     "botanic_desc": "Serene landscapes and classical views overlooking the Opera House and Harbour.",
-    "clock_title": "Sydney Town Hall Clock Tower",
-    "clock_desc": "Timeless historical landmarks in the heart of Sydney's central business district.",
-    "terminal_title": "Sydney Airport Terminal",
-    "terminal_desc": "Reliable, executive-class business travel directly from the private aviation runway.",
-    "darling_title": "Darling Harbour Side",
-    "darling_desc": "Vibrant nightlife, premium dining, and entertainment venues at the waterfront."
+    "clock_title": "Town Hall Clock Tower",
+    "clock_desc": "Timeless historical landmarks in the heart of the central business district.",
+    "terminal_title": "Private Jet Aviation Terminals",
+    "terminal_desc": "Reliable, executive-class business travel directly from private aviation runways nationwide.",
+    "darling_title": "Harbour & Waterfront Dining",
+    "darling_desc": "Vibrant nightlife, premium dining, and entertainment venues at premier waterfront locations."
   },
   "why_choose_us": {
     "subtitle": "Uncompromising Excellence",
     "title": "Why Choose Us?",
-    "lead": "We redefine corporate transportation through meticulous execution, world-class luxury fleets, and a commitment to setting new standards in executive concierge services.",
+    "lead": "We redefine corporate transportation through meticulous execution, world-class luxury fleets, and a commitment to setting new standards in executive concierge services across Australia.",
     "punctuality_title": "Flawless Punctuality",
     "punctuality_desc": "We track your flight numbers in real-time and plan routes dynamically to guarantee we are always 15 minutes ahead of schedule.",
     "safety_title": "Absolute Safety & Discretion",
@@ -81,13 +81,13 @@
     "badge": "Client Reviews",
     "title": "Client Testimonials",
     "subtitle": "Read what our distinguished clients say about our executive transport services.",
-    "quote1": "My Corporate Cars has been our exclusive transport provider in Sydney for 3 years. Their punctuality is absolute, and the S-Class is always immaculate. The absolute benchmark for executive chauffeur services.",
+    "quote1": "Elite Cars Australia has been our exclusive transport provider across Australia for 3 years. Their punctuality is absolute, and the S-Class is always immaculate. The absolute benchmark for executive chauffeur services.",
     "author1": "Alexander Mercer",
     "title1": "Managing Director, Apex Global",
-    "quote2": "Incredibly professional. I booking airport transfers frequently and they track flight changes seamlessly. Even when my flight was delayed 2 hours, the driver was waiting with a smile. Highly recommend zakki@zubs.dev for group transfers.",
+    "quote2": "Incredibly professional. I book airport transfers frequently and they track flight changes seamlessly. Even when my flight was delayed 2 hours, the driver was waiting with a smile. Highly recommend zakki@zubs.dev for group transfers.",
     "author2": "Elena Rostova",
     "title2": "Venture Partner, Horizon Capital",
-    "quote3": "We hired their V-Class and Mercedes Sprinter for our international delegates during the Sydney Summit. Vetted drivers, smooth rides, and flawless coordination. Truly premium service.",
+    "quote3": "We hired their V-Class and Mercedes Sprinter for our international delegates during the Australian Business Summit. Vetted drivers, smooth rides, and flawless coordination. Truly premium service.",
     "author3": "Marcus Vance",
     "title3": "Chief of Staff, TechCorp Australia"
   },
@@ -102,7 +102,7 @@
   },
   "booking": {
     "title": "Book Your Ride",
-    "subtitle": "Reserve your premium chauffeur experience today."
+    "subtitle": "Reserve your premium chauffeur experience across Australia today."
   },
   "form": {
     "name": "Name",
@@ -121,7 +121,7 @@
     "welcome_msg": "👋 Welcome! Ask me anything.",
     "input_placeholder": "Type your message...",
     "chat_header": "Concierge",
-    "welcome_chat": "Hello! I am the My Corporate Cars AI assistant. How can I help you today?",
+    "welcome_chat": "Hello! I am the Elite Cars Australia AI assistant. How can I help you today?",
     "sending": "Sending booking request...",
     "success": "Booking request sent successfully! We will contact you shortly.",
     "error_prefix": "Failed to send booking request",

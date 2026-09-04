@@ -49,8 +49,8 @@
 
 .badge {
   display: inline-block;
-  background: #ff3b30;
-  color: white;
+  background: #c9a86a;
+  color: #000000;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -88,13 +88,13 @@
 
 .infoRow:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(201, 168, 106, 0.3);
   transform: translateY(-2px);
 }
 
 :global(.light-theme) .infoRow:hover {
   background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.10);
+  border-color: rgba(201, 168, 106, 0.3);
 }
 
 .whatsAppRow:hover {
@@ -106,26 +106,26 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(201, 168, 106, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ff3b30;
+  color: #c9a86a;
   flex-shrink: 0;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201, 168, 106, 0.2);
 }
 
 :global(.light-theme) .iconCircle {
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(201, 168, 106, 0.12);
+  border: 1px solid rgba(201, 168, 106, 0.25);
 }
 
 .infoRow:hover .iconCircle {
   transform: scale(1.1);
-  background: #ff3b30;
-  color: white;
-  border-color: #ff3b30;
+  background: #c9a86a;
+  color: #000000;
+  border-color: #c9a86a;
 }
 
 .whatsAppCircle {
@@ -233,23 +233,29 @@
 .inputGroup select:focus,
 .inputGroup textarea:focus {
   outline: none;
-  border-color: var(--text-color);
+  border-color: #c9a86a;
 }
 
 .submitBtn {
   width: 100%;
   padding: 15px;
-  background: var(--text-color);
-  color: var(--bg-color);
-  font-weight: 600;
-  border-radius: 4px;
+  background: #c9a86a;
+  color: #000000;
+  font-weight: 700;
+  border-radius: 6px;
   margin-top: 10px;
-  transition: all 0.3s;
+  border: 2px solid #c9a86a;
+  cursor: pointer;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
 }
 
 .submitBtn:hover {
-  background: var(--text-muted);
+  background: transparent;
+  color: #c9a86a;
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(201, 168, 106, 0.3);
 }
 
 .statusMsg {
@@ -261,7 +267,7 @@
 
 .errorMsg {
   text-align: center;
-  color: #ff3b30;
+  color: #e5a93c;
   margin-top: 15px;
   font-weight: 500;
 }
