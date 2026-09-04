@@ -189,17 +189,17 @@ const HeroSection = () => {
             className={styles.animatedCar} 
             style={{ opacity: 0 }}
           >
-            <img src="/Hero/audiBody_no_shadow.png" alt="Audi Q7 Body" className={styles.carBody} />
+            <img src="/Hero/audiBody_no_shadow.png" alt="Elite Cars Australia Luxury Chauffeur Vehicle Fleet" className={styles.carBody} />
             <img 
               ref={frontWheel1Ref} 
               src="/Hero/front_wheel.png" 
-              alt="Front Wheel" 
+              alt="Elite Cars Australia Front Wheel" 
               className={`${styles.wheel} ${styles.frontWheel}`} 
             />
             <img 
               ref={backWheel1Ref} 
               src="/Hero/back_wheel.png" 
-              alt="Back Wheel" 
+              alt="Elite Cars Australia Back Wheel" 
               className={`${styles.wheel} ${styles.backWheel}`} 
             />
           </div>

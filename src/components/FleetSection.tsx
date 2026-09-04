@@ -51,7 +51,7 @@ const FleetSection = () => {
           {fleet.map((car, index) => (
             <div key={index} className={styles.card}>
               <div className={styles.imageWrapper}>
-                <img src={car.img} alt={car.name} />
+                <img src={car.img} alt={`${car.name} - Luxury Chauffeur Car Hire Australia | Elite Cars Australia`} loading="lazy" />
               </div>
               <div className={styles.info}>
                 <h3>{car.name}</h3>

@@ -217,6 +217,50 @@
   display: block;
   color: var(--text-color);
   font-weight: 500;
+.seoDirectory {
+  margin-top: 40px;
+  margin-bottom: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.78rem;
+  color: #777;
+  text-align: center;
+}
+
+:global(.light-theme) .seoDirectory {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  color: #888;
+}
+
+.seoTitle {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #999;
+  margin-bottom: 10px;
+  font-size: 0.72rem;
+}
+
+:global(.light-theme) .seoTitle {
+  color: #666;
+}
+
+.seoTags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 12px;
+  line-height: 1.7;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.seoTags span {
+  transition: color 0.2s ease;
+}
+
+.seoTags span:hover {
+  color: #c9a86a;
 }
 
 /* Divider */
