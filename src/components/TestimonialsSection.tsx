@@ -89,13 +89,13 @@ const TestimonialsSection = () => {
           </div>
 
           <div className={styles.testimonialContainer}>
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout" initial={false}>
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
                 className={styles.testimonialCard}
               >
                 <div className={styles.rating}>

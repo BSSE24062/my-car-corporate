@@ -162,6 +162,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-color);
+  word-break: break-word;
 }
 
 .formWrapper {
@@ -280,17 +281,81 @@
 }
 
 @media (max-width: 968px) {
+  .bookingSection {
+    padding: 70px 4%;
+  }
+
   .splitLayout {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .formWrapper {
+    order: 1;
+    padding: 36px 28px;
+  }
+
+  .contactCard {
+    order: 2;
+    padding: 36px 28px;
+  }
+
+  .contactCardHeader h2,
+  .formWrapper h2 {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 600px) {
+  .bookingSection {
+    padding: 50px 3%;
+  }
+
   .row {
     flex-direction: column;
+    gap: 16px;
   }
+
   .formWrapper, .contactCard {
-    padding: 30px 20px;
+    padding: 24px 16px;
+    border-radius: 14px;
+  }
+
+  .contactCardHeader h2,
+  .formWrapper h2 {
+    font-size: 1.65rem;
+  }
+
+  .contactCardHeader p,
+  .formWrapper p {
+    font-size: 0.92rem;
+    margin-bottom: 24px;
+  }
+
+  .infoRow {
+    padding: 14px 14px;
+    gap: 12px;
+  }
+
+  .iconCircle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .infoValue {
+    font-size: 0.92rem;
+  }
+
+  .inputGroup input,
+  .inputGroup select,
+  .inputGroup textarea {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+
+  .submitBtn {
+    padding: 14px;
+    font-size: 0.9rem;
   }
 }

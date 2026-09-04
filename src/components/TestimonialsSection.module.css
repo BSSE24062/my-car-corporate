@@ -90,11 +90,12 @@
 }
 
 .testimonialContainer {
-  flex: 1;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 180px; /* Prevents height collapsing during cross-fade transitions */
+  min-height: 250px;
+  position: relative;
 }
 
 .testimonialCard {
@@ -105,7 +106,7 @@
   display: flex;
   justify-content: center;
   gap: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .star {
@@ -113,21 +114,24 @@
 }
 
 .quote {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   line-height: 1.7;
   font-style: italic;
   color: var(--text-color);
-  margin-bottom: 30px;
-  max-width: 800px;
+  margin-bottom: 24px;
+  max-width: 780px;
   margin-left: auto;
   margin-right: auto;
-  min-height: 110px; /* Keeps height stable across different quote lengths */
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .authorInfo {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .name {
@@ -147,7 +151,7 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 30px;
+  margin-top: 24px;
 }
 
 .dot {
@@ -173,26 +177,43 @@
 
 @media (max-width: 768px) {
   .testimonialSection {
-    padding: 60px 5%;
+    padding: 60px 4%;
   }
 
   .header h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .sliderWrapper {
-    padding: 40px 20px 30px 20px;
-    min-height: 380px;
+    padding: 40px 18px 24px 18px;
+    min-height: 420px;
   }
 
   .testimonialContainer {
-    min-height: 240px; /* Prevents height collapsing on mobile screens */
+    min-height: 290px;
   }
 
   .quote {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     line-height: 1.6;
-    min-height: 140px; /* Stable height for longer quotes on mobile */
+    min-height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sliderWrapper {
+    min-height: 460px;
+    padding: 36px 14px 20px 14px;
+  }
+
+  .testimonialContainer {
+    min-height: 320px;
+  }
+
+  .quote {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    min-height: 170px;
   }
 }
 

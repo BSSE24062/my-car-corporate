@@ -74,7 +74,7 @@ const BookingForm = () => {
                 <div className={styles.iconCircle}>
                   <Mail size={20} />
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <div className={styles.infoDetails}>
                   <span className={styles.infoLabel}>{t('contact.email_us', 'Email Us')}</span>
                   <span className={styles.infoValue}>info@elitecarsaustralia.com.au</span>
                 </div>
