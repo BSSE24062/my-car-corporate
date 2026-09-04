@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './ServicesSlider.module.css';
 
 const services = [
@@ -46,17 +47,48 @@ const services = [
 const ServicesSlider = () => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // Auto slide (optional, can be removed if user should only click)
   useEffect(() => {
+    if (isHovered) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % services.length);
-    }, 4000);
+    }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [isHovered]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % services.length);
+  };
 
   return (
-    <section id="services" className={styles.sliderSection}>
+    <section 
+      id="services" 
+      className={styles.sliderSection}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Navigation Arrows */}
+      <button 
+        className={`${styles.navBtn} ${styles.leftBtn}`}
+        onClick={handlePrev}
+        aria-label="Previous service"
+      >
+        <ChevronLeft size={24} />
+      </button>
+
+      <button 
+        className={`${styles.navBtn} ${styles.rightBtn}`}
+        onClick={handleNext}
+        aria-label="Next service"
+      >
+        <ChevronRight size={24} />
+      </button>
+
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}

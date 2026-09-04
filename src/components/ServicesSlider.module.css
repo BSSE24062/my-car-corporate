@@ -78,8 +78,43 @@
 }
 
 .activeDot {
-  background: white; /* Keep white for active dot */
+  background: #c9a86a; /* Luxury gold accent */
   transform: scale(1.3);
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 20;
+}
+
+.navBtn:hover {
+  background: #c9a86a;
+  color: #000000;
+  border-color: #c9a86a;
+  box-shadow: 0 5px 20px rgba(201, 168, 106, 0.5);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.leftBtn {
+  left: 36px;
+}
+
+.rightBtn {
+  right: 36px;
 }
 
 @media (max-width: 768px) {
@@ -87,9 +122,20 @@
     background-image: var(--bg-mobile);
   }
   .content h2 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
   .content p {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+  }
+  .navBtn {
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  .leftBtn {
+    left: 14px;
+  }
+  .rightBtn {
+    right: 14px;
   }
 }
