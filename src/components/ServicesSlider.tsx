@@ -160,16 +160,16 @@ const ServicesSlider = () => {
           
           <div className={styles.content}>
             <motion.h2 
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.35 }}
+              transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
             >
               {t(services[currentIndex].titleKey)}
             </motion.h2>
             <motion.p
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.35 }}
+              transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
             >
               {t(services[currentIndex].descKey)}
             </motion.p>
