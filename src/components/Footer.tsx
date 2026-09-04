@@ -88,23 +88,23 @@ const Footer = () => {
           <div className={styles.contactCol}>
             <h4 className={styles.colTitle}>Direct Concierge</h4>
             
-            <a href="tel:+61451002525" className={styles.contactItem}>
+            <a href="tel:+61430729993" className={styles.contactItem}>
               <div className={styles.contactIcon}>
                 <Phone size={18} />
               </div>
               <div>
                 <span className={styles.contactLabel}>Reserve a Ride</span>
-                <span className={styles.contactValue}>+61 451 002 525</span>
+                <span className={styles.contactValue}>+61 430 729 993</span>
               </div>
             </a>
 
-            <a href="mailto:zakki@zubs.dev" className={styles.contactItem}>
+            <a href="mailto:info@elitecarsaustralia.com.au" className={styles.contactItem}>
               <div className={styles.contactIcon}>
                 <Mail size={18} />
               </div>
               <div>
                 <span className={styles.contactLabel}>Executive Enquiries</span>
-                <span className={styles.contactValue}>zakki@zubs.dev</span>
+                <span className={styles.contactValue}>info@elitecarsaustralia.com.au</span>
               </div>
             </a>
 

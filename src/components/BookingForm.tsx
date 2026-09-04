@@ -60,28 +60,28 @@ const BookingForm = () => {
             </div>
 
             <div className={styles.contactInfo}>
-              <a href="tel:+61451002525" className={styles.infoRow}>
+              <a href="tel:+61430729993" className={styles.infoRow}>
                 <div className={styles.iconCircle}>
                   <Phone size={20} />
                 </div>
                 <div className={styles.infoDetails}>
                   <span className={styles.infoLabel}>{t('contact.call_us', 'Call Us')}</span>
-                  <span className={styles.infoValue}>+61 451 002 525</span>
+                  <span className={styles.infoValue}>+61 430 729 993</span>
                 </div>
               </a>
 
-              <a href="mailto:zakki@zubs.dev" className={styles.infoRow}>
+              <a href="mailto:info@elitecarsaustralia.com.au" className={styles.infoRow}>
                 <div className={styles.iconCircle}>
                   <Mail size={20} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <span className={styles.infoLabel}>{t('contact.email_us', 'Email Us')}</span>
-                  <span className={styles.infoValue}>zakki@zubs.dev</span>
+                  <span className={styles.infoValue}>info@elitecarsaustralia.com.au</span>
                 </div>
               </a>
 
               <a 
-                href="https://wa.me/61451002525" 
+                href="https://wa.me/61430729993" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className={`${styles.infoRow} ${styles.whatsAppRow}`}

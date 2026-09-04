@@ -65,7 +65,7 @@ export default function RootLayout({
               "image": "https://elitecarsaustralia.com.au/audiMain.png",
               "@id": "https://elitecarsaustralia.com.au/#service",
               "url": "https://elitecarsaustralia.com.au",
-              "telephone": "+61451002525",
+              "telephone": "+61430729993",
               "priceRange": "$$",
               "address": {
                 "@type": "PostalAddress",
@@ -114,7 +114,7 @@ export default function RootLayout({
               "provider": {
                 "@type": "LocalBusiness",
                 "name": "Elite Cars Australia",
-                "telephone": "+61451002525"
+                "telephone": "+61430729993"
               }
             })
           }}

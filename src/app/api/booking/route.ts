@@ -43,7 +43,7 @@ export async function POST(req: Request) {
     // 4. Formulate email contents
     const mailOptions = {
       from: `"${name}" <${smtpUser}>`, // Must be smtpUser to avoid spoofing rejections by mail providers
-      to: 'zakkiullahbaig580@gmail.com',
+      to: process.env.BOOKING_NOTIFICATION_EMAIL || 'info@elitecarsaustralia.com.au',
       replyTo: email, // Direct replies back to the customer's email
       subject: `[Elite Cars Australia] New Ride Booking Request from ${name}`,
       text: `
