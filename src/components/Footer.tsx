@@ -121,40 +121,6 @@ const Footer = () => {
 
         </div>
 
-        {/* SEO Directory & Popular Searches */}
-        <div className={styles.seoDirectory}>
-          <p className={styles.seoTitle}>Nationwide Chauffeur Services Australia:</p>
-          <div className={styles.seoTags}>
-            <span>Elite Cars Australia</span>
-            <span>·</span>
-            <span>Chauffeur Service Australia</span>
-            <span>·</span>
-            <span>Luxury Airport Transfers Sydney</span>
-            <span>·</span>
-            <span>Melbourne Chauffeur Hire</span>
-            <span>·</span>
-            <span>Brisbane Executive Chauffeur</span>
-            <span>·</span>
-            <span>Perth Private Chauffeur</span>
-            <span>·</span>
-            <span>Adelaide Luxury Transport</span>
-            <span>·</span>
-            <span>Gold Coast VIP Transfers</span>
-            <span>·</span>
-            <span>Canberra Corporate Car Hire</span>
-            <span>·</span>
-            <span>Mercedes-Benz S-Class Chauffeur</span>
-            <span>·</span>
-            <span>Mercedes V-Class People Mover</span>
-            <span>·</span>
-            <span>Wedding Chauffeur Cars Australia</span>
-            <span>·</span>
-            <span>Corporate Roadshow Travel</span>
-            <span>·</span>
-            <span>Private Jet Terminal Chauffeur</span>
-          </div>
-        </div>
-
         {/* Divider */}
         <div className={styles.divider} />
 
