@@ -4,7 +4,7 @@ import styles from './ServicesBanner.module.css';
 
 const ServicesBanner = () => {
   const { t } = useTranslation();
-  const label = t('services.banner', 'Our Luxury Services');
+  const label = t('services.banner', 'Our Luxury Services Across Australia');
   const text = `${label}  ·  ${label}  ·  ${label}  ·  ${label}  ·  `;
   
   return (
