@@ -55,22 +55,27 @@
   line-height: 1.6;
 }
 
-.actions {
-  margin-top: 32px;
+.staticActions {
+  position: absolute;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: auto;
 }
 
 .viewAllBtn {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 34px;
-  background: rgba(201, 168, 106, 0.18);
+  padding: 13px 32px;
+  background: rgba(201, 168, 106, 0.2);
   border: 1.5px solid #c9a86a;
   color: #ffffff;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   border-radius: 999px;
@@ -80,6 +85,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(201, 168, 106, 0.2);
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .viewAllBtn:hover {
@@ -99,12 +105,12 @@
 
 .dotsContainer {
   position: absolute;
-  bottom: 50px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 15px;
-  z-index: 10;
+  z-index: 25;
 }
 
 .dot {
@@ -175,13 +181,16 @@
   .content p {
     font-size: 1.05rem;
   }
-  .actions {
-    margin-top: 22px;
+  .staticActions {
+    bottom: 75px;
   }
   .viewAllBtn {
     padding: 10px 22px;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     gap: 8px;
+  }
+  .dotsContainer {
+    bottom: 35px;
   }
   .navBtn {
     width: 40px;

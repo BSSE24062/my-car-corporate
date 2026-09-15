@@ -5,6 +5,14 @@
   z-index: 9999;
 }
 
+.fabContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
 .fab {
   background: var(--text-color);
   color: var(--bg-color);
@@ -14,7 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s;
   overflow: hidden;
   border: none;
@@ -33,6 +41,66 @@
   display: block;
 }
 
+.welcomeBubble {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-size: 0.88rem;
+  animation: fadeIn 0.3s ease-out;
+  pointer-events: auto;
+}
+
+:global(.light-theme) .welcomeBubble {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.welcomeText {
+  line-height: 1.3;
+}
+
+.welcomeCloseBtn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.welcomeCloseBtn:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: var(--text-color);
+}
+
+:global(.light-theme) .welcomeCloseBtn {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+:global(.light-theme) .welcomeCloseBtn:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
 .chatWindow {
   width: 350px;
   height: 500px;
@@ -42,7 +110,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
   animation: slideUp 0.3s ease-out forwards;
 }
 
@@ -193,10 +261,11 @@
   cursor: not-allowed;
 }
 
+/* Responsive Media Queries at bottom */
 @media (max-width: 768px) {
   .assistantWrapper {
     bottom: calc(76px + env(safe-area-inset-bottom, 0px));
-    right: 16px;
+    right: 14px;
     z-index: 1001;
   }
 
@@ -207,10 +276,33 @@
   }
 
   .welcomeBubble {
-    font-size: 0.82rem;
-    padding: 8px 12px;
-    max-width: 220px;
+    font-size: 0.8rem;
+    padding: 8px 10px 8px 12px;
+    max-width: calc(100vw - 90px);
+    width: auto;
     white-space: normal;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+
+  .welcomeText {
+    flex: 1;
+    min-width: 0;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+
+  .welcomeCloseBtn {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
   }
 }
 
@@ -226,63 +318,4 @@
     border: 1px solid var(--border-color);
     z-index: 10000;
   }
-}
-
-.fabContainer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-}
-
-.welcomeBubble {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  color: var(--text-color);
-  padding: 10px 14px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-  font-size: 0.88rem;
-  animation: fadeIn 0.3s ease-out;
-  pointer-events: auto;
-}
-
-:global(.light-theme) .welcomeBubble {
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.welcomeText {
-  line-height: 1.2;
-}
-
-.welcomeCloseBtn {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 2px;
-  border-radius: 50%;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.welcomeCloseBtn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--text-color);
-}
-
-:global(.light-theme) .welcomeCloseBtn:hover {
-  background-color: rgba(0, 0, 0, 0.05);
 }

@@ -185,20 +185,17 @@ const ServicesSlider = () => {
             >
               {t(currentService.descKey, currentService.defaultDesc)}
             </motion.p>
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.45, duration: 0.6, ease: "easeOut" }}
-              className={styles.actions}
-            >
-              <a href="/services" className={styles.viewAllBtn}>
-                <span>{t('services.view_all_btn', 'Explore All Services')}</span>
-                <ArrowRight size={18} className={styles.btnArrow} />
-              </a>
-            </motion.div>
           </div>
         </motion.div>
       </AnimatePresence>
+
+      {/* Still, Persistent CTA Button (Does not re-animate on slide change) */}
+      <div className={styles.staticActions}>
+        <a href="/services" className={styles.viewAllBtn}>
+          <span>{t('services.view_all_btn', 'Explore All Services')}</span>
+          <ArrowRight size={18} className={styles.btnArrow} />
+        </a>
+      </div>
 
       <div className={styles.dotsContainer}>
         {services.map((_, index) => (

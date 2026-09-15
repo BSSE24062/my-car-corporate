@@ -437,3 +437,42 @@
     font-size: 1rem;
   }
 }
+
+@media (max-width: 768px) {
+  .heroActions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 12px;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 18px;
+    font-size: 0.88rem;
+    letter-spacing: 0.5px;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .container {
+    padding: 50px 4%;
+  }
+
+  .sectionHeader h2 {
+    font-size: 1.8rem;
+  }
+
+  .ctaBox {
+    padding: 40px 20px;
+  }
+
+  .ctaBox h2 {
+    font-size: 1.7rem;
+  }
+}

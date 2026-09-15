@@ -4,7 +4,7 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
-import { Map, Clock, ShieldCheck, CheckCircle, ArrowRight, FileSpreadsheet, Users } from 'lucide-react';
+import { Map, Clock, ShieldCheck, CheckCircle, ArrowRight, FileSpreadsheet, Users, Mail } from 'lucide-react';
 import styles from '../services.module.css';
 
 export default function RoadshowsClient() {
@@ -121,7 +121,7 @@ export default function RoadshowsClient() {
               Submit Roadshow Details <ArrowRight size={16} />
             </a>
             <a href="mailto:info@elitecarsaustralia.com.au" className={styles.secondaryBtn}>
-              Email info@elitecarsaustralia.com.au
+              <Mail size={16} /> Email Roadshow Team
             </a>
           </div>
         </div>

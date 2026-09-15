@@ -4,7 +4,7 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
-import { Building2, FileText, Headphones, Globe, CheckCircle, ArrowRight, UserCheck, ShieldCheck } from 'lucide-react';
+import { Building2, FileText, Headphones, Globe, CheckCircle, ArrowRight, UserCheck, ShieldCheck, Mail } from 'lucide-react';
 import styles from '../services.module.css';
 
 export default function CorporateAccountsClient() {
@@ -122,7 +122,7 @@ export default function CorporateAccountsClient() {
               Enquire Corporate Account <ArrowRight size={16} />
             </a>
             <a href="mailto:info@elitecarsaustralia.com.au" className={styles.secondaryBtn}>
-              Email info@elitecarsaustralia.com.au
+              <Mail size={16} /> Email Corporate Team
             </a>
           </div>
         </div>

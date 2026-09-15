@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { MessageSquare, X, Send } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import styles from './AIAssistant.module.css';
@@ -12,14 +13,41 @@ interface Message {
 
 const AIAssistant = () => {
   const { t } = useTranslation();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: 'welcome_chat' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Welcome message only appears once on the main landing page ('/')
+  useEffect(() => {
+    try {
+      const isDismissed = sessionStorage.getItem('chatbot_welcome_dismissed') === 'true';
+      if (pathname === '/' && !isDismissed) {
+        setShowWelcome(true);
+      } else {
+        setShowWelcome(false);
+      }
+    } catch {
+      setShowWelcome(pathname === '/');
+    }
+  }, [pathname]);
+
+  const dismissWelcome = () => {
+    try {
+      sessionStorage.setItem('chatbot_welcome_dismissed', 'true');
+    } catch {}
+    setShowWelcome(false);
+  };
+
+  const handleOpenChat = () => {
+    dismissWelcome();
+    setIsOpen(true);
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -138,16 +166,17 @@ const AIAssistant = () => {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setShowWelcome(false);
+                  dismissWelcome();
                 }}
                 className={styles.welcomeCloseBtn}
+                aria-label="Dismiss welcome message"
                 title="Dismiss welcome message"
               >
                 <X size={14} />
               </button>
             </div>
           )}
-          <button className={styles.fab} onClick={() => { setIsOpen(true); setShowWelcome(false); }}>
+          <button className={styles.fab} onClick={handleOpenChat} aria-label="Open AI Concierge">
             <img src="/AI-agent.jpg" alt="AI Agent" className={styles.fabImage} />
           </button>
         </div>

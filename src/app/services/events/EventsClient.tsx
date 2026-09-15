@@ -35,7 +35,7 @@ export default function EventsClient() {
               Request Event Quote
             </a>
             <a href="tel:+61430729993" className={styles.secondaryBtn}>
-              Call Events Team
+              Call Chauffeur Dispatch
             </a>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function EventsClient() {
 
         <div className={styles.ctaBox}>
           <h2>Planning an Upcoming Conference or Gala?</h2>
-          <p>Contact our event logistics team for a comprehensive vehicle allocation plan and transparent quote.</p>
+          <p>Contact our dedicated chauffeur transport coordinators for a comprehensive vehicle allocation plan and transparent quote.</p>
           <div className={styles.heroActions}>
             <a href="/#booking" onClick={handleBookService} className={styles.primaryBtn}>
               Submit Event Requirements <ArrowRight size={16} />
