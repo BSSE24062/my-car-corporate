@@ -55,6 +55,48 @@
   line-height: 1.6;
 }
 
+.actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewAllBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 34px;
+  background: rgba(201, 168, 106, 0.18);
+  border: 1.5px solid #c9a86a;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: 999px;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(201, 168, 106, 0.2);
+  cursor: pointer;
+}
+
+.viewAllBtn:hover {
+  background: #c9a86a;
+  color: #000000;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 30px rgba(201, 168, 106, 0.55), 0 0 25px rgba(201, 168, 106, 0.4);
+}
+
+.btnArrow {
+  transition: transform 0.3s ease;
+}
+
+.viewAllBtn:hover .btnArrow {
+  transform: translateX(5px);
+}
+
 .dotsContainer {
   position: absolute;
   bottom: 50px;
@@ -132,6 +174,14 @@
   }
   .content p {
     font-size: 1.05rem;
+  }
+  .actions {
+    margin-top: 22px;
+  }
+  .viewAllBtn {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    gap: 8px;
   }
   .navBtn {
     width: 40px;

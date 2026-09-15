@@ -43,7 +43,8 @@
     "one_day_title": "Custom Day Tours",
     "one_day_desc": "Explore Australia's premier regions with tailored itineraries driven by knowledgeable local chauffeurs.",
     "private_title": "Private Tours",
-    "private_desc": "Discover hidden gems and iconic Australian landmarks with personalized private tours driven by local experts."
+    "private_desc": "Discover hidden gems and iconic Australian landmarks with personalized private tours driven by local experts.",
+    "view_all_btn": "Explore All Services"
   },
   "corporate_section": {
     "badge": "Corporate & VIP Accounts",

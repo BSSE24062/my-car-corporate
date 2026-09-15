@@ -43,7 +43,8 @@
     "private_aviation_title": "Private Aviation & FBO Transfers",
     "private_aviation_desc": "Direct tarmac and FBO terminal transfers connecting private jet charters with executive destinations.",
     "interstate_title": "Interstate & Regional Transfers",
-    "interstate_desc": "Long-distance and interstate private chauffeur travel between major cities and regional centres."
+    "interstate_desc": "Long-distance and interstate private chauffeur travel between major cities and regional centres.",
+    "view_all_btn": "Explorar todos los servicios"
   },
   "fleet": {
     "title": "Nuestra Flota Premium",

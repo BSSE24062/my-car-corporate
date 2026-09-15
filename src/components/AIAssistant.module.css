@@ -193,13 +193,34 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 768px) {
+  .assistantWrapper {
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    right: 16px;
+    z-index: 1001;
+  }
+
+  .fab {
+    width: 52px;
+    height: 52px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  }
+
+  .welcomeBubble {
+    font-size: 0.82rem;
+    padding: 8px 12px;
+    max-width: 220px;
+    white-space: normal;
+  }
+}
+
 @media (max-width: 480px) {
   .chatWindow {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: calc(100vw - 40px);
-    max-height: 80vh;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    right: 12px;
+    width: calc(100vw - 24px);
+    max-height: calc(100vh - 130px);
     height: 480px;
     border-radius: 16px;
     border: 1px solid var(--border-color);
