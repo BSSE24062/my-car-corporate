@@ -1,12 +1,19 @@
 "use client";
 
 import React from 'react';
-import { Phone, Calendar } from 'lucide-react';
+import { Phone, Calendar, Home } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import styles from './MobileActionBar.module.css';
 
 const MobileActionBar = () => {
   const { t } = useTranslation();
+
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== 'undefined' && window.location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const handleBookClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const bookingEl = document.getElementById('booking');
@@ -24,6 +31,17 @@ const MobileActionBar = () => {
   return (
     <aside className={styles.mobileActionBar} aria-label="Quick contact actions">
       <div className={styles.barGrid}>
+        {/* Home Navigation Button */}
+        <a
+          href="/"
+          onClick={handleHomeClick}
+          className={`${styles.actionBtn} ${styles.homeBtn}`}
+          aria-label="Go to Home"
+        >
+          <Home size={15} />
+          <span className={styles.btnText}>{t('nav.home', 'Home')}</span>
+        </a>
+
         {/* WhatsApp Button */}
         <a
           href="https://wa.me/61430729993?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20a%20chauffeur%20booking"
@@ -32,7 +50,7 @@ const MobileActionBar = () => {
           className={`${styles.actionBtn} ${styles.whatsAppBtn}`}
           aria-label="Chat on WhatsApp"
         >
-          <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.385 5.39 0 12.007 0c3.202.001 6.212 1.248 8.477 3.517 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.617-5.39 12.003-12.007 12.003-2.001-.001-3.97-.502-5.716-1.464L0 24zm6.002-4.058c1.656.982 3.284 1.498 4.884 1.5l.583-.002c5.386 0 9.77-4.381 9.773-9.764.001-2.607-1.009-5.06-2.845-6.898C16.619 2.943 14.162 1.932 11.55 1.931c-5.385 0-9.768 4.382-9.772 9.765-.001 1.768.487 3.494 1.414 5.014l-.234-.528L1.933 21.07l5.055-1.32c-.31.18-.62.292-.929.192zm11.238-6.16c-.279-.14-1.647-.812-1.902-.903-.255-.094-.442-.14-.627.14-.185.281-.716.903-.878 1.09-.162.186-.324.21-.603.07-.279-.14-1.18-.435-2.247-1.385-.83-.74-1.39-1.653-1.553-1.933-.162-.28-.017-.431.122-.571.125-.125.279-.328.42-.492.14-.164.185-.28.278-.468.093-.188.046-.352-.023-.492-.069-.14-.627-1.511-.86-2.072-.227-.546-.456-.472-.627-.48l-.534-.01c-.185 0-.486.07-.74.352-.254.281-.971.95-1.001 2.327-.03 1.377.971 2.705 1.11 2.893.14.188 1.97 3.01 4.773 4.22.667.288 1.188.46 1.594.59.67.213 1.28.183 1.762.11.537-.08 1.647-.672 1.88-1.32.233-.648.233-1.203.162-1.32-.07-.118-.255-.188-.534-.328z"/>
           </svg>
           <span className={styles.btnText}>WhatsApp</span>
