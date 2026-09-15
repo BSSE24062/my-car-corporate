@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { BASE_URL } from '@/lib/seo-schema';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -18,8 +19,18 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/api/'],
       },
+      {
+        userAgent: 'Applebot',
+        allow: '/',
+        disallow: ['/api/'],
+      },
+      {
+        userAgent: 'DuckDuckBot',
+        allow: '/',
+        disallow: ['/api/'],
+      },
     ],
-    sitemap: 'https://www.elitecarsaustralia.com.au/sitemap.xml',
-    host: 'https://www.elitecarsaustralia.com.au',
+    sitemap: `${BASE_URL}/sitemap.xml`,
+    host: BASE_URL,
   };
 }

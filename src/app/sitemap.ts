@@ -1,45 +1,69 @@
 import { MetadataRoute } from 'next';
+import { BASE_URL } from '@/lib/seo-schema';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.elitecarsaustralia.com.au';
-  const currentDate = new Date().toISOString();
+  const currentDate = new Date();
 
   return [
     {
-      url: `${baseUrl}/`,
+      url: `${BASE_URL}/`,
       lastModified: currentDate,
       changeFrequency: 'daily',
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/#services`,
+      url: `${BASE_URL}/services`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#fleet`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#sydney`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/#about`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#booking`,
-      lastModified: currentDate,
-      changeFrequency: 'daily',
       priority: 0.95,
+    },
+    {
+      url: `${BASE_URL}/services/airport-transfers`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
+      url: `${BASE_URL}/services/corporate-accounts`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
+      url: `${BASE_URL}/services/as-directed-chauffeur-hire`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/services/roadshows`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/services/events`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/services/weddings`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/services/private-aviation-fbo`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/services/interstate-transfers`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
   ];
 }

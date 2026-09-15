@@ -3,6 +3,8 @@
   color: var(--text-color);
   background-color: var(--bg-color);
   padding-top: 30px;
+  position: relative;
+  z-index: 5;
 }
 
 /* ─── Road Banner ─────────────────────────────────────────── */
@@ -75,50 +77,64 @@
 .roadSubtitle {
   position: relative;
   z-index: 2;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
   letter-spacing: 0.5px;
-  max-width: 600px;
+  max-width: 680px;
   text-align: center;
   padding: 0 20px;
   margin: 0;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
 }
 
 /* ─── Fleet Grid ──────────────────────────────────────────── */
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 30px 1rem 2.5rem;
+  padding: 40px 1.5rem 3.5rem;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 28px;
 }
 
 .card {
   background: var(--bg-secondary);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: all 0.35s ease;
   border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  border-color: #444;
+  transform: translateY(-8px);
+  border-color: rgba(201, 168, 106, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+}
+
+:global(.light-theme) .card {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+:global(.light-theme) .card:hover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
 }
 
 .imageWrapper {
   width: 100%;
-  height: 250px;
+  height: 230px;
   overflow: hidden;
   background: var(--bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .imageWrapper img {
@@ -132,19 +148,94 @@
   transform: scale(1.05);
 }
 
+.categoryTag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  color: #c9a86a;
+  border: 1px solid rgba(201, 168, 106, 0.35);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
 .info {
-  padding: 20px;
-  text-align: center;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.carHeader {
+  margin-bottom: 14px;
 }
 
 .info h3 {
-  font-size: 1.5rem;
-  margin-bottom: 5px;
+  font-size: 1.35rem;
+  margin-bottom: 4px;
+  color: var(--text-color);
 }
 
-.info p {
+.classLabel {
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.88rem;
+}
+
+/* Capacity Badges Row */
+.capacityRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 16px;
+}
+
+.capBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.capIcon {
+  color: #c9a86a;
+}
+
+.dividerDot {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.selectVehicleBtn {
+  margin-top: auto;
+  width: 100%;
+  padding: 10px;
+  background: rgba(201, 168, 106, 0.1);
+  color: #c9a86a;
+  border: 1px solid rgba(201, 168, 106, 0.3);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.selectVehicleBtn:hover {
+  background: #c9a86a;
+  color: #000000;
+  transform: translateY(-2px);
 }
 
 /* ─── Responsive ──────────────────────────────────────────── */
@@ -159,6 +250,15 @@
   }
 
   .roadSubtitle {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
+  }
+
+  .container {
+    padding: 30px 1rem 2rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }

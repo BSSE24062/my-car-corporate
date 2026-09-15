@@ -10,35 +10,45 @@ const services = [
   {
     id: 1,
     titleKey: "services.professional_title",
+    defaultTitle: "Professional Chauffeurs",
     descKey: "services.professional_desc",
+    defaultDesc: "Licensed, background-checked chauffeurs dedicated to discreet, punctual, and comfortable executive transport.",
     bgImage: "/Services/professional.jpg",
     mobileBgImage: "/Services/mobile_services/professional.jpg"
   },
   {
     id: 2,
     titleKey: "services.airport_title",
+    defaultTitle: "Airport Transfers",
     descKey: "services.airport_desc",
+    defaultDesc: "Punctual, stress-free airport transfers nationwide with real-time flight tracking and terminal meet-and-greet.",
     bgImage: "/Services/AirportPickups.jpg",
     mobileBgImage: "/Services/mobile_services/AirportPickups.jpg"
   },
   {
     id: 3,
     titleKey: "services.one_day_title",
+    defaultTitle: "Custom Day Tours",
     descKey: "services.one_day_desc",
+    defaultDesc: "Explore Australia's premier regions with tailored itineraries driven by knowledgeable local chauffeurs.",
     bgImage: "/Services/oneDayTour.jpg",
     mobileBgImage: "/Services/mobile_services/oneDayTrip.jpg"
   },
   {
     id: 4,
     titleKey: "services.wedding_title",
+    defaultTitle: "Wedding Transport",
     descKey: "services.wedding_desc",
+    defaultDesc: "Immaculate sedans and people movers providing smooth, elegant transport for bridal parties and VIP guests.",
     bgImage: "/Services/wedding.jpg",
     mobileBgImage: "/Services/mobile_services/wedding.jpg"
   },
   {
     id: 5,
     titleKey: "services.private_title",
+    defaultTitle: "Private Tours",
     descKey: "services.private_desc",
+    defaultDesc: "Discover hidden gems and iconic Australian landmarks with personalized private tours driven by local experts.",
     bgImage: "/Services/privateTour.jpg",
     mobileBgImage: "/Services/mobile_services/privateTours.jpg"
   }
@@ -115,6 +125,8 @@ const ServicesSlider = () => {
     touchEndY.current = null;
   };
 
+  const currentService = services[currentIndex];
+
   return (
     <section 
       id="services" 
@@ -152,8 +164,8 @@ const ServicesSlider = () => {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className={styles.slideBackground}
           style={{
-            '--bg-desktop': `url(${services[currentIndex].bgImage})`,
-            '--bg-mobile': `url(${services[currentIndex].mobileBgImage})`
+            '--bg-desktop': `url(${currentService.bgImage})`,
+            '--bg-mobile': `url(${currentService.mobileBgImage})`
           } as React.CSSProperties}
         >
           <div className={styles.overlay}></div>
@@ -164,14 +176,14 @@ const ServicesSlider = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
             >
-              {t(services[currentIndex].titleKey)}
+              {t(currentService.titleKey, currentService.defaultTitle)}
             </motion.h2>
             <motion.p
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
             >
-              {t(services[currentIndex].descKey)}
+              {t(currentService.descKey, currentService.defaultDesc)}
             </motion.p>
           </div>
         </motion.div>

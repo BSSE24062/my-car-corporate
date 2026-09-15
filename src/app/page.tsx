@@ -1,32 +1,41 @@
-"use client";
+import type { Metadata } from 'next';
+import HomeClient from '@/components/HomeClient';
+import { BASE_URL, siteMetadata, getBreadcrumbsSchema } from '@/lib/seo-schema';
 
-import React from 'react';
-import Navbar from '@/components/Navbar';
-import HeroSection from '@/components/HeroSection';
-import ServicesBanner from '@/components/ServicesBanner';
-import ServicesSlider from '@/components/ServicesSlider';
-import FleetSection from '@/components/FleetSection';
-import SydneySection from '@/components/SydneySection';
-import ChooseUsSection from '@/components/ChooseUsSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import BookingForm from '@/components/BookingForm';
-import Footer from '@/components/Footer';
-import AIAssistant from '@/components/AIAssistant';
+export const metadata: Metadata = {
+  title: 'Elite Cars Australia | Luxury Chauffeur & Airport Transfers Nationwide',
+  description: siteMetadata.description,
+  alternates: {
+    canonical: `${BASE_URL}/`,
+  },
+  openGraph: {
+    title: 'Elite Cars Australia | Luxury Chauffeur & Airport Transfers Nationwide',
+    description: siteMetadata.description,
+    url: `${BASE_URL}/`,
+    siteName: siteMetadata.siteName,
+    images: [
+      {
+        url: `${BASE_URL}/Hero/audiMain.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Elite Cars Australia Premium Chauffeurs Nationwide',
+      },
+    ],
+  },
+};
 
-export default function Home() {
+export default function HomePage() {
+  const breadcrumbSchema = getBreadcrumbsSchema([
+    { name: 'Home', url: '/' },
+  ]);
+
   return (
-    <main style={{ backgroundColor: 'black', minHeight: '100vh', width: '100vw', overflowX: 'hidden' }}>
-      <Navbar />
-      <HeroSection />
-      <ServicesBanner />
-      <ServicesSlider />
-      <FleetSection />
-      <SydneySection />
-      <ChooseUsSection />
-      <TestimonialsSection />
-      <BookingForm />
-      <Footer />
-      <AIAssistant />
-    </main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <HomeClient />
+    </>
   );
 }

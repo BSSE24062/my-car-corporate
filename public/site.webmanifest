@@ -1,0 +1,21 @@
+{
+  "name": "Elite Cars Australia - Executive Chauffeurs",
+  "short_name": "Elite Cars",
+  "description": "Australia's premier luxury chauffeur service providing executive transport, airport transfers, corporate accounts, and VIP travel nationwide.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#c9a86a",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

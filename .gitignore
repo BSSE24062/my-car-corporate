@@ -23,12 +23,17 @@
 # misc
 .DS_Store
 *.pem
+*.pdf
 
-# debug
+# debug & temp
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+scratch/
+src/scratch/
+Extra/
+New folder/
 
 # env files (can opt-in for committing if needed)
 .env*

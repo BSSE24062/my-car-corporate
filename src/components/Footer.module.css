@@ -263,9 +263,15 @@
   }
 }
 
+@media (max-width: 768px) {
+  .footer {
+    padding-bottom: calc(95px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 @media (max-width: 640px) {
   .footer {
-    padding: 60px 5% 30px;
+    padding: 60px 5% calc(95px + env(safe-area-inset-bottom, 0px));
   }
 
   .mainGrid {

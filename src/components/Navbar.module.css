@@ -3,16 +3,18 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
+  height: 75px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5%;
+  padding: 0 max(24px, 3.5%);
   background: var(--nav-bg);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   z-index: 1000;
   border-bottom: 1px solid var(--border-color);
   transition: background-color 0.5s ease, border-color 0.5s ease;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -20,54 +22,71 @@
   border: none;
   padding: 0;
   cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .logo h1 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   color: var(--text-color);
   transition: color 0.5s ease, opacity 0.2s ease;
+  white-space: nowrap;
 }
 
 .logo:hover h1 {
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 .navLinks {
   display: flex;
-  gap: 2rem;
+  gap: 1.25rem;
   align-items: center;
 }
 
 .navLinks a {
-  font-size: 0.9rem;
+  font-size: 0.83rem;
   font-weight: 500;
-  transition: color 0.3s;
+  color: var(--text-color);
+  transition: color 0.25s, opacity 0.25s;
+  white-space: nowrap;
+  letter-spacing: 0.25px;
+  opacity: 0.88;
 }
 
 .navLinks a:hover {
-  color: #ccc;
+  color: #c9a86a;
+  opacity: 1;
 }
 
 .bookBtn {
-  background: var(--text-color);
-  color: var(--bg-color) !important;
-  padding: 8px 20px;
-  border-radius: 4px;
-  font-weight: 600 !important;
-  transition: all 0.3s ease;
+  background: #c9a86a !important;
+  color: #000000 !important;
+  padding: 7px 15px !important;
+  border-radius: 6px;
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  transition: all 0.25s ease !important;
+  letter-spacing: 0.4px;
+  border: 1px solid #c9a86a !important;
+  opacity: 1 !important;
 }
 
 .bookBtn:hover {
-  background: #e0e0e0;
+  background: transparent !important;
+  color: #c9a86a !important;
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(201, 168, 106, 0.3);
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.65rem;
+  flex-shrink: 0;
 }
 
 .langSelector {
@@ -77,20 +96,23 @@
 .langBtn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   color: var(--text-color);
-  padding: 8px;
-  border-radius: 4px;
+  padding: 6px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
   transition: background 0.3s, color 0.5s ease;
+  cursor: pointer;
 }
 
 .langBtn:hover {
   background: var(--hover-bg);
+  border-color: #c9a86a;
 }
 
 .currentLang {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .langDropdown {
@@ -107,13 +129,14 @@
   min-width: 150px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   transition: background-color 0.5s ease, border-color 0.5s ease;
+  z-index: 1001;
 }
 
 .langDropdown button {
   padding: 10px 15px;
   text-align: left;
   color: var(--text-color);
-  opacity: 0.8;
+  opacity: 0.85;
   border-radius: 4px;
   transition: all 0.2s;
   font-size: 0.9rem;
@@ -121,36 +144,90 @@
 
 .langDropdown button:hover {
   background: var(--hover-bg);
+  color: #c9a86a;
   opacity: 1;
 }
 
 .activeLang {
-  color: var(--text-color) !important;
-  font-weight: 600;
+  color: #c9a86a !important;
+  font-weight: 700;
   opacity: 1 !important;
-  background: var(--hover-bg);
+  background: rgba(201, 168, 106, 0.1);
 }
 
 .mobileMenuBtn {
   display: none;
   color: var(--text-color);
   transition: color 0.5s ease;
+  cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1240px) {
+  .navbar {
+    padding: 0 2%;
+  }
+  .logo h1 {
+    font-size: 1.15rem;
+  }
+  .navLinks {
+    gap: 0.85rem;
+  }
+  .navLinks a {
+    font-size: 0.78rem;
+    letter-spacing: 0.1px;
+  }
+  .bookBtn {
+    padding: 6px 12px !important;
+    font-size: 0.76rem !important;
+  }
+  .actions {
+    gap: 0.45rem;
+  }
+}
+
+@media (max-width: 1060px) {
+  .navLinks {
+    gap: 0.55rem;
+  }
+  .navLinks a {
+    font-size: 0.74rem;
+  }
+  .logo h1 {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 968px) {
+  .navbar {
+    height: 75px;
+    padding: 0 4%;
+  }
+
   .navLinks {
     position: absolute;
-    top: 80px;
+    top: 75px;
     left: 0;
     width: 100%;
     flex-direction: column;
     background: var(--bg-color);
     padding: 2rem 0;
     gap: 1.5rem;
-    transform: translateY(-100%);
+    transform: translateY(-120%);
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .navLinks a {
+    font-size: 1rem;
+    opacity: 1;
+  }
+
+  .bookBtn {
+    padding: 10px 24px !important;
+    font-size: 0.9rem !important;
   }
 
   .navLinks.showMenu {

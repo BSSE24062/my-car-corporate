@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './HeroSection.module.css';
@@ -26,10 +25,21 @@ const HeroSection = () => {
   const backWheel1Ref = useRef<HTMLImageElement>(null);
   const text1Ref = useRef<HTMLDivElement>(null);
 
+  // Preload all hero images on mount for instantaneous rendering
+  useEffect(() => {
+    heroBgs.forEach((bg) => {
+      const img1 = new Image();
+      img1.src = bg.desktop;
+      const img2 = new Image();
+      img2.src = bg.mobile;
+    });
+  }, []);
+
+  // Background slideshow cycle every 5.5s
   useEffect(() => {
     const interval = setInterval(() => {
       setBgIndex((prev) => (prev + 1) % heroBgs.length);
-    }, 5500); // Change background every 5.5s
+    }, 5500);
     return () => clearInterval(interval);
   }, []);
 
@@ -46,7 +56,7 @@ const HeroSection = () => {
       const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       const xPercentVal = isMobile ? -50 : 0;
 
-      // 1. Car emerges cleanly from offscreen right
+      // 1. Car emerges smoothly from offscreen right
       gsap.fromTo(car1Ref.current,
         { x: "100vw", xPercent: xPercentVal, opacity: 1, scale: 0.75, rotation: -10 },
         { 
@@ -55,22 +65,22 @@ const HeroSection = () => {
           opacity: 1,
           scale: 1, 
           rotation: 0, 
-          duration: 2.6, 
+          duration: 1.8, 
           ease: "power4.out",
           onComplete: initScrollTrigger
         }
       );
 
-      // 2. Wheels spin counter-clockwise as the car drives forward onto the screen
+      // 2. Wheels spin counter-clockwise as car drives forward onto screen
       gsap.fromTo([frontWheel1Ref.current, backWheel1Ref.current],
         { rotation: 360 },
-        { rotation: 0, duration: 2.6, ease: "power4.out" }
+        { rotation: 0, duration: 1.8, ease: "power4.out" }
       );
 
       // 3. Intro text fades/slides in from left with blur
       gsap.fromTo(text1Ref.current,
-        { x: "-100px", opacity: 0, filter: "blur(8px)" },
-        { x: "0px", opacity: 1, filter: "blur(0px)", duration: 2.0, ease: "power3.out" }
+        { x: "-60px", opacity: 0, filter: "blur(6px)" },
+        { x: "0px", opacity: 1, filter: "blur(0px)", duration: 1.4, ease: "power3.out" }
       );
     };
 
@@ -79,44 +89,61 @@ const HeroSection = () => {
       const xPercentVal = isMobile ? -50 : 0;
 
       ctx = gsap.context(() => {
+        // Natural scroll scrub (pin: false) so programmatic scrolls to #booking never get trapped or cause blank hero states
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: "+=100%", // Viewport height scroll length
-            pin: true,
-            scrub: 1,
+            end: "bottom top",
+            scrub: 0.5,
           }
         });
 
-        // Single transition: Car drives off left, wheels spin forward, Text fades out
+        // 1. Car drives smoothly across the screen to the left as user scrolls down
         tl.to(car1Ref.current, {
-          x: '-120vw',
+          x: isMobile ? '-110vw' : '-105vw',
           xPercent: xPercentVal,
-          ease: "none",
+          ease: "power1.in",
           duration: 1.0
         }, 0);
 
+        // 2. Wheels spin forward in sync with motion
         tl.to([frontWheel1Ref.current, backWheel1Ref.current], {
           rotation: -720,
           ease: "none",
           duration: 1.0
         }, 0);
 
+        // 3. Text fades and slides up smoothly
         tl.to(text1Ref.current, {
           opacity: 0,
-          y: -50,
-          duration: 0.8,
+          y: -40,
+          duration: 0.5,
+          ease: "power1.out"
         }, 0);
 
       }, containerRef);
     };
 
+    const isAlreadyLoaded = typeof window !== 'undefined' && (
+      sessionStorage.getItem('elite_video_intro_seen') === 'true' ||
+      (window as unknown as { __ELITE_LOADING_FINISHED__?: boolean }).__ELITE_LOADING_FINISHED__ === true
+    );
+
+    if (isAlreadyLoaded) {
+      // Immediate entrance animation without delay when returning to home from services or other pages
+      const timer = setTimeout(startEntranceAnimations, 30);
+      return () => {
+        clearTimeout(timer);
+        if (ctx) ctx.revert();
+      };
+    }
+
     window.addEventListener('loading-finished', startEntranceAnimations);
 
     const fallbackTimer = setTimeout(() => {
       startEntranceAnimations();
-    }, 6500);
+    }, 4600);
 
     return () => {
       window.removeEventListener('loading-finished', startEntranceAnimations);
@@ -125,60 +152,70 @@ const HeroSection = () => {
     };
   }, []);
 
-  const handleBookNowClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
+  const scrollToBooking = (mode: 'booking' | 'quote') => {
+    window.dispatchEvent(new CustomEvent('set-booking-type', { detail: mode }));
     const bookingSection = document.getElementById('booking');
     if (bookingSection) {
-      bookingSection.scrollIntoView({ behavior: 'smooth' });
+      const yOffset = -20;
+      const y = bookingSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     } else {
-      window.location.hash = '#booking';
+      window.location.href = '/#booking';
     }
+  };
+
+  const handleBookNowClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    scrollToBooking('booking');
+  };
+
+  const handleGetQuoteClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    scrollToBooking('quote');
   };
 
   return (
     <section ref={containerRef} className={styles.heroContainer}>
+      {/* Layered Cross-Fading Background Slideshow — No Black Gaps or Unmounting */}
       <div className={styles.backgroundSlideshow}>
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            key={bgIndex}
-            className={styles.slideImage}
-            initial={{ opacity: 0, scale: 1.12 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1.04,
-              transition: {
-                opacity: { duration: 1.5, ease: "easeInOut" },
-                scale: { duration: 5.5, ease: "linear" }
-              }
-            }}
-            exit={{ 
-              opacity: 0,
-              transition: { duration: 1.5, ease: "easeInOut" }
-            }}
+        {heroBgs.map((bg, idx) => (
+          <div
+            key={bg.id}
+            className={`${styles.slideImage} ${idx === bgIndex ? styles.slideActive : ''}`}
             style={{
-              '--bg-desktop': `url(${heroBgs[bgIndex].desktop})`,
-              '--bg-mobile': `url(${heroBgs[bgIndex].mobile})`
+              '--bg-desktop': `url('${bg.desktop}')`,
+              '--bg-mobile': `url('${bg.mobile}')`
             } as React.CSSProperties}
           />
-        </AnimatePresence>
+        ))}
         <div className={styles.overlay}></div>
       </div>
 
       <div className={styles.contentWrapper}>
         
-        {/* Left Side: Single Text Content */}
+        {/* Left Side: Text Content */}
         <div className={styles.textContent}>
           <div ref={text1Ref} className={`${styles.textBlock} ${styles.relativeMobile}`} style={{ opacity: 0 }}>
             <h1>{t('hero.title', 'Elite Cars Australia')}</h1>
-            <p className={styles.subtitle}>{t('hero.subtitle', 'Premium Chauffeur Service Across Australia')}</p>
-            <p className={styles.description}>{t('hero.description', 'Experience first-class travel tailored for corporate executives, VIP events, and seamless airport transfers across Australia. Our professional chauffeurs guarantee absolute reliability, ultimate comfort, and a grand arrival in our premier luxury fleet.')}</p>
-            <a 
-              href="#booking" 
-              className={styles.bookNowBtn}
-              onClick={handleBookNowClick}
-            >
-              {t('form.submit', 'Book Now')}
-            </a>
+            <p className={styles.subtitle}>{t('hero.subtitle', 'Executive Chauffeur & Airport Transfers Across Australia')}</p>
+            <p className={styles.description}>{t('hero.description', 'Professional chauffeured transport tailored for corporate executives, VIP delegations, and seamless airport transfers across Sydney, Melbourne, Brisbane, Perth, Adelaide, and Canberra. Featuring meticulously maintained vehicles, flight tracking, and courteous drivers.')}</p>
+            
+            <div className={styles.heroBtnGroup}>
+              <a 
+                href="#booking" 
+                className={styles.bookNowBtn}
+                onClick={handleBookNowClick}
+              >
+                {t('hero.book_now', 'Book Now')}
+              </a>
+              <a 
+                href="#booking" 
+                className={styles.quoteBtn}
+                onClick={handleGetQuoteClick}
+              >
+                {t('hero.get_quote', 'Get a Quote')}
+              </a>
+            </div>
           </div>
         </div>
 

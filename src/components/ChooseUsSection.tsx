@@ -104,10 +104,10 @@ const ChooseUsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className={styles.subtitle}>{t('why_choose_us.subtitle', 'Uncompromising Excellence')}</span>
+              <span className={styles.subtitle}>{t('why_choose_us.subtitle', 'Professional Standards & Reliability')}</span>
               <h2>{t('why_choose_us.title', 'Why Choose Us?')}</h2>
               <p className={styles.leadText}>
-                {t('why_choose_us.lead', 'We redefine corporate transportation through meticulous execution, world-class luxury fleets, and a commitment to setting new standards in executive concierge services.')}
+                {t('why_choose_us.lead', 'We support corporate executives, travel managers, and private clients with dependable dispatch, pristine vehicles, and attentive service across Australia.')}
               </p>
             </motion.div>
 
