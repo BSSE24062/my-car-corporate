@@ -57,7 +57,7 @@
 
 .staticActions {
   position: absolute;
-  bottom: 85px;
+  bottom: 135px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 25;
@@ -182,7 +182,7 @@
     font-size: 1.05rem;
   }
   .staticActions {
-    bottom: 75px;
+    bottom: 230px;
   }
   .viewAllBtn {
     padding: 10px 22px;
