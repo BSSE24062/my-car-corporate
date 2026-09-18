@@ -29,7 +29,13 @@ export default function HomeClient() {
   }, []);
 
   return (
-    <main style={{ backgroundColor: 'black', minHeight: '100vh', width: '100vw', overflowX: 'hidden' }}>
+    <main
+      role="main"
+      aria-label="Elite Cars Australia — Executive Chauffeur and Luxury Car Service"
+      itemScope
+      itemType="https://schema.org/LimousineService"
+      style={{ backgroundColor: 'black', minHeight: '100vh', width: '100vw', overflowX: 'hidden' }}
+    >
       <Navbar />
       <HeroSection />
       <ServicesBanner />

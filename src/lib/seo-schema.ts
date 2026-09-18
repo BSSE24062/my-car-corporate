@@ -31,7 +31,22 @@ export const getWebsiteSchema = () => ({
   '@id': `${BASE_URL}/#website`,
   url: BASE_URL,
   name: siteMetadata.siteName,
-  alternateName: ['Elite Cars', 'Elite Cars AU', 'Elite Chauffeur Australia', 'Elite Cars Sydney', 'My Car Corporate'],
+  alternateName: [
+    'Elite Cars',
+    'Elite Cars AU',
+    'Elite Chauffeur Australia',
+    'Elite Cars Sydney',
+    'My Car Corporate',
+    'Elite Motors',
+    'Elite Motors Australia',
+    'Elite Chauffeurs',
+    'Elite Chauffeur Service',
+    'Premium Cars Australia',
+    'Australian Elite Cars',
+    'Australian Premium Cars',
+    "Australia's Premium Drivers",
+    'Elite Luxury Chauffeurs',
+  ],
   description: siteMetadata.description,
   publisher: {
     '@id': `${BASE_URL}/#organization`,
@@ -58,7 +73,28 @@ export const getOrganizationSchema = () => ({
     'Elite Chauffeur Australia',
     'Elite Luxury Chauffeurs Sydney',
     'Elite Chauffeur Service Melbourne',
-    'My Car Corporate'
+    'My Car Corporate',
+    'Elite Motors',
+    'Elite Motors Australia',
+    'Elite Chauffeurs',
+    'Elite Chauffeur Service',
+    'Premium Cars Australia',
+    'Australian Elite Cars',
+    'Australian Premium Cars',
+    "Australia's Premium Drivers",
+    'Elite Luxury Chauffeurs',
+  ],
+  slogan: "Australia's Premier Executive Chauffeur Service",
+  knowsLanguage: ['en', 'ar', 'zh', 'ja', 'fr', 'es', 'de', 'th', 'nl'],
+  sameAs: [
+    // Update these with your actual social media and directory profile URLs
+    'https://www.instagram.com/elitecarsaustralia/',
+    'https://www.facebook.com/elitecarsaustralia/',
+    // 'https://www.linkedin.com/company/elite-cars-australia/',
+    // 'https://www.youtube.com/@elitecarsaustralia',
+    // 'https://g.page/elite-cars-australia',  // Google Business Profile
+    // 'https://www.yelp.com.au/biz/elite-cars-australia-sydney',
+    // 'https://www.tripadvisor.com.au/...',
   ],
   url: BASE_URL,
   logo: `${BASE_URL}/logo.png`,
@@ -112,22 +148,65 @@ export const getOrganizationSchema = () => ({
     { '@type': 'City', name: 'Sunshine Coast', containedInPlace: { '@type': 'State', name: 'Queensland' } }
   ],
   knowsAbout: [
+    // ── Service expertise ──
     'Executive Chauffeur Service Sydney',
+    'Executive Chauffeur Service Australia',
+    'Luxury Chauffeur Service Australia',
+    'Premium Chauffeur Service Australia',
+    'Elite Chauffeur Service',
+    'VIP Car Service Australia',
+    'Chauffeur Service Australia',
+    'Private Driver Australia',
+    'Hire a Chauffeur Australia',
+
+    // ── Airport expertise ──
     'Airport Transfers Sydney Airport SYD',
-    'Corporate Chauffeur Accounts Australia',
+    'Airport Transfers Western Sydney International WSI',
     'Melbourne Airport Transfers Tullamarine MEL',
+    'Melbourne Airport Essendon Fields',
     'Brisbane Airport Chauffeur BNE',
     'Perth Airport Chauffeur PER',
+    'Adelaide Airport Transfers ADL',
+    'Gold Coast Airport Transfers OOL',
+    'Canberra Airport Chauffeur CBR',
+    'Airport Pickup Sydney',
+    'Airport Pickup Melbourne',
+    'Airport Meet and Greet Australia',
+
+    // ── Corporate expertise ──
+    'Corporate Chauffeur Accounts Australia',
+    'Corporate Travel Service Australia',
+    'Executive Assistant Priority Dispatch',
+    'Corporate 30-Day Invoicing Chauffeur',
+    'Corporate Investor Roadshow Transport Australia',
+
+    // ── Aviation expertise ──
     'Private Aviation FBO Tarmac Transfers',
     'ExecuJet Sydney Chauffeur',
     'Jet Aviation Sydney Transfers',
+    'Private Jet Chauffeur Australia',
+    'ASIC Accredited Airside Driver',
+
+    // ── Fleet expertise ──
     'Mercedes-Benz S-Class Chauffeur Hire',
     'Mercedes Maybach Chauffeur Hire',
     'Mercedes-Benz V-Class 7 Passenger Van Hire',
+    'Mercedes Sprinter Executive Minibus Hire',
+    'BMW 7 Series Chauffeur Hire',
+    'Audi Q7 Chauffeur Hire',
+    'BMW X7 Chauffeur Hire',
+    'Mercedes-Benz GLS Chauffeur Hire',
+    'Mercedes Chauffeur Australia',
+    'Luxury Sedan Hire with Driver',
+
+    // ── Specialty services ──
     'Luxury Wedding Car Hire Sydney',
+    'Wedding Chauffeur Australia',
     'As-Directed Hourly Chauffeur Hire',
-    'Corporate Investor Roadshow Transport Australia',
-    'Interstate Long Distance Chauffeur Australia'
+    'Hourly Chauffeur Hire Australia',
+    'Interstate Long Distance Chauffeur Australia',
+    'Conference and Event Transport Australia',
+    'VIP Transport Australia',
   ],
   aggregateRating: {
     '@type': 'AggregateRating',

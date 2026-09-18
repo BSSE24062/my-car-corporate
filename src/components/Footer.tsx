@@ -15,7 +15,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} itemScope itemType="https://schema.org/LocalBusiness" role="contentinfo" aria-label="Elite Cars Australia Footer">
       <div className={styles.glowBackground} />
       
       <div className={styles.container}>
@@ -93,7 +93,7 @@ const Footer = () => {
               </div>
               <div>
                 <span className={styles.contactLabel}>{t('footer.reserve_label', 'Reserve a Ride / Quotes')}</span>
-                <span className={styles.contactValue}>+61 430 729 993</span>
+                <span className={styles.contactValue} itemProp="telephone">+61 430 729 993</span>
               </div>
             </a>
 
@@ -103,7 +103,7 @@ const Footer = () => {
               </div>
               <div>
                 <span className={styles.contactLabel}>{t('footer.corporate_label', 'Corporate Accounts')}</span>
-                <span className={styles.contactValue}>info@elitecarsaustralia.com.au</span>
+                <span className={styles.contactValue} itemProp="email">info@elitecarsaustralia.com.au</span>
               </div>
             </a>
 
@@ -113,7 +113,7 @@ const Footer = () => {
               </div>
               <div>
                 <span className={styles.contactLabel}>{t('footer.service_territory_label', 'Service Territory')}</span>
-                <span className={styles.contactValue}>{t('footer.service_territory_val', 'Nationwide — Sydney, Melbourne, Brisbane, Perth, Adelaide, & Canberra')}</span>
+                <span className={styles.contactValue} itemProp="areaServed">{t('footer.service_territory_val', 'Nationwide — Sydney, Melbourne, Brisbane, Perth, Adelaide, & Canberra')}</span>
               </div>
             </div>
           </div>

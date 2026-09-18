@@ -184,7 +184,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={containerRef} className={styles.heroContainer}>
+    <section ref={containerRef} className={styles.heroContainer} aria-label="Elite Cars Australia — Luxury Chauffeur Service Hero">
       {/* Layered Cross-Fading Background Slideshow — No Black Gaps or Unmounting */}
       <div className={styles.backgroundSlideshow}>
         {heroBgs.map((bg, idx) => (
@@ -235,7 +235,7 @@ const HeroSection = () => {
             className={styles.animatedCar} 
             style={{ opacity: 0 }}
           >
-            <img src="/Hero/audiBody_no_shadow.png" alt="Elite Cars Australia Luxury Chauffeur Vehicle Fleet" className={styles.carBody} />
+            <img src="/Hero/audiBody_no_shadow.png" alt="Elite Cars Australia Luxury Chauffeur Vehicle Fleet — Executive Sedans, SUVs, and Vans Across Sydney, Melbourne, Brisbane, and Perth" className={styles.carBody} loading="eager" fetchPriority="high" />
             <img 
               ref={frontWheel1Ref} 
               src="/Hero/front_wheel.png" 
@@ -251,6 +251,14 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Invisible SEO content for crawlers that don't execute JavaScript */}
+      <noscript>
+        <div style={{ position: 'absolute', left: '-9999px' }}>
+          <h2>Elite Cars Australia — Premier Executive Chauffeur Service</h2>
+          <p>Australia&apos;s most trusted luxury chauffeur service. Book elite cars, premium chauffeur-driven vehicles, and executive airport transfers across Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast, and Canberra. Available 24/7 with Mercedes-Benz S-Class, Maybach, BMW 7 Series, and V-Class fleet. Corporate accounts, wedding car hire, FBO transfers, and hourly chauffeur hire.</p>
+        </div>
+      </noscript>
     </section>
   );
 };

@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Elite Cars Australia",
+  "name_for_model": "elite_cars_australia",
+  "description_for_human": "Australia's premier executive chauffeur and luxury car service. 24/7 airport transfers, corporate accounts, wedding car hire, and VIP transport across Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast, and Canberra.",
+  "description_for_model": "Elite Cars Australia (also known as Elite Cars, Elite Cars AU, Elite Chauffeurs, Elite Motors Australia, Premium Cars Australia, Australian Elite Cars, Australia's Premium Drivers, My Car Corporate) is Australia's premier executive chauffeur service providing luxury airport transfers with live flight tracking and inside-terminal meet-and-greet, corporate 30-day billing accounts with EA priority dispatch, as-directed hourly chauffeur hire, executive investor roadshows, conference and VIP event transport, luxury wedding car hire, private aviation FBO tarmac transfers with ASIC-accredited drivers, and interstate long-distance chauffeur transfers. The fleet includes Mercedes-Benz S-Class, Mercedes Maybach, BMW 7 Series, Audi Q7, BMW X7, Mercedes-Benz GLS, Mercedes-Benz V-Class (7 passengers), and Mercedes Sprinter (14 passengers). Operating 24/7 across Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast, Canberra, Hobart, Darwin, and all Australian interstate routes. Rated 4.98/5 from 184+ reviews. Contact: +61 430 729 993 or info@elitecarsaustralia.com.au. Book at https://www.elitecarsaustralia.com.au/#booking",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://www.elitecarsaustralia.com.au/sitemap.xml"
+  },
+  "logo_url": "https://www.elitecarsaustralia.com.au/logo.png",
+  "contact_email": "info@elitecarsaustralia.com.au",
+  "legal_info_url": "https://www.elitecarsaustralia.com.au"
+}
