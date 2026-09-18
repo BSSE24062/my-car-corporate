@@ -50,7 +50,6 @@
   gap: 20px;
 }
 
-/* Logo as a button — scroll to top on click */
 .brandLogo {
   background: none;
   border: none;
@@ -59,19 +58,24 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: flex-start;
+  gap: 8px;
   transition: opacity 0.2s ease;
 }
 
-.brandLogo:hover {
-  opacity: 0.8;
+.footerLogoImg {
+  height: 118px;
+  width: auto;
+  max-width: 380px;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.brandLogo h2 {
-  font-size: 1.85rem;
-  letter-spacing: 1px;
-  color: var(--text-color);
-  margin: 0;
+.brandLogo:hover .footerLogoImg {
+  opacity: 0.88;
+  transform: scale(1.02);
 }
 
 .brandTagline {
@@ -277,6 +281,11 @@
   .mainGrid {
     grid-template-columns: 1fr;
     gap: 36px;
+  }
+
+  .footerLogoImg {
+    height: 88px;
+    max-width: 300px;
   }
 
   .bottomBar {

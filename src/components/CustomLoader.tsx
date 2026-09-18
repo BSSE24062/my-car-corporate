@@ -18,11 +18,11 @@ export default function CustomLoader({
         <div className={styles.ring}></div>
         <div className={styles.innerRing}></div>
         <img 
-          src="/icon.png" 
+          src="/logo.png" 
           alt="Elite Cars Australia" 
           className={styles.centerLogo}
           onError={(e) => {
-            // fallback if icon.png isn't accessible
+            // fallback if logo.png isn't accessible
             (e.target as HTMLElement).style.display = 'none';
           }} 
         />

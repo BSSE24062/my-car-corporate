@@ -121,35 +121,114 @@
   color: var(--text-muted);
 }
 
-.dotsContainer {
+.paginationWrapper {
   display: flex;
-  gap: 8px;
-  margin-top: 20px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  user-select: none;
+}
+
+.navArrowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.navArrowBtn:hover {
+  background: rgba(201, 168, 106, 0.2);
+  border-color: #c9a86a;
+  color: #c9a86a;
+  transform: scale(1.08);
+}
+
+:global(.light-theme) .navArrowBtn {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+:global(.light-theme) .navArrowBtn:hover {
+  background: rgba(201, 168, 106, 0.2);
+}
+
+.dotsViewport {
+  width: 100px;
+  height: 24px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%);
+}
+
+.dotsTrack {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.4);
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: all 0.3s ease;
+  flex-shrink: 0;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :global(.light-theme) .dot {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .activeDot {
-  width: 24px;
+  width: 22px;
   border-radius: 4px;
   background: #c9a86a;
+  opacity: 1;
 }
 
 :global(.light-theme) .activeDot {
   background: #c9a86a;
+}
+
+.dotNear {
+  transform: scale(0.9);
+  opacity: 0.75;
+}
+
+.dotFar {
+  transform: scale(0.65);
+  opacity: 0.45;
+}
+
+.dotHidden {
+  transform: scale(0.35);
+  opacity: 0.2;
+}
+
+.slideCounter {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-left: 4px;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
@@ -202,8 +281,9 @@
     line-height: 1.45;
   }
   
-  .dotsContainer {
+  .paginationWrapper {
     margin-top: auto; /* Push dots to the very bottom of the card body */
-    padding-top: 12px;
+    padding-top: 10px;
+    gap: 8px;
   }
 }

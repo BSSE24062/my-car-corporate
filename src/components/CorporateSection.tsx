@@ -91,8 +91,8 @@ const CorporateSection = () => {
         {/* Corporate CTA Banner */}
         <div className={styles.ctaBanner}>
           <div className={styles.ctaText}>
-            <h3>Ready to streamline your company's executive travel?</h3>
-            <p>Set up an account today with priority dispatch, monthly invoicing, and dedicated EA assistance.</p>
+            <h3>{t('corporate_section.banner_title', "Ready to streamline your company's executive travel?")}</h3>
+            <p>{t('corporate_section.banner_desc', 'Set up an account today with priority dispatch, monthly invoicing, and dedicated EA assistance.')}</p>
           </div>
           <div className={styles.ctaActions}>
             <a
@@ -103,7 +103,7 @@ const CorporateSection = () => {
               {t('corporate_section.cta_button', 'Enquire Corporate Rates')}
             </a>
             <a href="tel:+61430729993" className={styles.contactBtn}>
-              Call Direct Concierge <ArrowRight size={16} />
+              {t('corporate_section.call_concierge', 'Call Direct Concierge')} <ArrowRight size={16} />
             </a>
           </div>
         </div>

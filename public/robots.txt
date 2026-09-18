@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /api/
-
-Sitemap: https://www.elitecarsaustralia.com.au/sitemap.xml
-Host: https://www.elitecarsaustralia.com.au

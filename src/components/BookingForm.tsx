@@ -325,12 +325,12 @@ const BookingForm = () => {
                     value={formData.vehiclePreference}
                     onChange={handleChange}
                   >
-                    <option value="Mercedes-Benz S-Class">Mercedes-Benz S-Class (3 Pax · 3 Bags)</option>
-                    <option value="Mercedes Maybach">Mercedes Maybach (3 Pax · 2 Bags)</option>
-                    <option value="BMW 7 Series">BMW 7 Series (3 Pax · 3 Bags)</option>
-                    <option value="Mercedes-Benz GLS">Mercedes-Benz GLS (4–6 Pax · 4 Bags)</option>
-                    <option value="BMW X7">BMW X7 (4–6 Pax · 4 Bags)</option>
-                    <option value="Audi Q7">Audi Q7 (4 Pax · 4 Bags)</option>
+                    <option value="Mercedes-Benz S-Class">Mercedes-Benz S-Class (3 Pax · 2 Large Bags + 2 Carry-ons)</option>
+                    <option value="Mercedes Maybach">Mercedes Maybach (3 Pax · 2 Large Bags + 2 Carry-ons)</option>
+                    <option value="BMW 7 Series">BMW 7 Series (3 Pax · 2 Large Bags + 2 Carry-ons)</option>
+                    <option value="Mercedes-Benz GLS">Mercedes-Benz GLS (4–6 Pax · 4 Large Bags + Carry-ons)</option>
+                    <option value="BMW X7">BMW X7 (4–6 Pax · 4 Large Bags + Carry-ons)</option>
+                    <option value="Audi Q7">Audi Q7 (4 Pax · 4 Large Bags + Carry-ons)</option>
                     <option value="Mercedes-Benz V-Class">Mercedes-Benz V-Class (Up to 7 Pax · 7 Bags)</option>
                     <option value="Mercedes Sprinter">Mercedes Sprinter (Up to 11–14 Pax · 12+ Bags)</option>
                     <option value="Best Available / No Preference">{t('form.vehicle_any', 'Best Available / No Preference')}</option>

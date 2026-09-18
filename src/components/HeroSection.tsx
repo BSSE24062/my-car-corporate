@@ -10,9 +10,18 @@ gsap.registerPlugin(ScrollTrigger);
 
 const heroBgs = [
   { id: 1, desktop: '/Hero/hero-bg-1.jpg', mobile: '/Hero/mobile_hero/hero-bg-1.jpg' },
-  { id: 2, desktop: '/Hero/hero-bg-2.jpg', mobile: '/Hero/mobile_hero/hero-bg-2.jpg' },
-  { id: 3, desktop: '/Hero/hero-bg-3.jpg', mobile: '/Hero/mobile_hero/hero-bg-3.jpg' },
-  { id: 4, desktop: '/Hero/hero-bg-4.jpg', mobile: '/Hero/mobile_hero/hero-bg-4.jpg' },
+  { id: 2, desktop: '/Sydney/Australia/cbd_melbourne.jpg', mobile: '/Sydney/Australia/mobile_australia/cbd_melbourne.jpg' },
+  { id: 3, desktop: '/Sydney/Australia/adelaid1.jpg', mobile: '/Sydney/Australia/mobile_australia/adelaid1.jpg' },
+  { id: 4, desktop: '/Hero/hero-bg-2.jpg', mobile: '/Hero/mobile_hero/hero-bg-2.jpg' },
+  { id: 5, desktop: '/Sydney/Australia/gold_coast_night.jpg', mobile: '/Sydney/Australia/mobile_australia/gold_coast_night.jpg' },
+  { id: 6, desktop: '/Sydney/Australia/syd_airport.jpg', mobile: '/Sydney/Australia/mobile_australia/syd_airport.jpg' },
+  { id: 7, desktop: '/Sydney/Australia/melbourne_night.jpg', mobile: '/Sydney/Australia/mobile_australia/melbourne_night.jpg' },
+  { id: 8, desktop: '/Sydney/Australia/adelaid2.jpg', mobile: '/Sydney/Australia/mobile_australia/adelaid2.jpg' },
+  { id: 9, desktop: '/Hero/hero-bg-3.jpg', mobile: '/Hero/mobile_hero/hero-bg-3.jpg' },
+  { id: 10, desktop: '/Sydney/Australia/perth2.jpg', mobile: '/Sydney/Australia/mobile_australia/perth2.jpg' },
+  { id: 11, desktop: '/Sydney/Australia/darwin.jpg', mobile: '/Sydney/Australia/mobile_australia/darwin.jpg' },
+  { id: 12, desktop: '/Hero/hero-bg-4.jpg', mobile: '/Hero/mobile_hero/hero-bg-4.jpg' },
+  { id: 13, desktop: '/Sydney/Australia/tasmania2.jpg', mobile: '/Sydney/Australia/mobile_australia/tasmania2.jpg' },
 ];
 
 const HeroSection = () => {
@@ -89,27 +98,27 @@ const HeroSection = () => {
       const xPercentVal = isMobile ? -50 : 0;
 
       ctx = gsap.context(() => {
-        // Natural scroll scrub (pin: false) so programmatic scrolls to #booking never get trapped or cause blank hero states
+        // Natural scroll scrub with slightly increased movement speed & tyre spin
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: "bottom top",
-            scrub: 0.5,
+            end: "70% top",
+            scrub: 0.3,
           }
         });
 
-        // 1. Car drives smoothly across the screen to the left as user scrolls down
+        // 1. Car drives faster across the screen to the left as user scrolls down
         tl.to(car1Ref.current, {
-          x: isMobile ? '-110vw' : '-105vw',
+          x: isMobile ? '-135vw' : '-130vw',
           xPercent: xPercentVal,
           ease: "power1.in",
           duration: 1.0
         }, 0);
 
-        // 2. Wheels spin forward in sync with motion
+        // 2. Wheels spin faster in sync with increased car speed
         tl.to([frontWheel1Ref.current, backWheel1Ref.current], {
-          rotation: -720,
+          rotation: -1080,
           ease: "none",
           duration: 1.0
         }, 0);
@@ -117,8 +126,8 @@ const HeroSection = () => {
         // 3. Text fades and slides up smoothly
         tl.to(text1Ref.current, {
           opacity: 0,
-          y: -40,
-          duration: 0.5,
+          y: -45,
+          duration: 0.45,
           ease: "power1.out"
         }, 0);
 

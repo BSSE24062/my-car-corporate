@@ -17,10 +17,10 @@ interface FleetCar {
 const fleet: FleetCar[] = [
   {
     name: 'Mercedes-Benz S-Class',
-    classKey: 'fleet.luxury_sedan',
-    category: 'Executive Sedan',
+    classKey: 'fleet.premium_sedan',
+    category: 'Premium Sedan',
     passengers: '3 Passengers',
-    luggage: '2–3 Large Bags',
+    luggage: '2 Large Bags + 2 Carry-ons',
     img: '/Fleet/benz s class.jpg'
   },
   {
@@ -28,7 +28,7 @@ const fleet: FleetCar[] = [
     classKey: 'fleet.ultra_luxury',
     category: 'First-Class Sedan',
     passengers: '3 Passengers',
-    luggage: '2 Large Bags',
+    luggage: '2 Large Bags + 2 Carry-ons',
     img: '/Fleet/benz.jpg'
   },
   {
@@ -36,31 +36,31 @@ const fleet: FleetCar[] = [
     classKey: 'fleet.premium_sedan',
     category: 'Premium Sedan',
     passengers: '3 Passengers',
-    luggage: '2–3 Large Bags',
+    luggage: '2 Large Bags + 2 Carry-ons',
     img: '/Fleet/BMW i7.jpg'
   },
   {
     name: 'Mercedes-Benz GLS',
-    classKey: 'fleet.luxury_suv',
-    category: 'Executive SUV',
+    classKey: 'fleet.premium_suv',
+    category: 'Premium SUV',
     passengers: '4–6 Passengers',
-    luggage: '4 Large Bags',
+    luggage: '4 Large Bags + Carry-ons',
     img: '/Fleet/gls.jpg'
   },
   {
     name: 'BMW X7',
     classKey: 'fleet.premium_suv',
-    category: 'Luxury SUV',
+    category: 'Premium SUV',
     passengers: '4–6 Passengers',
-    luggage: '4 Large Bags',
+    luggage: '4 Large Bags + Carry-ons',
     img: '/Fleet/bmwX7.jpg'
   },
   {
     name: 'Audi Q7',
     classKey: 'fleet.executive_suv',
-    category: 'Premium SUV',
+    category: 'Executive SUV',
     passengers: '4 Passengers',
-    luggage: '4 Large Bags',
+    luggage: '4 Large Bags + Carry-ons',
     img: '/Fleet/audiQ7.avif'
   },
   {
@@ -131,7 +131,7 @@ const FleetSection = () => {
           {fleet.map((car, index) => (
             <div key={index} className={styles.card}>
               <div className={styles.imageWrapper}>
-                <span className={styles.categoryTag}>{car.category}</span>
+                <span className={styles.categoryTag}>{t(car.classKey, car.category)}</span>
                 <img src={car.img} alt={`${car.name} - Executive Chauffeur Fleet Australia | Elite Cars Australia`} loading="lazy" />
               </div>
               <div className={styles.info}>
@@ -158,7 +158,7 @@ const FleetSection = () => {
                   onClick={() => handleSelectVehicle(car.name)}
                   className={styles.selectVehicleBtn}
                 >
-                  Quote / Book This Vehicle →
+                  {t('fleet.quote_book_btn', 'Quote / Book This Vehicle →')}
                 </button>
               </div>
             </div>

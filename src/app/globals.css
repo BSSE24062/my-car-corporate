@@ -17,20 +17,6 @@
   --border-color: rgba(255, 255, 255, 0.1);
 }
 
-.light-theme {
-  --primary: #000000;
-  --secondary: #f0f0f0;
-  --accent: #e0e0e0;
-  --bg-color: #ffffff;
-  --bg-secondary: #f9f9f9;
-  --text-color: #000000;
-  --text-muted: #666666;
-  --nav-bg: rgba(255, 255, 255, 0.85);
-  --dropdown-bg: #ffffff;
-  --hover-bg: rgba(0, 0, 0, 0.1);
-  --border-color: rgba(0, 0, 0, 0.1);
-}
-
 * {
   box-sizing: border-box;
   padding: 0;

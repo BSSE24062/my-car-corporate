@@ -8,7 +8,7 @@ export const siteMetadata = {
   telephone: '+61430729993',
   email: 'info@elitecarsaustralia.com.au',
   address: {
-    streetAddress: 'Executive Transport Hub',
+    streetAddress: 'Executive Chauffeur Hub, Sydney CBD',
     addressLocality: 'Sydney',
     addressRegion: 'NSW',
     postalCode: '2000',
@@ -18,8 +18,8 @@ export const siteMetadata = {
     latitude: -33.8688,
     longitude: 151.2093,
   },
-  currenciesAccepted: 'AUD, USD, EUR, GBP',
-  paymentAccepted: 'Credit Card, Debit Card, Amex, Wire Transfer, Corporate Invoicing',
+  currenciesAccepted: 'AUD, USD, EUR, GBP, SGD, NZD, JPY, CNY',
+  paymentAccepted: 'Credit Card, Debit Card, American Express, Corporate Invoicing, Bank Wire, EFT',
   priceRange: '$$$$',
   ratingValue: '4.98',
   reviewCount: '184',
@@ -31,6 +31,7 @@ export const getWebsiteSchema = () => ({
   '@id': `${BASE_URL}/#website`,
   url: BASE_URL,
   name: siteMetadata.siteName,
+  alternateName: ['Elite Cars', 'Elite Cars AU', 'Elite Chauffeur Australia', 'Elite Cars Sydney', 'My Car Corporate'],
   description: siteMetadata.description,
   publisher: {
     '@id': `${BASE_URL}/#organization`,
@@ -48,19 +49,25 @@ export const getWebsiteSchema = () => ({
 
 export const getOrganizationSchema = () => ({
   '@context': 'https://schema.org',
-  '@type': 'LimousineService',
+  '@type': ['LimousineService', 'AutoRental', 'LocalBusiness'],
   '@id': `${BASE_URL}/#organization`,
   name: siteMetadata.siteName,
   alternateName: [
     'Elite Cars',
     'Elite Cars AU',
     'Elite Chauffeur Australia',
-    'Elite Luxury Chauffeurs',
+    'Elite Luxury Chauffeurs Sydney',
+    'Elite Chauffeur Service Melbourne',
     'My Car Corporate'
   ],
   url: BASE_URL,
-  logo: `${BASE_URL}/icon.png`,
-  image: `${BASE_URL}/Hero/audiMain.png`,
+  logo: `${BASE_URL}/logo.png`,
+  image: [
+    `${BASE_URL}/Hero/audiMain.png`,
+    `${BASE_URL}/Fleet/benz s class.jpg`,
+    `${BASE_URL}/Sydney/operaHouse.jpg`,
+    `${BASE_URL}/Services/AirportPickups.jpg`
+  ],
   telephone: siteMetadata.telephone,
   email: siteMetadata.email,
   priceRange: siteMetadata.priceRange,
@@ -69,9 +76,11 @@ export const getOrganizationSchema = () => ({
   description: siteMetadata.description,
   address: {
     '@type': 'PostalAddress',
-    addressCountry: 'AU',
-    addressRegion: 'Australia Wide',
-    addressLocality: 'Sydney',
+    streetAddress: siteMetadata.address.streetAddress,
+    addressLocality: siteMetadata.address.addressLocality,
+    addressRegion: siteMetadata.address.addressRegion,
+    postalCode: siteMetadata.address.postalCode,
+    addressCountry: siteMetadata.address.addressCountry,
   },
   geo: {
     '@type': 'GeoCoordinates',
@@ -88,15 +97,37 @@ export const getOrganizationSchema = () => ({
   ],
   areaServed: [
     { '@type': 'Country', name: 'Australia' },
-    { '@type': 'City', name: 'Sydney' },
-    { '@type': 'City', name: 'Melbourne' },
-    { '@type': 'City', name: 'Brisbane' },
-    { '@type': 'City', name: 'Perth' },
-    { '@type': 'City', name: 'Adelaide' },
-    { '@type': 'City', name: 'Gold Coast' },
-    { '@type': 'City', name: 'Canberra' },
-    { '@type': 'City', name: 'Hobart' },
-    { '@type': 'City', name: 'Darwin' },
+    { '@type': 'City', name: 'Sydney', containedInPlace: { '@type': 'State', name: 'New South Wales' }, geo: { '@type': 'GeoCoordinates', latitude: -33.8688, longitude: 151.2093 } },
+    { '@type': 'City', name: 'Melbourne', containedInPlace: { '@type': 'State', name: 'Victoria' }, geo: { '@type': 'GeoCoordinates', latitude: -37.8136, longitude: 144.9631 } },
+    { '@type': 'City', name: 'Brisbane', containedInPlace: { '@type': 'State', name: 'Queensland' }, geo: { '@type': 'GeoCoordinates', latitude: -27.4698, longitude: 153.0251 } },
+    { '@type': 'City', name: 'Perth', containedInPlace: { '@type': 'State', name: 'Western Australia' }, geo: { '@type': 'GeoCoordinates', latitude: -31.9505, longitude: 115.8605 } },
+    { '@type': 'City', name: 'Adelaide', containedInPlace: { '@type': 'State', name: 'South Australia' }, geo: { '@type': 'GeoCoordinates', latitude: -34.9285, longitude: 138.6007 } },
+    { '@type': 'City', name: 'Gold Coast', containedInPlace: { '@type': 'State', name: 'Queensland' }, geo: { '@type': 'GeoCoordinates', latitude: -28.0167, longitude: 153.4000 } },
+    { '@type': 'City', name: 'Canberra', containedInPlace: { '@type': 'State', name: 'Australian Capital Territory' }, geo: { '@type': 'GeoCoordinates', latitude: -35.2809, longitude: 149.1300 } },
+    { '@type': 'City', name: 'Hobart', containedInPlace: { '@type': 'State', name: 'Tasmania' } },
+    { '@type': 'City', name: 'Darwin', containedInPlace: { '@type': 'State', name: 'Northern Territory' } },
+    { '@type': 'City', name: 'Newcastle', containedInPlace: { '@type': 'State', name: 'New South Wales' } },
+    { '@type': 'City', name: 'Wollongong', containedInPlace: { '@type': 'State', name: 'New South Wales' } },
+    { '@type': 'City', name: 'Geelong', containedInPlace: { '@type': 'State', name: 'Victoria' } },
+    { '@type': 'City', name: 'Sunshine Coast', containedInPlace: { '@type': 'State', name: 'Queensland' } }
+  ],
+  knowsAbout: [
+    'Executive Chauffeur Service Sydney',
+    'Airport Transfers Sydney Airport SYD',
+    'Corporate Chauffeur Accounts Australia',
+    'Melbourne Airport Transfers Tullamarine MEL',
+    'Brisbane Airport Chauffeur BNE',
+    'Perth Airport Chauffeur PER',
+    'Private Aviation FBO Tarmac Transfers',
+    'ExecuJet Sydney Chauffeur',
+    'Jet Aviation Sydney Transfers',
+    'Mercedes-Benz S-Class Chauffeur Hire',
+    'Mercedes Maybach Chauffeur Hire',
+    'Mercedes-Benz V-Class 7 Passenger Van Hire',
+    'Luxury Wedding Car Hire Sydney',
+    'As-Directed Hourly Chauffeur Hire',
+    'Corporate Investor Roadshow Transport Australia',
+    'Interstate Long Distance Chauffeur Australia'
   ],
   aggregateRating: {
     '@type': 'AggregateRating',
@@ -105,13 +136,180 @@ export const getOrganizationSchema = () => ({
     bestRating: '5',
     worstRating: '1',
   },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: siteMetadata.telephone,
-    contactType: 'customer service',
-    areaServed: 'AU',
-    availableLanguage: ['English', 'Arabic', 'Chinese', 'Japanese', 'French', 'Spanish', 'German', 'Thai', 'Dutch'],
-    contactOption: 'TollFree',
+  review: [
+    {
+      '@type': 'Review',
+      author: { '@type': 'Person', name: 'Sarah Jenkins' },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      reviewBody: 'Elite Cars Australia manages our executive airport transfers and board meeting itineraries in Sydney and Melbourne. Drivers are consistently punctual, courteous, and communicate in advance. An indispensable partner for our corporate travel.',
+    },
+    {
+      '@type': 'Review',
+      author: { '@type': 'Person', name: "David O'Connor" },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      reviewBody: 'Excellent airport transfer service. The chauffeur monitored our delayed flight from Singapore and was waiting inside arrivals with a name board. Clean Mercedes S-Class, smooth drive, and effortless monthly invoicing.',
+    },
+    {
+      '@type': 'Review',
+      author: { '@type': 'Person', name: 'Michelle Thornton' },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      reviewBody: 'We reserved multiple Mercedes V-Class vehicles for keynote speakers across a 3-day conference. Flawless dispatch coordination, polite drivers, and great feedback from all our international delegates.',
+    },
+    {
+      '@type': 'Review',
+      author: { '@type': 'Person', name: 'Julian Sterling' },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      reviewBody: 'Reliable tarmac and FBO transfers for our private charter guests in Sydney and the Gold Coast. Discretion, vehicle condition, and driver professionalism are always top-tier.',
+    }
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: siteMetadata.telephone,
+      contactType: 'customer service',
+      areaServed: ['AU', 'US', 'GB', 'SG', 'NZ', 'AE'],
+      availableLanguage: ['English', 'Arabic', 'Chinese', 'Japanese', 'French', 'Spanish', 'German', 'Thai', 'Dutch'],
+      contactOption: 'TollFree',
+      hoursAvailable: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '00:00',
+        closes: '23:59',
+      },
+    },
+    {
+      '@type': 'ContactPoint',
+      telephone: siteMetadata.telephone,
+      contactType: 'reservations',
+      areaServed: 'AU',
+      availableLanguage: ['English', 'Arabic', 'Chinese', 'Japanese', 'French', 'Spanish', 'German', 'Thai', 'Dutch'],
+    }
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Executive Chauffeured Transportation Services',
+    itemListElement: [
+      {
+        '@type': 'OfferCatalog',
+        name: 'Airport Chauffeur Transfers',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Airport Chauffeur Transfers Sydney, Melbourne, Brisbane & Perth',
+              description: 'Door-to-door luxury airport transfers with live commercial flight tracking and terminal meet-and-greet.',
+              url: `${BASE_URL}/services/airport-transfers`,
+            },
+          },
+        ],
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'Corporate Accounts',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Corporate Chauffeur Accounts & EA Support',
+              description: 'Centralized 30-day corporate billing, priority dispatch, and nationwide executive travel management.',
+              url: `${BASE_URL}/services/corporate-accounts`,
+            },
+          },
+        ],
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'As-Directed Hourly Chauffeur Hire',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Hourly As-Directed Chauffeur Hire',
+              description: 'Flexible luxury vehicle and private chauffeur on standby for multi-stop meetings and VIP schedules.',
+              url: `${BASE_URL}/services/as-directed-chauffeur-hire`,
+            },
+          },
+        ],
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'Executive Roadshows',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Corporate Investor Roadshows',
+              description: 'Precision multi-stop travel coordination and luxury fleet deployment for investor roadshows and board meetings.',
+              url: `${BASE_URL}/services/roadshows`,
+            },
+          },
+        ],
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'Conference & Event Logistics',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Conferences & VIP Event Transport',
+              description: 'Coordinated luxury group transport and VIP delegate logistics for conventions, summits, and private galas.',
+              url: `${BASE_URL}/services/events`,
+            },
+          },
+        ],
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'Luxury Wedding Car Hire',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Wedding Car Hire & Bridal Chauffeurs',
+              description: 'Immaculate Mercedes-Benz, Maybach, and BMW bridal cars and passenger vans with suited professional chauffeurs.',
+              url: `${BASE_URL}/services/weddings`,
+            },
+          },
+        ],
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'Private Aviation & FBO Tarmac Transfers',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Private Aviation & FBO Tarmac Transfers',
+              description: 'Direct tarmac and private jet FBO terminal chauffeured transfers with aircraft tail tracking and VIP security.',
+              url: `${BASE_URL}/services/private-aviation-fbo`,
+            },
+          },
+        ],
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'Interstate Long-Distance Chauffeur',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Interstate & Regional Chauffeur Transfers',
+              description: 'Comfortable, private long-distance chauffeured journeys between capital cities and regional commercial hubs.',
+              url: `${BASE_URL}/services/interstate-transfers`,
+            },
+          },
+        ],
+      },
+    ],
   },
 });
 
@@ -122,7 +320,7 @@ export const getFaqSchema = () => ({
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'How do I book or request a quote with Elite Cars Australia?',
+      name: 'How do I book a luxury chauffeur or request a quote in Sydney or nationwide?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'You can book directly or request a quotation online at https://www.elitecarsaustralia.com.au/#booking, call our 24/7 concierge at +61 430 729 993, or message us directly via WhatsApp. We provide instant reservation confirmation and transparent pricing.',
@@ -130,10 +328,10 @@ export const getFaqSchema = () => ({
     },
     {
       '@type': 'Question',
-      name: 'Which cities across Australia does Elite Cars Australia service?',
+      name: 'Which Australian cities and airport terminals does Elite Cars Australia service?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We provide nationwide executive chauffeur services covering Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast, Canberra, Hobart, Darwin, and regional interstate routes throughout Australia.',
+        text: 'We provide nationwide executive chauffeur services covering Sydney (Kingsford Smith Airport SYD & Western Sydney International), Melbourne (Tullamarine MEL & Essendon), Brisbane (BNE), Perth (PER), Adelaide (ADL), Gold Coast (OOL), Canberra (CBR), Hobart (HBA), Darwin (DRW), and regional interstate routes throughout Australia.',
       },
     },
     {
@@ -146,7 +344,7 @@ export const getFaqSchema = () => ({
     },
     {
       '@type': 'Question',
-      name: 'Do you track flights for airport pickup transfers?',
+      name: 'Do you track commercial flights and private jets for airport transfers?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Yes. Our dispatch team monitors real-time commercial and private aviation flight radar. Even if your flight is delayed or lands early, your chauffeur will be positioned inside arrivals with an executive name tablet and assist with luggage.',
@@ -154,10 +352,34 @@ export const getFaqSchema = () => ({
     },
     {
       '@type': 'Question',
-      name: 'Do you provide corporate billing accounts and itemized invoices?',
+      name: 'Do you provide corporate billing accounts and itemized monthly invoices for Executive Assistants?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. We provide streamlined corporate accounts with 30-day billing, consolidated itemized tax invoices, EA priority dispatch bookings, and multi-city management for executive teams.',
+        text: 'Yes. We provide streamlined corporate accounts with 30-day billing, consolidated itemized tax invoices with cost-center coding, EA priority dispatch bookings, and multi-city management for executive teams.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does inside-terminal meet-and-greet work at Sydney, Melbourne, and Brisbane airports?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Your professional chauffeur waits inside the terminal at the arrival baggage carousel exit holding an executive digital name sign. You will also receive the chauffeur’s name, phone number, and vehicle registration ahead of landing.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can Elite Cars Australia provide child seats or booster seats?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Certified Australian Standard rear-facing, forward-facing child seats and booster seats can be installed prior to arrival upon request in your booking notes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you service private jet FBO facilities like ExecuJet and Jet Aviation in Australia?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. We service all private jet FBO hangars across Australia, including Jet Aviation and ExecuJet at Sydney Airport, Essendon Fields and Tullamarine FBO in Melbourne, and Brisbane Airport FBO, with ASIC-accredited drivers ready directly tarmac-side.',
       },
     },
   ],
@@ -201,7 +423,7 @@ export const getServiceSchema = ({
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Luxury Chauffeured Transport',
+    name: 'Executive Chauffeured Transport Services',
     itemListElement: [
       {
         '@type': 'Offer',
@@ -210,6 +432,8 @@ export const getServiceSchema = ({
           name,
           description,
         },
+        priceCurrency: 'AUD',
+        availability: 'https://schema.org/InStock',
       },
     ],
   },

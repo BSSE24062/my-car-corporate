@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './SydneySection.module.css';
 
 const destinationImages = [
@@ -15,59 +16,143 @@ const destinationImages = [
   },
   {
     id: 2,
-    titleKey: "sydney.airport_title",
-    descKey: "sydney.airport_desc",
-    desktopImg: "/Sydney/airport.jpg",
-    mobileImg: "/Sydney/mobile_sydney/airport.jpg"
+    titleKey: "sydney.melbourne_cbd_title",
+    descKey: "sydney.melbourne_cbd_desc",
+    desktopImg: "/Sydney/Australia/cbd_melbourne.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/cbd_melbourne.jpg"
   },
   {
     id: 3,
-    titleKey: "sydney.bondi_title",
-    descKey: "sydney.bondi_desc",
-    desktopImg: "/Sydney/bondi.jpg",
-    mobileImg: "/Sydney/mobile_sydney/bondi.jpg"
-  },
-  {
-    id: 4,
     titleKey: "sydney.harbour_title",
     descKey: "sydney.harbour_desc",
     desktopImg: "/Sydney/harbour.jpg",
     mobileImg: "/Sydney/mobile_sydney/harbour.jpg"
   },
   {
+    id: 4,
+    titleKey: "sydney.brisbane_title",
+    descKey: "sydney.brisbane_desc",
+    desktopImg: "/Sydney/Australia/brisbane.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/brisbane.jpg"
+  },
+  {
     id: 5,
-    titleKey: "sydney.seacliff_title",
-    descKey: "sydney.seacliff_desc",
-    desktopImg: "/Sydney/seacliff.jpg",
-    mobileImg: "/Sydney/mobile_sydney/seacliff.jpg"
+    titleKey: "sydney.bondi_title",
+    descKey: "sydney.bondi_desc",
+    desktopImg: "/Sydney/bondi.jpg",
+    mobileImg: "/Sydney/mobile_sydney/bondi.jpg"
   },
   {
     id: 6,
+    titleKey: "sydney.goldcoast_day_title",
+    descKey: "sydney.goldcoast_day_desc",
+    desktopImg: "/Sydney/Australia/gold_coast_day.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/gold_coast_day.jpg"
+  },
+  {
+    id: 7,
     titleKey: "sydney.botanic_title",
     descKey: "sydney.botanic_desc",
     desktopImg: "/Sydney/nearOpera.jpg",
     mobileImg: "/Sydney/mobile_sydney/nearOpera.jpg"
   },
   {
-    id: 7,
+    id: 8,
+    titleKey: "sydney.perth_skyline_title",
+    descKey: "sydney.perth_skyline_desc",
+    desktopImg: "/Sydney/Australia/perth1.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/perth1.jpg"
+  },
+  {
+    id: 9,
+    titleKey: "sydney.bluemountains_title",
+    descKey: "sydney.bluemountains_desc",
+    desktopImg: "/Sydney/Australia/bluemountains.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/bluemountains.jpg"
+  },
+  {
+    id: 10,
+    titleKey: "sydney.adelaide_city_title",
+    descKey: "sydney.adelaide_city_desc",
+    desktopImg: "/Sydney/Australia/adelaid1.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/adelaide1.jpg"
+  },
+  {
+    id: 11,
+    titleKey: "sydney.sydney_new_airport_title",
+    descKey: "sydney.sydney_new_airport_desc",
+    desktopImg: "/Sydney/Australia/western_syd_airport.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/western_syd_airport.jpg"
+  },
+  {
+    id: 12,
+    titleKey: "sydney.melbourne_night_title",
+    descKey: "sydney.melbourne_night_desc",
+    desktopImg: "/Sydney/Australia/melbourne_night.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/melbourne_night.jpg"
+  },
+  {
+    id: 13,
+    titleKey: "sydney.darwin_title",
+    descKey: "sydney.darwin_desc",
+    desktopImg: "/Sydney/Australia/darwin.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/darwin.jpg"
+  },
+  {
+    id: 14,
     titleKey: "sydney.clock_title",
     descKey: "sydney.clock_desc",
     desktopImg: "/Sydney/clockTower.jpg",
     mobileImg: "/Sydney/mobile_sydney/clockTower.jpg"
   },
   {
-    id: 8,
-    titleKey: "sydney.terminal_title",
-    descKey: "sydney.terminal_desc",
-    desktopImg: "/Sydney/sydneyAirport.jpg",
-    mobileImg: "/Sydney/mobile_sydney/sydneyAirport.jpg"
+    id: 15,
+    titleKey: "sydney.goldcoast_night_title",
+    descKey: "sydney.goldcoast_night_desc",
+    desktopImg: "/Sydney/Australia/gold_coast_night.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/gold_coast_night.jpg"
   },
   {
-    id: 9,
+    id: 16,
     titleKey: "sydney.darling_title",
     descKey: "sydney.darling_desc",
     desktopImg: "/Sydney/harbourSide.jpg",
     mobileImg: "/Sydney/mobile_sydney/harbourSide.jpg"
+  },
+  {
+    id: 17,
+    titleKey: "sydney.perth_coast_title",
+    descKey: "sydney.perth_coast_desc",
+    desktopImg: "/Sydney/Australia/perth2.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/perth2.jpg"
+  },
+  {
+    id: 18,
+    titleKey: "sydney.tasmania_title",
+    descKey: "sydney.tasmania_desc",
+    desktopImg: "/Sydney/Australia/tasmania.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/tasmania.jpg"
+  },
+  {
+    id: 19,
+    titleKey: "sydney.adelaide_hills_title",
+    descKey: "sydney.adelaide_hills_desc",
+    desktopImg: "/Sydney/Australia/adelaid2.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/adelaid2.jpg"
+  },
+  {
+    id: 20,
+    titleKey: "sydney.airport_title",
+    descKey: "sydney.airport_desc",
+    desktopImg: "/Sydney/Australia/syd_airport.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/syd_airport.jpg"
+  },
+  {
+    id: 21,
+    titleKey: "sydney.tasmania_coast_title",
+    descKey: "sydney.tasmania_coast_desc",
+    desktopImg: "/Sydney/Australia/tasmania2.jpg",
+    mobileImg: "/Sydney/Australia/mobile_australia/tasmania2.jpg"
   }
 ];
 
@@ -81,6 +166,14 @@ const SydneySection = () => {
     }, 5000); // 5 seconds per slide
     return () => clearInterval(interval);
   }, []);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + destinationImages.length) % destinationImages.length);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % destinationImages.length);
+  };
 
   return (
     <section id="sydney" className={styles.sydneySection}>
@@ -126,8 +219,8 @@ const SydneySection = () => {
                     style={{
                       left: `-${index * 100}%`,
                       width: `${8 * 100}%`,
-                      '--bg-desktop': `url(${destinationImages[currentIndex].desktopImg})`,
-                      '--bg-mobile': `url(${destinationImages[currentIndex].mobileImg})`,
+                      '--bg-desktop': `url("${destinationImages[currentIndex].desktopImg}")`,
+                      '--bg-mobile': `url("${destinationImages[currentIndex].mobileImg}")`,
                     } as React.CSSProperties}
                     animate={{
                       scale: [1.0, 1.05],
@@ -160,16 +253,54 @@ const SydneySection = () => {
               </motion.div>
             </AnimatePresence>
 
-            {/* Dots navigation */}
-            <div className={styles.dotsContainer}>
-              {destinationImages.map((_, idx) => (
-                <button
-                  key={idx}
-                  className={`${styles.dot} ${idx === currentIndex ? styles.activeDot : ''}`}
-                  onClick={() => setCurrentIndex(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
+            {/* Instagram-Style Carousel Pagination */}
+            <div className={styles.paginationWrapper}>
+              <button 
+                onClick={handlePrev}
+                className={styles.navArrowBtn}
+                aria-label="Previous destination"
+              >
+                <ChevronLeft size={16} />
+              </button>
+
+              <div className={styles.dotsViewport}>
+                <div 
+                  className={styles.dotsTrack}
+                  style={{
+                    transform: `translateX(${50 - (currentIndex * 13 + 11)}px)`
+                  }}
+                >
+                  {destinationImages.map((_, idx) => {
+                    const distance = Math.abs(idx - currentIndex);
+                    let dotClass = styles.dot;
+                    if (distance === 0) dotClass = `${styles.dot} ${styles.activeDot}`;
+                    else if (distance === 1) dotClass = `${styles.dot} ${styles.dotNear}`;
+                    else if (distance === 2) dotClass = `${styles.dot} ${styles.dotFar}`;
+                    else dotClass = `${styles.dot} ${styles.dotHidden}`;
+
+                    return (
+                      <button
+                        key={idx}
+                        className={dotClass}
+                        onClick={() => setCurrentIndex(idx)}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+
+              <button 
+                onClick={handleNext}
+                className={styles.navArrowBtn}
+                aria-label="Next destination"
+              >
+                <ChevronRight size={16} />
+              </button>
+
+              <span className={styles.slideCounter}>
+                {String(currentIndex + 1).padStart(2, '0')}&nbsp;/&nbsp;{String(destinationImages.length).padStart(2, '0')}
+              </span>
             </div>
           </div>
         </div>

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Globe, Menu, X, Sun, Moon } from 'lucide-react';
+import { Globe, Menu, X } from 'lucide-react';
 import styles from './Navbar.module.css';
 
 const languages = [
@@ -26,16 +26,6 @@ const Navbar = () => {
     i18n.changeLanguage(lng);
     setLangOpen(false);
   };
-
-  const [isLight, setIsLight] = useState(false);
-
-  useEffect(() => {
-    if (isLight) {
-      document.body.classList.add('light-theme');
-    } else {
-      document.body.classList.remove('light-theme');
-    }
-  }, [isLight]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     setMenuOpen(false);
@@ -70,9 +60,14 @@ const Navbar = () => {
       <a
         href="/"
         className={styles.logo}
-        aria-label="Back to home"
+        aria-label="Elite Cars Australia"
       >
-        <h1>Elite Cars Australia</h1>
+        <img 
+          src="/logo.png" 
+          alt="Elite Cars Australia" 
+          className={styles.logoImg}
+        />
+        <span className={styles.mobileBrandText}>Elite Cars Australia</span>
       </a>
 
       {/* Desktop & Mobile Menu */}
@@ -88,15 +83,6 @@ const Navbar = () => {
       </div>
 
       <div className={styles.actions}>
-        <button 
-          onClick={() => setIsLight(!isLight)} 
-          className={styles.langBtn} 
-          title="Toggle Theme"
-          aria-label="Toggle Light/Dark Theme"
-        >
-          {isLight ? <Moon size={18} /> : <Sun size={18} />}
-        </button>
-
         <div className={styles.langSelector}>
           <button onClick={() => setLangOpen(!langOpen)} className={styles.langBtn} aria-label="Select Language">
             <Globe size={18} />
