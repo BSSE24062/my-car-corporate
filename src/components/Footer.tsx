@@ -29,8 +29,9 @@ const Footer = () => {
                 alt="Elite Cars Australia" 
                 className={styles.footerLogoImg}
               />
-              <span className={styles.brandTagline}>{t('footer.tagline', 'Executive Chauffeur & Airport Transfers')}</span>
             </button>
+            
+            <span className={styles.brandTagline}>{t('footer.tagline', 'Executive Chauffeur & Airport Transfers')}</span>
             
             <p className={styles.brandDesc}>
               {t('footer.brand_desc', 'Executive chauffeur transportation across Australia — defined by discretion, flight monitoring, punctual drivers, and pristine fleet presentation.')}

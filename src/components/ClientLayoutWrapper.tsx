@@ -33,7 +33,7 @@ export default function ClientLayoutWrapper({
           (window as unknown as { __ELITE_LOADING_FINISHED__?: boolean }).__ELITE_LOADING_FINISHED__ = true;
           window.dispatchEvent(new Event('loading-finished'));
         }
-      }, 4500);
+      }, 2800);
       return () => clearTimeout(timer);
     } else {
       setShowVideoLoader(false);

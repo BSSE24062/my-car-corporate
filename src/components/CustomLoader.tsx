@@ -14,27 +14,55 @@ export default function CustomLoader({
 }: CustomLoaderProps) {
   return (
     <div className={styles.loaderWrapper} role="status" aria-live="polite">
+      {/* Background ambient radial glow */}
+      <div className={styles.glowAura} />
+      
       <div className={styles.spinnerContainer}>
-        <div className={styles.ring}></div>
-        <div className={styles.innerRing}></div>
+        {/* Outer glowing orbital track with satellite beacon */}
+        <div className={styles.orbitRingOuter}>
+          <span className={styles.orbitSatellite} />
+        </div>
+
+        {/* Middle counter-rotating dashed precision ring */}
+        <div className={styles.orbitRingMiddle} />
+
+        {/* Inner shimmering ring */}
+        <div className={styles.orbitRingInner} />
+
+        {/* Cardinal micro-gold diamonds */}
+        <div className={styles.cardinalMarks}>
+          <span className={styles.markNorth} />
+          <span className={styles.markSouth} />
+          <span className={styles.markEast} />
+          <span className={styles.markWest} />
+        </div>
+
+        {/* Central Logo with backlight halo */}
+        <div className={styles.logoBacklight} />
         <img 
           src="/logo.png" 
           alt="Elite Cars Australia" 
           className={styles.centerLogo}
           onError={(e) => {
-            // fallback if logo.png isn't accessible
             (e.target as HTMLElement).style.display = 'none';
           }} 
         />
       </div>
 
+      {/* Brand Text Section */}
       <div className={styles.brandText}>
-        <span className={styles.brandTitle}>{label}</span>
+        <span className={styles.brandBadge}>✦ LUXURY CHAUFFEUR ✦</span>
+        <h2 className={styles.brandTitle}>{label}</h2>
         <span className={styles.brandSubtitle}>{subtitle}</span>
+        
+        {/* High-tech glassmorphic progress bar */}
         <div className={styles.shimmerBar}>
-          <div className={styles.shimmerProgress}></div>
+          <div className={styles.shimmerProgress}>
+            <span className={styles.progressGlow} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
+

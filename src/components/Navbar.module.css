@@ -222,23 +222,23 @@
 
 @media (max-width: 968px) {
   .navbar {
-    height: 84px;
-    padding: 0 4%;
+    height: 88px;
+    padding: 0 3.5%;
   }
   .logo {
     margin-left: 2px;
-    gap: 8px;
+    gap: 10px;
   }
   .logoImg {
-    height: 56px;
+    height: 72px;
     width: auto;
-    max-width: 58px;
+    max-width: 76px;
     flex-shrink: 0;
   }
   .mobileBrandText {
     display: inline-block;
     font-family: 'Playfair Display', serif;
-    font-size: 1.28rem;
+    font-size: 1.3rem;
     font-weight: 800;
     letter-spacing: 0.4px;
     color: var(--text-color);
@@ -249,7 +249,7 @@
 
   .navLinks {
     position: absolute;
-    top: 84px;
+    top: 88px;
     left: 0;
     width: 100%;
     flex-direction: column;
@@ -291,12 +291,18 @@
 }
 
 @media (max-width: 480px) {
+  .navbar {
+    height: 84px;
+  }
+  .navLinks {
+    top: 84px;
+  }
   .logoImg {
-    height: 48px;
-    max-width: 50px;
+    height: 64px;
+    max-width: 68px;
   }
   .mobileBrandText {
-    font-size: 1.16rem;
+    font-size: 1.18rem;
     letter-spacing: 0.3px;
   }
   .actions {
@@ -308,12 +314,18 @@
 }
 
 @media (max-width: 375px) {
+  .navbar {
+    height: 80px;
+  }
+  .navLinks {
+    top: 80px;
+  }
   .logoImg {
-    height: 42px;
-    max-width: 44px;
+    height: 56px;
+    max-width: 60px;
   }
   .mobileBrandText {
-    font-size: 1.04rem;
+    font-size: 1.06rem;
     letter-spacing: 0.2px;
   }
   .actions {

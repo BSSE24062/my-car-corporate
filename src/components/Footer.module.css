@@ -47,7 +47,7 @@
 .brandCol {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
 }
 
 .brandLogo {
@@ -56,17 +56,16 @@
   padding: 0;
   cursor: pointer;
   text-align: left;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  display: block;
+  margin-top: -45px;
+  margin-bottom: 0;
   transition: opacity 0.2s ease;
 }
 
 .footerLogoImg {
-  height: 118px;
+  height: 160px;
   width: auto;
-  max-width: 380px;
+  max-width: 480px;
   object-fit: contain;
   object-position: left center;
   display: block;
@@ -79,12 +78,14 @@
 }
 
 .brandTagline {
-  display: inline-block;
-  font-size: 0.75rem;
-  letter-spacing: 2.5px;
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 2.2px;
   text-transform: uppercase;
   color: #c9a86a;
   font-weight: 600;
+  margin-top: 12px;
+  margin-bottom: 14px;
 }
 
 .brandDesc {
@@ -92,13 +93,14 @@
   line-height: 1.7;
   color: var(--text-muted);
   max-width: 380px;
+  margin: 0 0 20px 0;
 }
 
 /* Social icons */
 .socialRow {
   display: flex;
   gap: 12px;
-  margin-top: 4px;
+  margin-top: 0;
 }
 
 .socialBtn {
@@ -283,9 +285,22 @@
     gap: 36px;
   }
 
+  .brandLogo {
+    margin-top: -26px;
+  }
+
   .footerLogoImg {
-    height: 88px;
-    max-width: 300px;
+    height: 125px;
+    max-width: 360px;
+  }
+
+  .brandTagline {
+    margin-top: 10px;
+    margin-bottom: 12px;
+  }
+
+  .brandDesc {
+    margin-bottom: 16px;
   }
 
   .bottomBar {
