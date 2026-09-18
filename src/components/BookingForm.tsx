@@ -204,7 +204,7 @@ const BookingForm = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="e.g. Zakkiullah Baig"
+                    placeholder={t('form.name_placeholder', 'Please enter your name.')}
                     required
                   />
                 </div>
