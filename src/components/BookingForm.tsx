@@ -26,6 +26,8 @@ const BookingForm = () => {
   // Google Maps Resolved Places & Route State
   const [pickupPlace, setPickupPlace] = useState<ResolvedPlace | null>(null);
   const [dropoffPlace, setDropoffPlace] = useState<ResolvedPlace | null>(null);
+  const pickupPlaceRef = useRef<ResolvedPlace | null>(null);
+  const dropoffPlaceRef = useRef<ResolvedPlace | null>(null);
   const [routeData, setRouteData] = useState<ComputedRouteData | null>(null);
   const [isCalculatingRoute, setIsCalculatingRoute] = useState(false);
   const [routeError, setRouteError] = useState<string | null>(null);
@@ -115,19 +117,24 @@ const BookingForm = () => {
   };
 
   const handlePickupPlaceChange = (place: ResolvedPlace | null) => {
+    pickupPlaceRef.current = place;
     setPickupPlace(place);
-    void updateRouteBetween(place, dropoffPlace);
+    void updateRouteBetween(place, dropoffPlaceRef.current);
   };
 
   const handleDropoffPlaceChange = (place: ResolvedPlace | null) => {
+    dropoffPlaceRef.current = place;
     setDropoffPlace(place);
-    void updateRouteBetween(pickupPlace, place);
+    void updateRouteBetween(pickupPlaceRef.current, place);
   };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+    if (status && status.startsWith('success_')) {
+      setStatus(null);
+    }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -214,6 +221,8 @@ const BookingForm = () => {
       if (response.ok) {
         setStatus(type === 'booking' ? 'success_booking' : 'success_quote');
         routeSeqRef.current += 1;
+        pickupPlaceRef.current = null;
+        dropoffPlaceRef.current = null;
         setPickupPlace(null);
         setDropoffPlace(null);
         setRouteData(null);

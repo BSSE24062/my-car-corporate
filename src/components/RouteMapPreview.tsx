@@ -30,11 +30,25 @@ const RouteMapPreview: React.FC<RouteMapPreviewProps> = ({
   errorMessage,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapElementRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<GoogleMapInstance | null>(null);
   const overlaysRef = useRef<Array<GoogleMarkerInstance | GooglePolylineInstance>>([]);
 
   useEffect(() => {
-    if (!routeData || !mapContainerRef.current) return;
+    if (!routeData) {
+      for (const item of overlaysRef.current) {
+        item.setMap(null);
+      }
+      overlaysRef.current = [];
+      if (!mapContainerRef.current) {
+        mapInstanceRef.current = null;
+        mapElementRef.current = null;
+      }
+      return;
+    }
+
+    const containerEl = mapContainerRef.current;
+    if (!containerEl) return;
 
     let cancelled = false;
 
@@ -45,10 +59,13 @@ const RouteMapPreview: React.FC<RouteMapPreviewProps> = ({
 
         const mapsLib = (await mapsNamespace.importLibrary('maps')) as MapsLibrary;
         const coreLib = (await mapsNamespace.importLibrary('core')) as CoreLibrary;
-        if (cancelled || !mapContainerRef.current) return;
+        const currentEl = mapContainerRef.current;
+        if (cancelled || !currentEl) return;
 
-        if (!mapInstanceRef.current) {
-          mapInstanceRef.current = new mapsLib.Map(mapContainerRef.current, {
+        // Re-initialize Google Map whenever the underlying DOM container was remounted
+        // (e.g. on a 2nd booking/quote in the same session or after clearing locations)
+        if (!mapInstanceRef.current || mapElementRef.current !== currentEl) {
+          mapInstanceRef.current = new mapsLib.Map(currentEl, {
             center: routeData.pickupCoords,
             zoom: 12,
             disableDefaultUI: true,
@@ -59,6 +76,7 @@ const RouteMapPreview: React.FC<RouteMapPreviewProps> = ({
             gestureHandling: 'cooperative',
             styles: LUXURY_DARK_MAP_STYLES,
           });
+          mapElementRef.current = currentEl;
         }
 
         const map = mapInstanceRef.current;
