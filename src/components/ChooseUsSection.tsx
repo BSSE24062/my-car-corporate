@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Clock, Shield, Award, Car } from 'lucide-react';
+import { cldUrl } from '@/lib/cloudinary';
 import styles from './ChooseUsSection.module.css';
 
 const ChooseUsSection = () => {
@@ -82,7 +83,15 @@ const ChooseUsSection = () => {
 
               {/* Image at the front face (z = 24px) with glassy border and glare */}
               <div className={styles.imageWrapper}>
-                <img src="/chooseUS.jpg" alt="Why Choose Us" className={styles.mainImage} />
+                <img
+                  src={cldUrl('/chooseUS.jpg', { width: 828 })}
+                  srcSet={`${cldUrl('/chooseUS.jpg', { width: 640 })} 640w, ${cldUrl('/chooseUS.jpg', { width: 828 })} 828w, ${cldUrl('/chooseUS.jpg', { width: 1080 })} 1080w`}
+                  sizes="(max-width: 768px) 92vw, 45vw"
+                  alt="Why Choose Us"
+                  className={styles.mainImage}
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className={styles.glassOverlay} />
                 <div className={styles.reflection} />
               </div>

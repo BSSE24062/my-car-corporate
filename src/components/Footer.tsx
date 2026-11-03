@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Phone, Mail, MapPin, ChevronRight } from 'lucide-react';
+import { cldUrl } from '@/lib/cloudinary';
 import styles from './Footer.module.css';
 
 const Footer = () => {
@@ -25,9 +26,11 @@ const Footer = () => {
           <div className={styles.brandCol}>
             <button onClick={scrollToTop} className={styles.brandLogo} aria-label="Elite Cars Australia - Back to top">
               <img 
-                src="/logo.png" 
+                src={cldUrl('/logo.png', { width: 256 })} 
                 alt="Elite Cars Australia" 
                 className={styles.footerLogoImg}
+                loading="lazy"
+                decoding="async"
               />
             </button>
             

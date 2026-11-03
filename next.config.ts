@@ -7,7 +7,26 @@ const nextConfig: NextConfig = {
   // Enable gzip compression for better Core Web Vitals
   compress: true,
 
-  // SEO & security headers applied to all routes
+  // Image CDN & modern AVIF/WebP optimization settings (Next.js 16)
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    qualities: [75, 85],
+    minimumCacheTTL: 2678400, // 31 days cache TTL
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'maps.googleapis.com',
+        pathname: '/maps/api/staticmap/**',
+      },
+    ],
+  },
+
+  // SEO, caching & security headers applied to all routes
   async headers() {
     return [
       {
@@ -28,6 +47,16 @@ const nextConfig: NextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
+      // Long-lived browser & CDN caching for static assets if fallback is used
+      {
+        source: '/:all*(svg|jpg|jpeg|png|webp|avif|ico)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

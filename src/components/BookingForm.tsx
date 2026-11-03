@@ -1,8 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mail, Phone, Calendar, Calculator, CheckCircle, Clock, MapPin, Users, Briefcase, Car, Plane, ArrowRight } from 'lucide-react';
+import { Mail, Phone, Calendar, Calculator } from 'lucide-react';
+import LocationAutocompleteInput from './LocationAutocompleteInput';
+import RouteMapPreview from './RouteMapPreview';
+import {
+  ComputedRouteData,
+  ResolvedPlace,
+  RouteSummaryPayload,
+  buildGoogleMapsDirectionsUrl,
+  calculateDrivingRoute,
+  computeEtaDisplay,
+  geocodeAustralianAddress,
+  isGoogleMapsConfigured,
+} from '@/lib/google-maps';
 import styles from './BookingForm.module.css';
 
 const BookingForm = () => {
@@ -10,6 +22,15 @@ const BookingForm = () => {
   const [requestType, setRequestType] = useState<'booking' | 'quote'>('booking');
   const [status, setStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Google Maps Resolved Places & Route State
+  const [pickupPlace, setPickupPlace] = useState<ResolvedPlace | null>(null);
+  const [dropoffPlace, setDropoffPlace] = useState<ResolvedPlace | null>(null);
+  const [routeData, setRouteData] = useState<ComputedRouteData | null>(null);
+  const [isCalculatingRoute, setIsCalculatingRoute] = useState(false);
+  const [routeError, setRouteError] = useState<string | null>(null);
+  const routeSeqRef = useRef(0);
+  const formRef = useRef<HTMLFormElement>(null);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -25,7 +46,7 @@ const BookingForm = () => {
     passengerCount: '1',
     luggageCount: '1-2 Bags',
     vehiclePreference: 'Mercedes-Benz S-Class',
-    details: ''
+    details: '',
   });
 
   // Listen for custom dispatch events to pre-fill or switch modes from other sections
@@ -38,13 +59,13 @@ const BookingForm = () => {
 
     const handleServiceChange = (e: CustomEvent) => {
       if (e.detail) {
-        setFormData(prev => ({ ...prev, serviceType: e.detail }));
+        setFormData((prev) => ({ ...prev, serviceType: e.detail }));
       }
     };
 
     const handleVehicleChange = (e: CustomEvent) => {
       if (e.detail) {
-        setFormData(prev => ({ ...prev, vehiclePreference: e.detail }));
+        setFormData((prev) => ({ ...prev, vehiclePreference: e.detail }));
       }
     };
 
@@ -59,18 +80,127 @@ const BookingForm = () => {
     };
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const updateRouteBetween = async (
+    nextPickup: ResolvedPlace | null,
+    nextDropoff: ResolvedPlace | null
+  ) => {
+    const seq = ++routeSeqRef.current;
+
+    if (!nextPickup || !nextDropoff) {
+      setRouteData(null);
+      setRouteError(null);
+      setIsCalculatingRoute(false);
+      return;
+    }
+
+    setIsCalculatingRoute(true);
+    setRouteError(null);
+
+    try {
+      const computed = await calculateDrivingRoute(nextPickup, nextDropoff);
+      if (seq !== routeSeqRef.current) return;
+      setRouteData(computed);
+    } catch {
+      if (seq === routeSeqRef.current) {
+        setRouteData(null);
+        setRouteError(
+          'Unable to preview driving route between these two points. Your selected addresses will still be sent with your request.'
+        );
+      }
+    } finally {
+      if (seq === routeSeqRef.current) {
+        setIsCalculatingRoute(false);
+      }
+    }
   };
 
+  const handlePickupPlaceChange = (place: ResolvedPlace | null) => {
+    setPickupPlace(place);
+    void updateRouteBetween(place, dropoffPlace);
+  };
+
+  const handleDropoffPlaceChange = (place: ResolvedPlace | null) => {
+    setDropoffPlace(place);
+    void updateRouteBetween(pickupPlace, place);
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const etaInfo = routeData
+    ? computeEtaDisplay(routeData.durationSeconds, formData.date, formData.pickupTime)
+    : null;
+
   const submitWithMode = async (type: 'booking' | 'quote') => {
+    if (formRef.current && !formRef.current.reportValidity()) {
+      return;
+    }
+
+    if (!formData.name.trim() || !formData.contactNumber.trim() || !formData.email.trim()) {
+      setStatus('error: Please fill in your Full Name, Contact Number, and Email Address.');
+      return;
+    }
+
+    if (!formData.pickupLocation.trim() || !formData.dropoffLocation.trim()) {
+      setStatus('error: Please select both a Pickup Location and a Drop-off Location.');
+      return;
+    }
+
     setIsLoading(true);
-    setStatus("sending");
+    setStatus('sending');
+
+    // Ensure route data is resolved even if the user typed manually and clicked submit immediately
+    let finalRoute = routeData;
+    if (!finalRoute && isGoogleMapsConfigured()) {
+      try {
+        const resolvedOrigin =
+          pickupPlace || (await geocodeAustralianAddress(formData.pickupLocation));
+        const resolvedDest =
+          dropoffPlace || (await geocodeAustralianAddress(formData.dropoffLocation));
+        if (resolvedOrigin && resolvedDest) {
+          finalRoute = await calculateDrivingRoute(resolvedOrigin, resolvedDest);
+          setRouteData(finalRoute);
+        }
+      } catch {
+        // Proceed cleanly with text addresses if live route lookup is unavailable
+      }
+    }
+
+    const finalEta = finalRoute
+      ? computeEtaDisplay(finalRoute.durationSeconds, formData.date, formData.pickupTime)
+      : null;
+
+    const routePayload: RouteSummaryPayload | undefined = finalRoute
+      ? {
+          distanceText: finalRoute.distanceText,
+          durationText: finalRoute.durationText,
+          etaText: finalEta?.etaFullText || '',
+          pickupCoords: finalRoute.pickupCoords,
+          dropoffCoords: finalRoute.dropoffCoords,
+          encodedPolyline: finalRoute.encodedPolyline,
+          googleMapsUrl: finalRoute.googleMapsUrl,
+        }
+      : {
+          distanceText: '',
+          durationText: '',
+          etaText: '',
+          pickupCoords: pickupPlace?.coords || { lat: 0, lng: 0 },
+          dropoffCoords: dropoffPlace?.coords || { lat: 0, lng: 0 },
+          encodedPolyline: '',
+          googleMapsUrl: buildGoogleMapsDirectionsUrl(
+            formData.pickupLocation,
+            formData.dropoffLocation
+          ),
+        };
 
     const payload = {
       ...formData,
-      requestType: type
+      requestType: type,
+      routeInfo: routePayload,
     };
 
     try {
@@ -80,9 +210,14 @@ const BookingForm = () => {
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
+      const data = (await response.json()) as { error?: string };
       if (response.ok) {
         setStatus(type === 'booking' ? 'success_booking' : 'success_quote');
+        routeSeqRef.current += 1;
+        setPickupPlace(null);
+        setDropoffPlace(null);
+        setRouteData(null);
+        setRouteError(null);
         setFormData({
           name: '',
           contactNumber: '',
@@ -96,13 +231,13 @@ const BookingForm = () => {
           passengerCount: '1',
           luggageCount: '1-2 Bags',
           vehiclePreference: 'Mercedes-Benz S-Class',
-          details: ''
+          details: '',
         });
       } else {
         setStatus(`error: ${data.error || 'Failed to submit request'}`);
       }
-    } catch (err) {
-      setStatus("error: Network error. Please check your connection and try again.");
+    } catch {
+      setStatus('error: Network error. Please check your connection and try again.');
     } finally {
       setIsLoading(false);
     }
@@ -110,20 +245,24 @@ const BookingForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    submitWithMode(requestType);
+    void submitWithMode(requestType);
   };
 
   return (
     <section id="booking" className={styles.bookingSection}>
       <div className={styles.container}>
         <div className={styles.splitLayout}>
-
           {/* Left Column: Contact & Concierge Card */}
           <div className={styles.contactCard}>
             <div className={styles.contactCardHeader}>
               <span className={styles.badge}>{t('contact.badge', 'Direct Concierge')}</span>
               <h2>{t('contact.title', 'Contact Details')}</h2>
-              <p>{t('contact.desc', 'For urgent transfers, corporate billing accounts, or direct dispatch support, contact our team via phone, email, or WhatsApp 24/7.')}</p>
+              <p>
+                {t(
+                  'contact.desc',
+                  'For urgent transfers, corporate billing accounts, or direct dispatch support, contact our team via phone, email, or WhatsApp 24/7.'
+                )}
+              </p>
             </div>
 
             <div className={styles.contactInfo}>
@@ -154,13 +293,23 @@ const BookingForm = () => {
                 className={`${styles.infoRow} ${styles.whatsAppRow}`}
               >
                 <div className={`${styles.iconCircle} ${styles.whatsAppCircle}`}>
-                  <svg className={styles.whatsAppIcon} viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <svg
+                    className={styles.whatsAppIcon}
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    fill="currentColor"
+                  >
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.385 5.39 0 12.007 0c3.202.001 6.212 1.248 8.477 3.517 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.617-5.39 12.003-12.007 12.003-2.001-.001-3.97-.502-5.716-1.464L0 24zm6.002-4.058c1.656.982 3.284 1.498 4.884 1.5l.583-.002c5.386 0 9.77-4.381 9.773-9.764.001-2.607-1.009-5.06-2.845-6.898C16.619 2.943 14.162 1.932 11.55 1.931c-5.385 0-9.768 4.382-9.772 9.765-.001 1.768.487 3.494 1.414 5.014l-.234-.528L1.933 21.07l5.055-1.32c-.31.18-.62.292-.929.192zm11.238-6.16c-.279-.14-1.647-.812-1.902-.903-.255-.094-.442-.14-.627.14-.185.281-.716.903-.878 1.09-.162.186-.324.21-.603.07-.279-.14-1.18-.435-2.247-1.385-.83-.74-1.39-1.653-1.553-1.933-.162-.28-.017-.431.122-.571.125-.125.279-.328.42-.492.14-.164.185-.28.278-.468.093-.188.046-.352-.023-.492-.069-.14-.627-1.511-.86-2.072-.227-.546-.456-.472-.627-.48l-.534-.01c-.185 0-.486.07-.74.352-.254.281-.971.95-1.001 2.327-.03 1.377.971 2.705 1.11 2.893.14.188 1.97 3.01 4.773 4.22.667.288 1.188.46 1.594.59.67.213 1.28.183 1.762.11.537-.08 1.647-.672 1.88-1.32.233-.648.233-1.203.162-1.32-.07-.118-.255-.188-.534-.328z" />
                   </svg>
                 </div>
                 <div className={styles.infoDetails}>
-                  <span className={styles.infoLabel}>{t('contact.whatsapp_us', 'WhatsApp Concierge')}</span>
-                  <span className={styles.infoValue}>{t('contact.chat_now', 'Chat Instantly')}</span>
+                  <span className={styles.infoLabel}>
+                    {t('contact.whatsapp_us', 'WhatsApp Concierge')}
+                  </span>
+                  <span className={styles.infoValue}>
+                    {t('contact.chat_now', 'Chat Instantly')}
+                  </span>
                 </div>
               </a>
             </div>
@@ -169,8 +318,17 @@ const BookingForm = () => {
           {/* Right Column: Advanced Booking & Quote Form */}
           <div className={styles.formWrapper}>
             <div className={styles.formHeader}>
-              <h2>{requestType === 'quote' ? 'Request a Chauffeur Quote' : t('booking.title', 'Book Your Ride')}</h2>
-              <p>{t('booking.subtitle', 'Reserve your chauffeur or receive a detailed quotation within minutes.')}</p>
+              <h2>
+                {requestType === 'quote'
+                  ? 'Request a Chauffeur Quote'
+                  : t('booking.title', 'Book Your Ride')}
+              </h2>
+              <p>
+                {t(
+                  'booking.subtitle',
+                  'Reserve your chauffeur or receive a detailed quotation within minutes.'
+                )}
+              </p>
             </div>
 
             {/* Mode Switcher Tabs */}
@@ -193,8 +351,7 @@ const BookingForm = () => {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className={styles.form}>
-
+            <form ref={formRef} onSubmit={handleSubmit} className={styles.form}>
               {/* Row 1: Full Name & Contact Number */}
               <div className={styles.row}>
                 <div className={styles.inputGroup}>
@@ -230,7 +387,7 @@ const BookingForm = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="name@gmail.com"
+                    placeholder="name@company.com.au"
                     required
                   />
                 </div>
@@ -243,44 +400,75 @@ const BookingForm = () => {
                     required
                   >
                     <option value="airport">{t('form.airport', 'Airport Transfer')}</option>
-                    <option value="corporate">{t('form.corporate', 'Corporate Account / Executive Travel')}</option>
-                    <option value="hourly">{t('form.hourly', 'As-Directed Chauffeur Hire (Hourly)')}</option>
+                    <option value="corporate">
+                      {t('form.corporate', 'Corporate Account / Executive Travel')}
+                    </option>
+                    <option value="hourly">
+                      {t('form.hourly', 'As-Directed Chauffeur Hire (Hourly)')}
+                    </option>
                     <option value="roadshow">{t('form.roadshow', 'Executive Roadshow')}</option>
                     <option value="events">{t('form.events', 'Conferences & Events')}</option>
                     <option value="wedding">{t('form.wedding', 'Wedding Transport')}</option>
-                    <option value="private_aviation">{t('form.private_aviation', 'Private Aviation / FBO Transfer')}</option>
-                    <option value="interstate">{t('form.interstate', 'Interstate / Regional Transfer')}</option>
+                    <option value="private_aviation">
+                      {t('form.private_aviation', 'Private Aviation / FBO Transfer')}
+                    </option>
+                    <option value="interstate">
+                      {t('form.interstate', 'Interstate / Regional Transfer')}
+                    </option>
                     <option value="one_day">{t('form.one_day', 'Custom Day Tour')}</option>
                     <option value="other">{t('form.other', 'Other Private Transfer')}</option>
                   </select>
                 </div>
               </div>
 
-              {/* Row 3: Pickup Location & Drop-off Location */}
+              {/* Row 3: Pickup Location & Drop-off Location (Google Maps Autocomplete) */}
               <div className={styles.row}>
                 <div className={styles.inputGroup}>
                   <label>{t('form.pickup_location', 'Pickup Location')} *</label>
-                  <input
-                    type="text"
+                  <LocationAutocompleteInput
                     name="pickupLocation"
+                    variant="pickup"
                     value={formData.pickupLocation}
-                    onChange={handleChange}
-                    placeholder={t('form.pickup_placeholder', 'Address, Airport Terminal, or Hotel')}
+                    resolvedPlace={pickupPlace}
+                    placeholder={t(
+                      'form.pickup_placeholder',
+                      'Search Australian address, airport, or hotel'
+                    )}
                     required
+                    onValueChange={(val) =>
+                      setFormData((prev) => ({ ...prev, pickupLocation: val }))
+                    }
+                    onPlaceResolved={handlePickupPlaceChange}
                   />
                 </div>
                 <div className={styles.inputGroup}>
                   <label>{t('form.dropoff_location', 'Drop-off Location')} *</label>
-                  <input
-                    type="text"
+                  <LocationAutocompleteInput
                     name="dropoffLocation"
+                    variant="dropoff"
                     value={formData.dropoffLocation}
-                    onChange={handleChange}
-                    placeholder={t('form.dropoff_placeholder', 'Destination Address or Region')}
+                    resolvedPlace={dropoffPlace}
+                    placeholder={t(
+                      'form.dropoff_placeholder',
+                      'Search destination address or venue'
+                    )}
                     required
+                    onValueChange={(val) =>
+                      setFormData((prev) => ({ ...prev, dropoffLocation: val }))
+                    }
+                    onPlaceResolved={handleDropoffPlaceChange}
                   />
                 </div>
               </div>
+
+              {/* Live Google Maps Route Visual, Distance, Travel Time & ETA */}
+              <RouteMapPreview
+                routeData={routeData}
+                etaTime={etaInfo?.etaTime || '--'}
+                etaSubtitle={etaInfo?.etaSubtitle || ''}
+                isCalculating={isCalculatingRoute}
+                errorMessage={routeError}
+              />
 
               {/* Row 4: Date & Pickup Time */}
               <div className={styles.row}>
@@ -325,15 +513,29 @@ const BookingForm = () => {
                     value={formData.vehiclePreference}
                     onChange={handleChange}
                   >
-                    <option value="Mercedes-Benz S-Class">Mercedes-Benz S-Class (3 Pax · 2 Large Bags + 2 Carry-ons)</option>
-                    <option value="Mercedes Maybach">Mercedes Maybach (3 Pax · 2 Large Bags + 2 Carry-ons)</option>
-                    <option value="BMW 7 Series">BMW 7 Series (3 Pax · 2 Large Bags + 2 Carry-ons)</option>
-                    <option value="Mercedes-Benz GLS">Mercedes-Benz GLS (4–6 Pax · 4 Large Bags + Carry-ons)</option>
+                    <option value="Mercedes-Benz S-Class">
+                      Mercedes-Benz S-Class (3 Pax · 2 Large Bags + 2 Carry-ons)
+                    </option>
+                    <option value="Mercedes Maybach">
+                      Mercedes Maybach (3 Pax · 2 Large Bags + 2 Carry-ons)
+                    </option>
+                    <option value="BMW 7 Series">
+                      BMW 7 Series (3 Pax · 2 Large Bags + 2 Carry-ons)
+                    </option>
+                    <option value="Mercedes-Benz GLS">
+                      Mercedes-Benz GLS (4–6 Pax · 4 Large Bags + Carry-ons)
+                    </option>
                     <option value="BMW X7">BMW X7 (4–6 Pax · 4 Large Bags + Carry-ons)</option>
                     <option value="Audi Q7">Audi Q7 (4 Pax · 4 Large Bags + Carry-ons)</option>
-                    <option value="Mercedes-Benz V-Class">Mercedes-Benz V-Class (Up to 7 Pax · 7 Bags)</option>
-                    <option value="Mercedes Sprinter">Mercedes Sprinter (Up to 11–14 Pax · 12+ Bags)</option>
-                    <option value="Best Available / No Preference">{t('form.vehicle_any', 'Best Available / No Preference')}</option>
+                    <option value="Mercedes-Benz V-Class">
+                      Mercedes-Benz V-Class (Up to 7 Pax · 7 Bags)
+                    </option>
+                    <option value="Mercedes Sprinter">
+                      Mercedes Sprinter (Up to 11–14 Pax · 12+ Bags)
+                    </option>
+                    <option value="Best Available / No Preference">
+                      {t('form.vehicle_any', 'Best Available / No Preference')}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -380,7 +582,10 @@ const BookingForm = () => {
                   name="details"
                   value={formData.details}
                   onChange={handleChange}
-                  placeholder={t('form.details', 'Special requests, child seats, multiple stops, or billing notes...')}
+                  placeholder={t(
+                    'form.details',
+                    'Special requests, child seats, multiple stops, or billing notes...'
+                  )}
                   rows={3}
                 />
               </div>
@@ -389,33 +594,59 @@ const BookingForm = () => {
               <div className={styles.actionsRow}>
                 <button
                   type="button"
-                  className={requestType === 'booking' ? styles.submitBtnPrimary : styles.submitBtnSecondary}
+                  className={
+                    requestType === 'booking' ? styles.submitBtnPrimary : styles.submitBtnSecondary
+                  }
                   disabled={isLoading}
-                  onClick={() => submitWithMode('booking')}
+                  onClick={() => {
+                    setRequestType('booking');
+                    void submitWithMode('booking');
+                  }}
                 >
                   <Calendar size={17} />
-                  <span>{isLoading && requestType === 'booking' ? t('form.sending_status', 'Processing...') : t('form.submit', 'Book Now')}</span>
+                  <span>
+                    {isLoading && requestType === 'booking'
+                      ? t('form.sending_status', 'Processing...')
+                      : t('form.submit', 'Book Now')}
+                  </span>
                 </button>
 
                 <button
                   type="button"
-                  className={requestType === 'quote' ? styles.submitBtnPrimary : styles.submitBtnSecondary}
+                  className={
+                    requestType === 'quote' ? styles.submitBtnPrimary : styles.submitBtnSecondary
+                  }
                   disabled={isLoading}
-                  onClick={() => submitWithMode('quote')}
+                  onClick={() => {
+                    setRequestType('quote');
+                    void submitWithMode('quote');
+                  }}
                 >
                   <Calculator size={17} />
-                  <span>{isLoading && requestType === 'quote' ? t('form.sending_status', 'Processing...') : t('form.submit_quote', 'Get a Quote')}</span>
+                  <span>
+                    {isLoading && requestType === 'quote'
+                      ? t('form.sending_status', 'Processing...')
+                      : t('form.submit_quote', 'Get a Quote')}
+                  </span>
                 </button>
               </div>
 
               {status === 'success_booking' && (
                 <p className={styles.statusMsg}>
-                  ✓ {t('form.success_booking', 'Booking request submitted successfully! Our dispatch team will confirm your reservation shortly.')}
+                  ✓{' '}
+                  {t(
+                    'form.success_booking',
+                    'Booking request submitted successfully! Our dispatch team will confirm your reservation shortly.'
+                  )}
                 </p>
               )}
               {status === 'success_quote' && (
                 <p className={styles.statusMsg}>
-                  ✓ {t('form.success_quote', 'Quote request submitted successfully! We will email you a tailored quote shortly.')}
+                  ✓{' '}
+                  {t(
+                    'form.success_quote',
+                    'Quote request submitted successfully! We will email you a tailored quote shortly.'
+                  )}
                 </p>
               )}
               {status === 'sending' && (

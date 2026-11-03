@@ -2,8 +2,9 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { MessageSquare, X, Send } from 'lucide-react';
+import { X, Send } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { cldUrl } from '@/lib/cloudinary';
 import styles from './AIAssistant.module.css';
 
 interface Message {
@@ -22,6 +23,8 @@ const AIAssistant = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const avatarSrc = cldUrl('/AI-agent.jpg', { width: 128 });
 
   // Welcome message only appears once on the main landing page ('/')
   useEffect(() => {
@@ -101,7 +104,7 @@ const AIAssistant = () => {
           return next;
         });
       }
-    } catch (error) {
+    } catch {
       setIsLoading(false);
       setMessages(prev => [
         ...prev,
@@ -117,7 +120,7 @@ const AIAssistant = () => {
           <div className={styles.header}>
             <div className={styles.headerInfo}>
               <div className={styles.avatar}>
-                <img src="/AI-agent.jpg" alt="AI Agent" className={styles.avatarImage} />
+                <img src={avatarSrc} alt="AI Agent" className={styles.avatarImage} loading="lazy" decoding="async" />
               </div>
               <h4>{t('form.chat_header', 'Concierge')}</h4>
             </div>
@@ -150,7 +153,7 @@ const AIAssistant = () => {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder={t('form.input_placeholder', 'Type your message...')}
             />
             <button onClick={handleSend} disabled={isLoading || !input.trim()}>
@@ -177,7 +180,7 @@ const AIAssistant = () => {
             </div>
           )}
           <button className={styles.fab} onClick={handleOpenChat} aria-label="Open AI Concierge">
-            <img src="/AI-agent.jpg" alt="AI Agent" className={styles.fabImage} />
+            <img src={avatarSrc} alt="AI Agent" className={styles.fabImage} loading="lazy" decoding="async" />
           </button>
         </div>
       )}

@@ -20,10 +20,17 @@
 # production
 /build
 
-# misc
+# misc & secrets
 .DS_Store
+Thumbs.db
+Desktop.ini
 *.pem
+*.key
+*.p12
 *.pdf
+*.bak
+*.tmp
+*.log
 
 # debug & temp
 npm-debug.log*
@@ -35,7 +42,9 @@ src/scratch/
 Extra/
 New folder/
 
-# env files (can opt-in for committing if needed)
+# env files (keep real credentials strictly out of git; only commit .env.example template)
+.env
+.env.*
 .env*
 !.env.example
 

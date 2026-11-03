@@ -1,11 +1,13 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
 import { Heart, Sparkles, Clock, CheckCircle, ArrowRight, Camera, Users } from 'lucide-react';
+import { cldBgVars, cloudinaryLoader } from '@/lib/cloudinary';
 import styles from '../services.module.css';
 
 export default function WeddingsClient() {
@@ -21,10 +23,7 @@ export default function WeddingsClient() {
 
       <section 
         className={styles.hero} 
-        style={{ 
-          '--bg-desktop': "url('/Services/wedding.jpg')",
-          '--bg-mobile': "url('/Services/mobile_services/wedding.jpg')"
-        } as React.CSSProperties}
+        style={cldBgVars('/Services/wedding.jpg', '/Services/mobile_services/wedding.jpg') as React.CSSProperties}
       >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -74,7 +73,14 @@ export default function WeddingsClient() {
 
         <div className={styles.detailSplit}>
           <div className={styles.detailImage}>
-            <img src="/chooseUS.jpg" alt="Luxury Wedding Car Hire Australia" />
+            <Image
+              loader={cloudinaryLoader}
+              src="/chooseUS.jpg"
+              alt="Luxury Wedding Car Hire Australia"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className={styles.detailText}>
             <h2>{t('service_weddings.detail_title', 'Grace, Elegance & Absolute Peace of Mind')}</h2>

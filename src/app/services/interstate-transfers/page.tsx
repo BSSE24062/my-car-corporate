@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import InterstateClient from './InterstateClient';
+import { cldOgUrl } from '@/lib/cloudinary';
 import { BASE_URL, siteMetadata, getBreadcrumbsSchema, getServiceSchema } from '@/lib/seo-schema';
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     siteName: siteMetadata.siteName,
     images: [
       {
-        url: `${BASE_URL}/Services/oneDayTour.jpg`,
+        url: cldOgUrl('/Services/oneDayTour.jpg', BASE_URL),
         width: 1200,
         height: 630,
         alt: 'Elite Cars Australia Interstate and Long-Distance Transfers',

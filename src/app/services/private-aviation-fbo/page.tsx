@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PrivateAviationClient from './PrivateAviationClient';
+import { cldOgUrl } from '@/lib/cloudinary';
 import { BASE_URL, siteMetadata, getBreadcrumbsSchema, getServiceSchema } from '@/lib/seo-schema';
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     siteName: siteMetadata.siteName,
     images: [
       {
-        url: `${BASE_URL}/Sydney/sydneyAirport.jpg`,
+        url: cldOgUrl('/Sydney/sydneyAirport.jpg', BASE_URL),
         width: 1200,
         height: 630,
         alt: 'Elite Cars Australia Private Aviation and FBO Transfers',

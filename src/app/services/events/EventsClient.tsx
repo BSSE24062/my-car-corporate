@@ -1,11 +1,13 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
 import { Users, Calendar, Award, CheckCircle, ArrowRight, Bus, ShieldCheck } from 'lucide-react';
+import { cldBgVars, cloudinaryLoader } from '@/lib/cloudinary';
 import styles from '../services.module.css';
 
 export default function EventsClient() {
@@ -21,10 +23,7 @@ export default function EventsClient() {
 
       <section 
         className={styles.hero} 
-        style={{ 
-          '--bg-desktop': "url('/Services/conferences-and-events.jpg')",
-          '--bg-mobile': "url('/Services/conferences-and-events.jpg')"
-        } as React.CSSProperties}
+        style={cldBgVars('/Services/conferences-and-events.jpg', '/Services/mobile_services/conferences-and-events.jpg') as React.CSSProperties}
       >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -74,7 +73,14 @@ export default function EventsClient() {
 
         <div className={styles.detailSplit}>
           <div className={styles.detailImage}>
-            <img src="/Services/conferences-and-events.jpg" alt="Conferences and VIP Event Chauffeurs Australia" />
+            <Image
+              loader={cloudinaryLoader}
+              src="/Services/conferences-and-events.jpg"
+              alt="Conferences and VIP Event Chauffeurs Australia"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className={styles.detailText}>
             <h2>{t('service_events.detail_title', 'Streamlined Delegate Logistics')}</h2>

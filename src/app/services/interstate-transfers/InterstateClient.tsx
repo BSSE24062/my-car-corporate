@@ -1,11 +1,13 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
 import { Navigation, ShieldCheck, Clock, CheckCircle, ArrowRight, MapPin, Coffee, Car } from 'lucide-react';
+import { cldBgVars, cloudinaryLoader } from '@/lib/cloudinary';
 import styles from '../services.module.css';
 
 export default function InterstateClient() {
@@ -21,10 +23,7 @@ export default function InterstateClient() {
 
       <section 
         className={styles.hero} 
-        style={{ 
-          '--bg-desktop': "url('/Services/oneDayTour.jpg')",
-          '--bg-mobile': "url('/Services/mobile_services/oneDayTrip.jpg')"
-        } as React.CSSProperties}
+        style={cldBgVars('/Services/oneDayTour.jpg', '/Services/mobile_services/oneDayTrip.jpg') as React.CSSProperties}
       >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -74,7 +73,14 @@ export default function InterstateClient() {
 
         <div className={styles.detailSplit}>
           <div className={styles.detailImage}>
-            <img src="/Sydney/harbourSide.jpg" alt="Interstate Chauffeur Travel Australia" />
+            <Image
+              loader={cloudinaryLoader}
+              src="/Sydney/harbourSide.jpg"
+              alt="Interstate Chauffeur Travel Australia"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className={styles.detailText}>
             <h2>{t('service_interstate.detail_title', 'The Smarter Alternative to Short Flights')}</h2>

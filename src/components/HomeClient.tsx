@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ServicesBanner from '@/components/ServicesBanner';
@@ -12,7 +13,10 @@ import ChooseUsSection from '@/components/ChooseUsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import BookingForm from '@/components/BookingForm';
 import Footer from '@/components/Footer';
-import AIAssistant from '@/components/AIAssistant';
+
+const AIAssistant = dynamic(() => import('@/components/AIAssistant'), {
+  ssr: false,
+});
 
 export default function HomeClient() {
   useEffect(() => {

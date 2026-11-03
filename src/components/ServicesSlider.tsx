@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { cldBgVars, cldUrl } from '@/lib/cloudinary';
 import styles from './ServicesSlider.module.css';
 
 const services = [
@@ -65,15 +66,16 @@ const ServicesSlider = () => {
   const touchEndX = useRef<number | null>(null);
   const touchEndY = useRef<number | null>(null);
 
-  // Preload all slider images on mount for instant zero-lag rendering
+  // Preload ONLY the next slide for the active viewport instead of all 10 images at once
   useEffect(() => {
-    services.forEach((s) => {
-      const img1 = new Image();
-      img1.src = s.bgImage;
-      const img2 = new Image();
-      img2.src = s.mobileBgImage;
-    });
-  }, []);
+    const nextSlide = services[(currentIndex + 1) % services.length];
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    const preloader = new window.Image();
+    preloader.decoding = 'async';
+    preloader.src = isMobile
+      ? cldUrl(nextSlide.mobileBgImage, { width: 828 })
+      : cldUrl(nextSlide.bgImage, { width: 1920 });
+  }, [currentIndex]);
 
   // Auto slide timer (pauses when hovered or interacted with)
   useEffect(() => {
@@ -110,12 +112,11 @@ const ServicesSlider = () => {
     const diffX = touchStartX.current - touchEndX.current;
     const diffY = (touchStartY.current || 0) - (touchEndY.current || 0);
 
-    // Ensure it's a predominantly horizontal swipe of at least 40px
     if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
       if (diffX > 0) {
-        handleNext(); // Swiped left -> Next slide
+        handleNext();
       } else {
-        handlePrev(); // Swiped right -> Prev slide
+        handlePrev();
       }
     }
 
@@ -137,7 +138,6 @@ const ServicesSlider = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Navigation Arrows */}
       <button 
         className={`${styles.navBtn} ${styles.leftBtn}`}
         onClick={handlePrev}
@@ -154,7 +154,6 @@ const ServicesSlider = () => {
         <ChevronRight size={24} />
       </button>
 
-      {/* Seamless Cross-fade without mode="wait" to eliminate blank void */}
       <AnimatePresence initial={false}>
         <motion.div
           key={currentIndex}
@@ -163,10 +162,7 @@ const ServicesSlider = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className={styles.slideBackground}
-          style={{
-            '--bg-desktop': `url(${currentService.bgImage})`,
-            '--bg-mobile': `url(${currentService.mobileBgImage})`
-          } as React.CSSProperties}
+          style={cldBgVars(currentService.bgImage, currentService.mobileBgImage) as React.CSSProperties}
         >
           <div className={styles.overlay}></div>
           
@@ -189,7 +185,6 @@ const ServicesSlider = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Still, Persistent CTA Button (Does not re-animate on slide change) */}
       <div className={styles.staticActions}>
         <a href="/services" className={styles.viewAllBtn}>
           <span>{t('services.view_all_btn', 'Explore All Services')}</span>

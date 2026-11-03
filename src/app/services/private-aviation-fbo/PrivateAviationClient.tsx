@@ -1,11 +1,13 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
 import { Plane, ShieldCheck, Clock, CheckCircle, ArrowRight, Lock, UserCheck } from 'lucide-react';
+import { cldBgVars, cloudinaryLoader } from '@/lib/cloudinary';
 import styles from '../services.module.css';
 
 export default function PrivateAviationClient() {
@@ -21,10 +23,7 @@ export default function PrivateAviationClient() {
 
       <section 
         className={styles.hero} 
-        style={{ 
-          '--bg-desktop': "url('/Sydney/sydneyAirport.jpg')",
-          '--bg-mobile': "url('/Services/mobile_services/AirportPickups.jpg')"
-        } as React.CSSProperties}
+        style={cldBgVars('/Sydney/sydneyAirport.jpg', '/Services/mobile_services/AirportPickups.jpg') as React.CSSProperties}
       >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -74,7 +73,14 @@ export default function PrivateAviationClient() {
 
         <div className={styles.detailSplit}>
           <div className={styles.detailImage}>
-            <img src="/Sydney/clockTower.jpg" alt="Private Jet FBO Chauffeur Transfers Australia" />
+            <Image
+              loader={cloudinaryLoader}
+              src="/Sydney/clockTower.jpg"
+              alt="Private Jet FBO Chauffeur Transfers Australia"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className={styles.detailText}>
             <h2>{t('service_fbo.detail_title', 'Plane-to-Boardroom Precision')}</h2>

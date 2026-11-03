@@ -1,3 +1,5 @@
+import { cldOgUrl } from './cloudinary';
+
 export const BASE_URL = 'https://www.elitecarsaustralia.com.au';
 
 export const siteMetadata = {
@@ -97,12 +99,12 @@ export const getOrganizationSchema = () => ({
     // 'https://www.tripadvisor.com.au/...',
   ],
   url: BASE_URL,
-  logo: `${BASE_URL}/logo.png`,
+  logo: cldOgUrl('/logo.png', BASE_URL),
   image: [
-    `${BASE_URL}/Hero/audiMain.png`,
-    `${BASE_URL}/Fleet/benz s class.jpg`,
-    `${BASE_URL}/Sydney/operaHouse.jpg`,
-    `${BASE_URL}/Services/AirportPickups.jpg`
+    cldOgUrl('/Hero/audiMain.png', BASE_URL),
+    cldOgUrl('/Fleet/benz s class.jpg', BASE_URL),
+    cldOgUrl('/Sydney/operaHouse.jpg', BASE_URL),
+    cldOgUrl('/Services/AirportPickups.jpg', BASE_URL)
   ],
   telephone: siteMetadata.telephone,
   email: siteMetadata.email,
@@ -492,7 +494,7 @@ export const getServiceSchema = ({
   name,
   description,
   url: `${BASE_URL}${url}`,
-  image: image.startsWith('http') ? image : `${BASE_URL}${image}`,
+  image: image.startsWith('http') ? image : cldOgUrl(image, BASE_URL),
   provider: {
     '@id': `${BASE_URL}/#organization`,
   },

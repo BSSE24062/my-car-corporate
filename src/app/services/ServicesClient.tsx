@@ -1,12 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import AIAssistant from '@/components/AIAssistant';
 import { ArrowRight, Plane, Building2, Clock, Map, Users, Heart, Shield, Navigation } from 'lucide-react';
+import { cloudinaryLoader, cldUrl } from '@/lib/cloudinary';
 import styles from './services.module.css';
+
+const AIAssistant = dynamic(() => import('@/components/AIAssistant'), { ssr: false });
 
 const desktopSlides = [
   '/Services/professional.jpg',
@@ -49,6 +53,8 @@ export default function ServicesClient() {
   }, [isMobile]);
 
   const activeSlides = isMobile ? mobileSlides : desktopSlides;
+  const prevSlide = (currentSlide - 1 + activeSlides.length) % activeSlides.length;
+  const nextSlide = (currentSlide + 1) % activeSlides.length;
 
   const servicesList = [
     {
@@ -116,13 +122,19 @@ export default function ServicesClient() {
       {/* Hero Header with Cross-Fading Background Slideshow */}
       <section className={styles.hero}>
         <div className={styles.heroSlideshow}>
-          {activeSlides.map((img, idx) => (
-            <div
-              key={img}
-              className={`${styles.heroSlideItem} ${idx === currentSlide ? styles.heroSlideItemActive : ''}`}
-              style={{ backgroundImage: `url('${img}')` }}
-            />
-          ))}
+          {activeSlides.map((img, idx) => {
+            const shouldLoad = idx === currentSlide || idx === prevSlide || idx === nextSlide;
+            const optimizedUrl = shouldLoad
+              ? cldUrl(img, { width: isMobile ? 828 : 1920 })
+              : '';
+            return (
+              <div
+                key={img}
+                className={`${styles.heroSlideItem} ${idx === currentSlide ? styles.heroSlideItemActive : ''}`}
+                style={shouldLoad ? { backgroundImage: `url("${optimizedUrl}")` } : undefined}
+              />
+            );
+          })}
         </div>
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -165,7 +177,14 @@ export default function ServicesClient() {
           {servicesList.map((service, index) => (
             <a key={index} href={`/services/${service.slug}`} className={styles.serviceHubCard}>
               <div className={styles.serviceHubImage}>
-                <img src={service.image} alt={service.title} />
+                <Image
+                  loader={cloudinaryLoader}
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
               <div className={styles.serviceHubBody}>
                 <div className={styles.featureIcon} style={{ width: 42, height: 42, marginBottom: 12 }}>

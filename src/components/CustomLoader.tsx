@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { cldUrl } from '@/lib/cloudinary';
 import styles from './CustomLoader.module.css';
 
 interface CustomLoaderProps {
@@ -40,9 +41,10 @@ export default function CustomLoader({
         {/* Central Logo with backlight halo */}
         <div className={styles.logoBacklight} />
         <img 
-          src="/logo.png" 
+          src={cldUrl('/logo.png', { width: 256 })} 
           alt="Elite Cars Australia" 
           className={styles.centerLogo}
+          decoding="async"
           onError={(e) => {
             (e.target as HTMLElement).style.display = 'none';
           }} 

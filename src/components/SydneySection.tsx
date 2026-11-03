@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { cldBgVars, cldUrl } from '@/lib/cloudinary';
 import styles from './SydneySection.module.css';
 
 const destinationImages = [
@@ -167,6 +168,17 @@ const SydneySection = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Preload only the next destination image for smooth slice transitions
+  useEffect(() => {
+    const nextSlide = destinationImages[(currentIndex + 1) % destinationImages.length];
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    const preloader = new window.Image();
+    preloader.decoding = 'async';
+    preloader.src = isMobile
+      ? cldUrl(nextSlide.mobileImg, { width: 828 })
+      : cldUrl(nextSlide.desktopImg, { width: 1920 });
+  }, [currentIndex]);
+
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + destinationImages.length) % destinationImages.length);
   };
@@ -219,8 +231,10 @@ const SydneySection = () => {
                     style={{
                       left: `-${index * 100}%`,
                       width: `${8 * 100}%`,
-                      '--bg-desktop': `url("${destinationImages[currentIndex].desktopImg}")`,
-                      '--bg-mobile': `url("${destinationImages[currentIndex].mobileImg}")`,
+                      ...cldBgVars(
+                        destinationImages[currentIndex].desktopImg,
+                        destinationImages[currentIndex].mobileImg
+                      ),
                     } as React.CSSProperties}
                     animate={{
                       scale: [1.0, 1.05],

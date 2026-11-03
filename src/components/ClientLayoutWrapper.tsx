@@ -14,10 +14,8 @@ export default function ClientLayoutWrapper({
 }) {
   const pathname = usePathname();
   const [showVideoLoader, setShowVideoLoader] = useState<boolean>(false);
-  const [isReady, setIsReady] = useState<boolean>(false);
 
   useEffect(() => {
-    // Only show the 4.5s video loader on the main landing page ('/') on first session visit
     const hasSeenIntro = typeof window !== 'undefined' ? sessionStorage.getItem('elite_video_intro_seen') : null;
     const isHomePage = pathname === '/' || pathname === '';
 
@@ -25,7 +23,6 @@ export default function ClientLayoutWrapper({
       setShowVideoLoader(true);
       const timer = setTimeout(() => {
         setShowVideoLoader(false);
-        setIsReady(true);
         try {
           sessionStorage.setItem('elite_video_intro_seen', 'true');
         } catch {}
@@ -33,11 +30,10 @@ export default function ClientLayoutWrapper({
           (window as unknown as { __ELITE_LOADING_FINISHED__?: boolean }).__ELITE_LOADING_FINISHED__ = true;
           window.dispatchEvent(new Event('loading-finished'));
         }
-      }, 2800);
+      }, 800);
       return () => clearTimeout(timer);
     } else {
       setShowVideoLoader(false);
-      setIsReady(true);
       if (typeof window !== 'undefined') {
         (window as unknown as { __ELITE_LOADING_FINISHED__?: boolean }).__ELITE_LOADING_FINISHED__ = true;
         window.dispatchEvent(new Event('loading-finished'));
@@ -48,9 +44,7 @@ export default function ClientLayoutWrapper({
   return (
     <>
       {showVideoLoader && <LoadingScreen />}
-      <div style={{ opacity: (!isReady && showVideoLoader) ? 0 : 1, transition: 'opacity 0.4s ease-in' }}>
-        {children}
-      </div>
+      {children}
       <MobileActionBar />
       <Analytics />
     </>

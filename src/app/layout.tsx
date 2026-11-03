@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
+import { cldOgUrl } from "@/lib/cloudinary";
 import {
   BASE_URL,
   siteMetadata,
@@ -9,12 +9,6 @@ import {
   getOrganizationSchema,
   getFaqSchema,
 } from "@/lib/seo-schema";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -181,18 +175,16 @@ export const metadata: Metadata = {
     description: "Premier luxury chauffeur service across Sydney, Melbourne, Brisbane, Perth, Adelaide & Canberra. Immaculate Mercedes-Benz & BMW fleet, punctual airport transfers, corporate accounts, FBO private aviation & VIP transport.",
     images: [
       {
-        url: `${BASE_URL}/Hero/audiMain.png`,
+        url: cldOgUrl("/Hero/audiMain.png", BASE_URL),
         width: 1200,
         height: 630,
         alt: "Elite Cars Australia Executive Chauffeur Fleet & Luxury Vehicles",
-        type: "image/png",
       },
       {
-        url: `${BASE_URL}/Sydney/operaHouse.jpg`,
+        url: cldOgUrl("/Sydney/operaHouse.jpg", BASE_URL),
         width: 1200,
         height: 630,
         alt: "Elite Cars Australia Luxury Chauffeur Sydney",
-        type: "image/jpeg",
       },
     ],
   },
@@ -200,7 +192,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Elite Cars Australia | Luxury Chauffeur & Airport Transfers Sydney & Nationwide",
     description: "Premier luxury chauffeur service across Sydney, Melbourne, Brisbane, Perth, Adelaide & Canberra. Immaculate Mercedes-Benz & BMW fleet, punctual airport transfers, corporate accounts & VIP transport.",
-    images: [`${BASE_URL}/Hero/audiMain.png`],
+    images: [cldOgUrl("/Hero/audiMain.png", BASE_URL)],
     creator: "@elitecarsau",
     site: "@elitecarsau",
   },
@@ -261,12 +253,18 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <head>
-        {/* Preconnect for maximum loading performance */}
+        {/* Preconnect to Cloudinary Edge CDN, Google Fonts & Maps for faster TLS handshakes */}
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        />
 
         {/* Global JSON-LD Schema Graphs (WebSite, LimousineService, FAQPage) */}
         <script
@@ -274,7 +272,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
       </head>
-      <body className={inter.className}>
+      <body>
         <ClientLayoutWrapper>
           {children}
         </ClientLayoutWrapper>

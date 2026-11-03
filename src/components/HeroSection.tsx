@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { cldBgVars, cldUrl } from '@/lib/cloudinary';
 import styles from './HeroSection.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,15 +35,19 @@ const HeroSection = () => {
   const backWheel1Ref = useRef<HTMLImageElement>(null);
   const text1Ref = useRef<HTMLDivElement>(null);
 
-  // Preload all hero images on mount for instantaneous rendering
+  // Just-in-time preload ONLY the next slide for the active viewport (desktop OR mobile, never all 26 at once)
   useEffect(() => {
-    heroBgs.forEach((bg) => {
-      const img1 = new Image();
-      img1.src = bg.desktop;
-      const img2 = new Image();
-      img2.src = bg.mobile;
-    });
-  }, []);
+    const nextIdx = (bgIndex + 1) % heroBgs.length;
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    const nextSlide = heroBgs[nextIdx];
+    const targetUrl = isMobile
+      ? cldUrl(nextSlide.mobile, { width: 828 })
+      : cldUrl(nextSlide.desktop, { width: 1920 });
+
+    const preloader = new window.Image();
+    preloader.decoding = 'async';
+    preloader.src = targetUrl;
+  }, [bgIndex]);
 
   // Background slideshow cycle every 5.5s
   useEffect(() => {
@@ -98,7 +103,6 @@ const HeroSection = () => {
       const xPercentVal = isMobile ? -50 : 0;
 
       ctx = gsap.context(() => {
-        // Natural scroll scrub with slightly increased movement speed & tyre spin
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
@@ -108,7 +112,6 @@ const HeroSection = () => {
           }
         });
 
-        // 1. Car drives faster across the screen to the left as user scrolls down
         tl.to(car1Ref.current, {
           x: isMobile ? '-135vw' : '-130vw',
           xPercent: xPercentVal,
@@ -116,14 +119,12 @@ const HeroSection = () => {
           duration: 1.0
         }, 0);
 
-        // 2. Wheels spin faster in sync with increased car speed
         tl.to([frontWheel1Ref.current, backWheel1Ref.current], {
           rotation: -1080,
           ease: "none",
           duration: 1.0
         }, 0);
 
-        // 3. Text fades and slides up smoothly
         tl.to(text1Ref.current, {
           opacity: 0,
           y: -45,
@@ -140,7 +141,6 @@ const HeroSection = () => {
     );
 
     if (isAlreadyLoaded) {
-      // Immediate entrance animation without delay when returning to home from services or other pages
       const timer = setTimeout(startEntranceAnimations, 30);
       return () => {
         clearTimeout(timer);
@@ -152,7 +152,7 @@ const HeroSection = () => {
 
     const fallbackTimer = setTimeout(() => {
       startEntranceAnimations();
-    }, 4600);
+    }, 950);
 
     return () => {
       window.removeEventListener('loading-finished', startEntranceAnimations);
@@ -183,20 +183,27 @@ const HeroSection = () => {
     scrollToBooking('quote');
   };
 
+  const prevIdx = (bgIndex - 1 + heroBgs.length) % heroBgs.length;
+  const nextIdx = (bgIndex + 1) % heroBgs.length;
+
   return (
     <section ref={containerRef} className={styles.heroContainer} aria-label="Elite Cars Australia — Luxury Chauffeur Service Hero">
-      {/* Layered Cross-Fading Background Slideshow — No Black Gaps or Unmounting */}
+      {/* Layered Cross-Fading Background Slideshow — Only mounts active/adjacent URLs */}
       <div className={styles.backgroundSlideshow}>
-        {heroBgs.map((bg, idx) => (
-          <div
-            key={bg.id}
-            className={`${styles.slideImage} ${idx === bgIndex ? styles.slideActive : ''}`}
-            style={{
-              '--bg-desktop': `url('${bg.desktop}')`,
-              '--bg-mobile': `url('${bg.mobile}')`
-            } as React.CSSProperties}
-          />
-        ))}
+        {heroBgs.map((bg, idx) => {
+          const shouldLoadBg = idx === bgIndex || idx === prevIdx || idx === nextIdx;
+          return (
+            <div
+              key={bg.id}
+              className={`${styles.slideImage} ${idx === bgIndex ? styles.slideActive : ''}`}
+              style={
+                shouldLoadBg
+                  ? (cldBgVars(bg.desktop, bg.mobile) as React.CSSProperties)
+                  : undefined
+              }
+            />
+          );
+        })}
         <div className={styles.overlay}></div>
       </div>
 
@@ -235,17 +242,30 @@ const HeroSection = () => {
             className={styles.animatedCar} 
             style={{ opacity: 0 }}
           >
-            <img src="/Hero/audiBody_no_shadow.png" alt="Elite Cars Australia Luxury Chauffeur Vehicle Fleet — Executive Sedans, SUVs, and Vans Across Sydney, Melbourne, Brisbane, and Perth" className={styles.carBody} loading="eager" fetchPriority="high" />
+            <img
+              src={cldUrl('/Hero/audiBody_no_shadow.png', { width: 1080 })}
+              srcSet={`${cldUrl('/Hero/audiBody_no_shadow.png', { width: 640 })} 640w, ${cldUrl('/Hero/audiBody_no_shadow.png', { width: 1080 })} 1080w`}
+              sizes="(max-width: 768px) 90vw, 50vw"
+              alt="Elite Cars Australia Luxury Chauffeur Vehicle Fleet — Executive Sedans, SUVs, and Vans Across Sydney, Melbourne, Brisbane, and Perth"
+              className={styles.carBody}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
             <img 
               ref={frontWheel1Ref} 
-              src="/Hero/front_wheel.png" 
-              alt="Elite Cars Australia Front Wheel" 
+              src={cldUrl('/Hero/front_wheel.png', { width: 256 })} 
+              alt="" 
+              aria-hidden="true"
+              decoding="async"
               className={`${styles.wheel} ${styles.frontWheel}`} 
             />
             <img 
               ref={backWheel1Ref} 
-              src="/Hero/back_wheel.png" 
-              alt="Elite Cars Australia Back Wheel" 
+              src={cldUrl('/Hero/back_wheel.png', { width: 256 })} 
+              alt="" 
+              aria-hidden="true"
+              decoding="async"
               className={`${styles.wheel} ${styles.backWheel}`} 
             />
           </div>

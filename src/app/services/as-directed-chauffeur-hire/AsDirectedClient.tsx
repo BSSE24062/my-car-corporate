@@ -1,11 +1,13 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
 import { Clock, Shield, CheckCircle, ArrowRight, MapPin, Sparkles, Car } from 'lucide-react';
+import { cldBgVars, cloudinaryLoader } from '@/lib/cloudinary';
 import styles from '../services.module.css';
 
 export default function AsDirectedClient() {
@@ -21,10 +23,7 @@ export default function AsDirectedClient() {
 
       <section 
         className={styles.hero} 
-        style={{ 
-          '--bg-desktop': "url('/Services/privateTour.jpg')",
-          '--bg-mobile': "url('/Services/mobile_services/privateTours.jpg')"
-        } as React.CSSProperties}
+        style={cldBgVars('/Services/privateTour.jpg', '/Services/mobile_services/privateTours.jpg') as React.CSSProperties}
       >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -74,7 +73,14 @@ export default function AsDirectedClient() {
 
         <div className={styles.detailSplit}>
           <div className={styles.detailImage}>
-            <img src="/Fleet/BMW i7.jpg" alt="As Directed Executive Chauffeur Australia" />
+            <Image
+              loader={cloudinaryLoader}
+              src="/Fleet/BMW i7.jpg"
+              alt="As Directed Executive Chauffeur Australia"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className={styles.detailText}>
             <h2>{t('service_hourly.detail_title', 'Bespoke Chauffeured Mobility On Your Terms')}</h2>

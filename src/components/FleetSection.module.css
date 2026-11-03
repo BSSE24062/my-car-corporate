@@ -24,7 +24,7 @@
 .roadBg {
   position: absolute;
   inset: 0;
-  background-image: url('/Hero/road-only.jpg');
+  background-image: var(--road-bg, url('/Hero/road-only.jpg'));
   background-size: auto 100%;
   background-repeat: repeat-x;
   background-position: 0 center;
@@ -152,6 +152,7 @@
   position: absolute;
   top: 14px;
   left: 14px;
+  z-index: 2;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(8px);
   color: #c9a86a;

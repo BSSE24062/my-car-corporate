@@ -1,8 +1,10 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { Users, Briefcase } from 'lucide-react';
+import { cloudinaryLoader, cldUrl } from '@/lib/cloudinary';
 import styles from './FleetSection.module.css';
 
 interface FleetCar {
@@ -86,6 +88,10 @@ const FleetSection = () => {
   const titleText = t('fleet.title', 'Our Fleet & Capacities');
   const marqueeText = `${titleText}\u00A0\u00A0·\u00A0\u00A0${titleText}\u00A0\u00A0·\u00A0\u00A0${titleText}\u00A0\u00A0·\u00A0\u00A0${titleText}\u00A0\u00A0·\u00A0\u00A0${titleText}\u00A0\u00A0·\u00A0\u00A0`;
 
+  const roadBgStyle = {
+    '--road-bg': `url("${cldUrl('/Hero/road-only.jpg', { width: 1080 })}")`,
+  } as React.CSSProperties;
+
   const handleSelectVehicle = (carName: string) => {
     window.dispatchEvent(new CustomEvent('set-vehicle-pref', { detail: carName }));
     const bookingSection = document.getElementById('booking');
@@ -103,13 +109,9 @@ const FleetSection = () => {
 
       {/* Road Banner Header — road scrolls + text marquees on top */}
       <div className={styles.roadBanner}>
-        {/* Road scrolling background */}
-        <div className={styles.roadBg} />
-
-        {/* Dark overlay so text is readable */}
+        <div className={styles.roadBg} style={roadBgStyle} />
         <div className={styles.roadOverlay} />
 
-        {/* Marquee text pasted on the road */}
         <div className={styles.marqueeTrack}>
           <span className={styles.marqueeText}>
             {marqueeText}
@@ -119,7 +121,6 @@ const FleetSection = () => {
           </span>
         </div>
 
-        {/* Static sub-heading centered */}
         <p className={styles.roadSubtitle}>
           {t('fleet.subtitle', 'Meticulously maintained executive sedans, premium SUVs, and luxury people movers.')}
         </p>
@@ -132,7 +133,14 @@ const FleetSection = () => {
             <div key={index} className={styles.card}>
               <div className={styles.imageWrapper}>
                 <span className={styles.categoryTag}>{t(car.classKey, car.category)}</span>
-                <img src={car.img} alt={`${car.name} - Executive Chauffeur Fleet Australia | Elite Cars Australia`} loading="lazy" />
+                <Image
+                  loader={cloudinaryLoader}
+                  src={car.img}
+                  alt={`${car.name} - Executive Chauffeur Fleet Australia | Elite Cars Australia`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
               <div className={styles.info}>
                 <div className={styles.carHeader}>

@@ -1,11 +1,13 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
 import { Map, Clock, ShieldCheck, CheckCircle, ArrowRight, FileSpreadsheet, Users, Mail } from 'lucide-react';
+import { cldBgVars, cloudinaryLoader } from '@/lib/cloudinary';
 import styles from '../services.module.css';
 
 export default function RoadshowsClient() {
@@ -21,10 +23,7 @@ export default function RoadshowsClient() {
 
       <section 
         className={styles.hero} 
-        style={{ 
-          '--bg-desktop': "url('/Services/executive-road-shows.jpg')",
-          '--bg-mobile': "url('/Services/mobile_services/executive-road-shows.jpg')"
-        } as React.CSSProperties}
+        style={cldBgVars('/Services/executive-road-shows.jpg', '/Services/mobile_services/executive-road-shows.jpg') as React.CSSProperties}
       >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -74,7 +73,14 @@ export default function RoadshowsClient() {
 
         <div className={styles.detailSplit}>
           <div className={styles.detailImage}>
-            <img src="/Services/executive-road-shows.jpg" alt="Executive Roadshow Chauffeur Australia" />
+            <Image
+              loader={cloudinaryLoader}
+              src="/Services/executive-road-shows.jpg"
+              alt="Executive Roadshow Chauffeur Australia"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className={styles.detailText}>
             <h2>{t('service_roadshows.detail_title', 'Flawless Execution for High-Stakes Days')}</h2>

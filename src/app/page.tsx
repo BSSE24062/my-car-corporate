@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import HomeClient from '@/components/HomeClient';
+import { cldOgUrl } from '@/lib/cloudinary';
 import { BASE_URL, siteMetadata, getBreadcrumbsSchema } from '@/lib/seo-schema';
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     siteName: siteMetadata.siteName,
     images: [
       {
-        url: `${BASE_URL}/Hero/audiMain.png`,
+        url: cldOgUrl('/Hero/audiMain.png', BASE_URL),
         width: 1200,
         height: 630,
         alt: 'Elite Cars Australia Premium Chauffeurs Nationwide',

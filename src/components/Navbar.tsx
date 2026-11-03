@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Globe, Menu, X } from 'lucide-react';
+import { cldUrl } from '@/lib/cloudinary';
 import styles from './Navbar.module.css';
 
 const languages = [
@@ -63,9 +64,11 @@ const Navbar = () => {
         aria-label="Elite Cars Australia"
       >
         <img 
-          src="/logo.png" 
+          src={cldUrl('/logo.png', { width: 256 })} 
           alt="Elite Cars Australia" 
           className={styles.logoImg}
+          decoding="async"
+          fetchPriority="high"
         />
         <span className={styles.mobileBrandText}>Elite Cars Australia</span>
       </a>

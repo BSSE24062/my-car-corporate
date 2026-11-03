@@ -1,11 +1,13 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
 import { Plane, Clock, ShieldCheck, CheckCircle, ArrowRight, UserCheck, Luggage, BellRing } from 'lucide-react';
+import { cldBgVars, cloudinaryLoader } from '@/lib/cloudinary';
 import styles from '../services.module.css';
 
 export default function AirportTransfersClient() {
@@ -22,10 +24,7 @@ export default function AirportTransfersClient() {
       {/* Hero */}
       <section 
         className={styles.hero} 
-        style={{ 
-          '--bg-desktop': "url('/Services/AirportPickups.jpg')",
-          '--bg-mobile': "url('/Services/mobile_services/AirportPickups.jpg')"
-        } as React.CSSProperties}
+        style={cldBgVars('/Services/AirportPickups.jpg', '/Services/mobile_services/AirportPickups.jpg') as React.CSSProperties}
       >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -77,7 +76,14 @@ export default function AirportTransfersClient() {
         {/* Detailed Section */}
         <div className={styles.detailSplit}>
           <div className={styles.detailImage}>
-            <img src="/Sydney/airport.jpg" alt="Airport Terminal Chauffeur Pickups Australia" />
+            <Image
+              loader={cloudinaryLoader}
+              src="/Sydney/airport.jpg"
+              alt="Airport Terminal Chauffeur Pickups Australia"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className={styles.detailText}>
             <h2>{t('service_airport.detail_title', 'Stress-Free Airport Transit')}</h2>
